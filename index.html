@@ -3,703 +3,433 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>語源の旅人 - Language RPG</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', 'Hiragino Sans', sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            min-height: 100vh;
-            color: #eee;
-            padding: 20px;
-        }
-        
-        .game-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-        }
-        
-        h1 {
-            text-align: center;
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            background: linear-gradient(90deg, #e94560, #ff6b6b, #feca57);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .subtitle {
-            text-align: center;
-            color: #aaa;
-            margin-bottom: 30px;
-        }
-        
-        .status-bar {
-            display: flex;
-            justify-content: space-around;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        .status-item {
-            text-align: center;
-        }
-        
-        .status-item .label {
-            font-size: 0.8em;
-            color: #888;
-        }
-        
-        .status-item .value {
-            font-size: 1.3em;
-            font-weight: bold;
-        }
-        
-        .hp { color: #e94560; }
-        .level { color: #feca57; }
-        .gold { color: #ffd700; }
-        .english { color: #74b9ff; }
-        .chinese { color: #ff6b6b; }
-        
-        .game-screen {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 15px;
-            padding: 25px;
-            min-height: 300px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .message {
-            margin-bottom: 15px;
-            line-height: 1.8;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .word-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 20px;
-            border-radius: 15px;
-            margin: 15px 0;
-            text-align: center;
-        }
-        
-        .word-card .jp { font-size: 1.5em; margin-bottom: 10px; }
-        .word-card .en { color: #74b9ff; font-size: 1.3em; margin-bottom: 5px; }
-        .word-card .cn { color: #ff6b6b; font-size: 1.3em; }
-        
-        .battle-enemy {
-            background: linear-gradient(135deg, #e94560 0%, #c0392b 100%);
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        
-        .battle-enemy h3 { margin-bottom: 10px; }
-        
-        .question-box {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-        }
-        
-        .question-box h4 {
-            color: #feca57;
-            margin-bottom: 15px;
-        }
-        
-        .input-group {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        
-        input[type="text"] {
-            flex: 1;
-            padding: 12px 15px;
-            border: none;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
-            font-size: 1em;
-        }
-        
-        input[type="text"]::placeholder {
-            color: #888;
-        }
-        
-        button {
-            padding: 12px 25px;
-            border: none;
-            border-radius: 8px;
-            background: linear-gradient(135deg, #e94560, #c0392b);
-            color: #fff;
-            font-size: 1em;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(233, 69, 96, 0.4);
-        }
-        
-        .command-buttons {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 10px;
-            margin-top: 20px;
-        }
-        
-        .command-btn {
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-align: center;
-        }
-        
-        .command-btn:hover {
-            background: rgba(233, 69, 96, 0.3);
-            border-color: #e94560;
-        }
-        
-        .command-btn .icon {
-            font-size: 1.5em;
-            margin-bottom: 5px;
-        }
-        
-        .hidden {
-            display: none !important;
-        }
-        
-        .start-screen {
-            text-align: center;
-            padding: 50px 20px;
-        }
-        
-        .start-screen h2 {
-            margin-bottom: 30px;
-            color: #feca57;
-        }
-        
-        .damage {
-            color: #e94560;
-            font-weight: bold;
-        }
-        
-        .heal {
-            color: #55efc4;
-            font-weight: bold;
-        }
-        
-        .exp {
-            color: #feca57;
-            font-weight: bold;
-        }
-        
-        .gold-text {
-            color: #ffd700;
-            font-weight: bold;
-        }
-    </style>
+    <title>語源の旅人 - Etymology Traveler</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
 </head>
 <body>
-    <div class="game-container">
-        <h1>🎮 語源の旅人</h1>
-        <p class="subtitle">Language RPG - 英語と中国語を同時に学ぶ冒険</p>
-        
-        <!-- ステータスバー -->
-        <div class="status-bar" id="statusBar" style="display: none;">
-            <div class="status-item">
-                <div class="label">❤️ HP</div>
-                <div class="value hp" id="hp">100/100</div>
-            </div>
-            <div class="status-item">
-                <div class="label">⭐ Level</div>
-                <div class="value level" id="level">1</div>
-            </div>
-            <div class="status-item">
-                <div class="label">💰 Gold</div>
-                <div class="value gold" id="gold">50</div>
-            </div>
-            <div class="status-item">
-                <div class="label">🇬🇧 English</div>
-                <div class="value english" id="englishExp">0</div>
-            </div>
-            <div class="status-item">
-                <div class="label">🇨🇳 Chinese</div>
-                <div class="value chinese" id="chineseExp">0</div>
-            </div>
-        </div>
-        
-        <!-- ゲーム画面 -->
-        <div class="game-screen" id="gameScreen">
-            <!-- スタート画面 -->
-            <div class="start-screen" id="startScreen">
-                <h2>あなたの名前は？</h2>
-                <div class="input-group">
-                    <input type="text" id="playerName" placeholder="名前を入力" maxlength="10">
-                    <button onclick="startGame()">冒険を始める</button>
+    <div id="game-container">
+        <!-- タイトル画面 -->
+        <div id="title-screen" class="screen active">
+            <div class="title-content">
+                <h1 class="game-title">
+                    <span class="title-main">語源の旅人</span>
+                    <span class="title-sub">Etymology Traveler</span>
+                </h1>
+                <p class="title-tagline">言葉の力が魔法となる世界で、あなたの冒険が始まる</p>
+                <div class="title-buttons">
+                    <button id="btn-new-game" class="btn-primary">新規ゲーム</button>
+                    <button id="btn-continue" class="btn-secondary" disabled>続きから</button>
+                    <button id="btn-settings" class="btn-secondary">設定</button>
+                    <button id="btn-credits" class="btn-secondary">クレジット</button>
                 </div>
             </div>
-            
-            <!-- メイン画面 -->
-            <div id="mainScreen" class="hidden">
-                <div id="messageArea"></div>
+            <div class="title-bg-animation"></div>
+        </div>
+
+        <!-- クラス選択画面 -->
+        <div id="class-select-screen" class="screen">
+            <h2>クラス選択</h2>
+            <p class="class-desc">あなたの語学の道を選んでください</p>
+            <div class="class-options">
+                <div class="class-card" data-class="warrior">
+                    <div class="class-icon">⚔️</div>
+                    <h3>語学戦士</h3>
+                    <p>英語に特化した攻撃型クラス</p>
+                    <ul>
+                        <li>英語スキル威力 +20%</li>
+                        <li>HP +15%</li>
+                        <li>中国語スキル -10%</li>
+                    </ul>
+                </div>
+                <div class="class-card" data-class="mage">
+                    <div class="class-icon">🔮</div>
+                    <h3>文字術師</h3>
+                    <p>中国語に特化した魔法型クラス</p>
+                    <ul>
+                        <li>中国語スキル威力 +20%</li>
+                        <li>MP +20%</li>
+                        <li>英語スキル -10%</li>
+                    </ul>
+                </div>
+                <div class="class-card" data-class="bard">
+                    <div class="class-icon">🎵</div>
+                    <h3>語り部</h3>
+                    <p>バランス型の支援クラス</p>
+                    <ul>
+                        <li>両言語スキル +10%</li>
+                        <li>アイテム効果 +15%</li>
+                        <li>獲得経験値 +10%</li>
+                    </ul>
+                </div>
+                <div class="class-card" data-class="scholar">
+                    <div class="class-icon">📚</div>
+                    <h3>言語学者</h3>
+                    <p>防御重視の知識型クラス</p>
+                    <ul>
+                        <li>防御力 +25%</li>
+                        <li>単語学習ボーナス +20%</li>
+                        <li>スキル消費MP -15%</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="class-buttons">
+                <button id="btn-confirm-class" class="btn-primary" disabled>決定</button>
+                <button id="btn-back-class" class="btn-secondary">戻る</button>
             </div>
         </div>
-        
-        <!-- コマンドボタン -->
-        <div class="command-buttons" id="commandButtons" style="display: none;">
-            <div class="command-btn" onclick="explore()">
-                <div class="icon">🔍</div>
-                <div>探索</div>
-            </div>
-            <div class="command-btn" onclick="study()">
-                <div class="icon">📚</div>
-                <div>勉強</div>
-            </div>
-            <div class="command-btn" onclick="battle()">
-                <div class="icon">⚔️</div>
-                <div>戦闘</div>
-            </div>
-            <div class="command-btn" onclick="move()">
-                <div class="icon">🚶</div>
-                <div>移動</div>
-            </div>
-            <div class="command-btn" onclick="showStatus()">
-                <div class="icon">📊</div>
-                <div>ステータス</div>
-            </div>
-            <div class="command-btn" onclick="showVocab()">
-                <div class="icon">📖</div>
-                <div>単語帳</div>
+
+        <!-- メインゲーム画面 -->
+        <div id="game-screen" class="screen">
+            <!-- ヘッダー情報 -->
+            <header id="game-header">
+                <div class="player-info">
+                    <span class="player-name" id="player-name">旅人</span>
+                    <span class="player-class" id="player-class">語学戦士</span>
+                    <span class="player-level">Lv.<span id="player-level">1</span></span>
+                </div>
+                <div class="player-stats">
+                    <div class="stat-bar hp-bar">
+                        <span class="stat-label">HP</span>
+                        <div class="bar-container">
+                            <div class="bar-fill" id="hp-fill"></div>
+                        </div>
+                        <span class="stat-value"><span id="hp-current">100</span>/<span id="hp-max">100</span></span>
+                    </div>
+                    <div class="stat-bar mp-bar">
+                        <span class="stat-label">MP</span>
+                        <div class="bar-container">
+                            <div class="bar-fill" id="mp-fill"></div>
+                        </div>
+                        <span class="stat-value"><span id="mp-current">50</span>/<span id="mp-max">50</span></span>
+                    </div>
+                    <div class="stat-bar exp-bar">
+                        <span class="stat-label">EXP</span>
+                        <div class="bar-container">
+                            <div class="bar-fill" id="exp-fill"></div>
+                        </div>
+                        <span class="stat-value"><span id="exp-current">0</span>/<span id="exp-max">100</span></span>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button id="btn-menu" class="icon-btn">☰</button>
+                    <button id="btn-save" class="icon-btn">💾</button>
+                </div>
+            </header>
+
+            <!-- メインコンテンツエリア -->
+            <main id="game-main">
+                <!-- エクスプロレーション画面 -->
+                <div id="exploration-view" class="view active">
+                    <div class="area-display">
+                        <h2 id="area-name">始まりの森</h2>
+                        <p id="area-desc">言葉の力が宿る神秘の森</p>
+                        <div class="area-visual" id="area-visual"></div>
+                    </div>
+                    <div class="exploration-actions">
+                        <button id="btn-explore" class="btn-action">探索する</button>
+                        <button id="btn-battle" class="btn-action">戦闘を始める</button>
+                        <button id="btn-talk" class="btn-action">話す</button>
+                    </div>
+                    <div class="navigation">
+                        <button id="btn-move-north" class="nav-btn">▲ 北</button>
+                        <div class="nav-row">
+                            <button id="btn-move-west" class="nav-btn">◀ 西</button>
+                            <div class="current-location">現在地</div>
+                            <button id="btn-move-east" class="nav-btn">東 ▶</button>
+                        </div>
+                        <button id="btn-move-south" class="nav-btn">▼ 南</button>
+                    </div>
+                </div>
+
+                <!-- バトル画面 -->
+                <div id="battle-view" class="view">
+                    <div class="battle-scene">
+                        <div class="enemy-area">
+                            <div class="enemy-sprite" id="enemy-sprite"></div>
+                            <div class="enemy-info">
+                                <h3 id="enemy-name">スライム</h3>
+                                <div class="enemy-hp-bar">
+                                    <div class="bar-container">
+                                        <div class="bar-fill" id="enemy-hp-fill"></div>
+                                    </div>
+                                </div>
+                                <p id="enemy-desc">言葉の力を失った存在</p>
+                            </div>
+                        </div>
+                        <div class="battle-effects" id="battle-effects"></div>
+                    </div>
+                    <div class="battle-ui">
+                        <div class="battle-log" id="battle-log">
+                            <p>戦闘が始まった！</p>
+                        </div>
+                        <div class="battle-actions">
+                            <button id="btn-attack-en" class="btn-battle">英語攻撃</button>
+                            <button id="btn-attack-cn" class="btn-battle">中国語攻撃</button>
+                            <button id="btn-skill" class="btn-battle">スキル</button>
+                            <button id="btn-item" class="btn-battle">アイテム</button>
+                            <button id="btn-defend" class="btn-battle">防御</button>
+                            <button id="btn-escape" class="btn-battle">逃げる</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 単語クイズ画面 -->
+                <div id="quiz-view" class="view">
+                    <div class="quiz-container">
+                        <div class="quiz-header">
+                            <span class="quiz-type" id="quiz-type">英語→日本語</span>
+                            <span class="quiz-difficulty" id="quiz-difficulty">初級</span>
+                        </div>
+                        <div class="quiz-question">
+                            <h3 id="quiz-word">Hello</h3>
+                            <p class="quiz-hint" id="quiz-hint">ヒント: 挨拶の言葉</p>
+                        </div>
+                        <div class="quiz-options" id="quiz-options">
+                            <!-- 選択肢が動的に生成される -->
+                        </div>
+                        <div class="quiz-timer">
+                            <div class="timer-bar" id="timer-bar"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 会話画面 -->
+                <div id="dialogue-view" class="view">
+                    <div class="dialogue-container">
+                        <div class="npc-sprite" id="npc-sprite"></div>
+                        <div class="dialogue-box">
+                            <h4 id="npc-name">村人</h4>
+                            <p id="dialogue-text">こんにちは、旅人さん。</p>
+                        </div>
+                        <div class="dialogue-options" id="dialogue-options">
+                            <!-- 選択肢が動的に生成される -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- スキルツリー画面 -->
+                <div id="skill-tree-view" class="view">
+                    <h2>スキルツリー</h2>
+                    <div class="skill-tabs">
+                        <button class="skill-tab active" data-tree="english">英語スキル</button>
+                        <button class="skill-tab" data-tree="chinese">中国語スキル</button>
+                        <button class="skill-tab" data-tree="common">共通スキル</button>
+                    </div>
+                    <div class="skill-tree-container" id="skill-tree-container">
+                        <!-- スキルツリーが動的に生成される -->
+                    </div>
+                    <div class="skill-points">
+                        <span>残りスキルポイント: <span id="skill-points">0</span></span>
+                    </div>
+                </div>
+
+                <!-- インベントリ画面 -->
+                <div id="inventory-view" class="view">
+                    <h2>インベントリ</h2>
+                    <div class="inventory-tabs">
+                        <button class="inv-tab active" data-filter="all">すべて</button>
+                        <button class="inv-tab" data-filter="weapon">武器</button>
+                        <button class="inv-tab" data-filter="armor">防具</button>
+                        <button class="inv-tab" data-filter="consumable">消費</button>
+                        <button class="inv-tab" data-filter="material">素材</button>
+                    </div>
+                    <div class="inventory-grid" id="inventory-grid">
+                        <!-- アイテムが動的に生成される -->
+                    </div>
+                    <div class="item-detail" id="item-detail">
+                        <p>アイテムを選択してください</p>
+                    </div>
+                </div>
+
+                <!-- 装備画面 -->
+                <div id="equipment-view" class="view">
+                    <h2>装備</h2>
+                    <div class="equipment-slots">
+                        <div class="equip-slot" data-slot="weapon">
+                            <span class="slot-label">武器</span>
+                            <div class="slot-content" id="equip-weapon">未装備</div>
+                        </div>
+                        <div class="equip-slot" data-slot="armor">
+                            <span class="slot-label">防具</span>
+                            <div class="slot-content" id="equip-armor">未装備</div>
+                        </div>
+                        <div class="equip-slot" data-slot="accessory">
+                            <span class="slot-label">アクセサリ</span>
+                            <div class="slot-content" id="equip-accessory">未装備</div>
+                        </div>
+                    </div>
+                    <div class="equipment-stats">
+                        <h3>ステータス変化</h3>
+                        <div class="stat-comparison" id="stat-comparison">
+                            <!-- ステータス比較が動的に生成される -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- クラフト画面 -->
+                <div id="craft-view" class="view">
+                    <h2>クラフト</h2>
+                    <div class="craft-container">
+                        <div class="recipe-list" id="recipe-list">
+                            <!-- レシピが動的に生成される -->
+                        </div>
+                        <div class="craft-detail" id="craft-detail">
+                            <p>レシピを選択してください</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- クエスト画面 -->
+                <div id="quest-view" class="view">
+                    <h2>クエスト</h2>
+                    <div class="quest-tabs">
+                        <button class="quest-tab active" data-filter="active">進行中</button>
+                        <button class="quest-tab" data-filter="completed">完了</button>
+                    </div>
+                    <div class="quest-list" id="quest-list">
+                        <!-- クエストが動的に生成される -->
+                    </div>
+                </div>
+
+                <!-- マップ画面 -->
+                <div id="map-view" class="view">
+                    <h2>世界マップ</h2>
+                    <div class="world-map" id="world-map">
+                        <!-- マップが動的に生成される -->
+                    </div>
+                </div>
+            </main>
+
+            <!-- フッターナビゲーション -->
+            <footer id="game-footer">
+                <button class="footer-btn" data-view="exploration">🗺️ 探索</button>
+                <button class="footer-btn" data-view="skill-tree">🌳 スキル</button>
+                <button class="footer-btn" data-view="inventory">🎒 持ち物</button>
+                <button class="footer-btn" data-view="equipment">⚔️ 装備</button>
+                <button class="footer-btn" data-view="craft">🔨 クラフト</button>
+                <button class="footer-btn" data-view="quest">📜 クエスト</button>
+                <button class="footer-btn" data-view="map">🌍 マップ</button>
+            </footer>
+        </div>
+
+        <!-- メニューモーダル -->
+        <div id="menu-modal" class="modal">
+            <div class="modal-content">
+                <h2>メニュー</h2>
+                <div class="menu-options">
+                    <button id="menu-status">ステータス</button>
+                    <button id="menu-settings">設定</button>
+                    <button id="menu-help">ヘルプ</button>
+                    <button id="menu-title">タイトルに戻る</button>
+                </div>
+                <button id="menu-close" class="btn-secondary">閉じる</button>
             </div>
         </div>
+
+        <!-- スキル選択モーダル -->
+        <div id="skill-modal" class="modal">
+            <div class="modal-content">
+                <h2>スキルを選択</h2>
+                <div class="skill-list" id="skill-list">
+                    <!-- スキルが動的に生成される -->
+                </div>
+                <button id="skill-close" class="btn-secondary">キャンセル</button>
+            </div>
+        </div>
+
+        <!-- アイテム選択モーダル -->
+        <div id="item-modal" class="modal">
+            <div class="modal-content">
+                <h2>アイテムを使用</h2>
+                <div class="item-list" id="item-list">
+                    <!-- アイテムが動的に生成される -->
+                </div>
+                <button id="item-close" class="btn-secondary">キャンセル</button>
+            </div>
+        </div>
+
+        <!-- セーブ/ロード画面 -->
+        <div id="save-screen" class="screen">
+            <h2>セーブ / ロード</h2>
+            <div class="save-slots" id="save-slots">
+                <!-- セーブスロットが動的に生成される -->
+            </div>
+            <div class="save-actions">
+                <button id="btn-save-game" class="btn-primary">セーブ</button>
+                <button id="btn-load-game" class="btn-primary">ロード</button>
+                <button id="btn-delete-save" class="btn-danger">削除</button>
+                <button id="btn-back-save" class="btn-secondary">戻る</button>
+            </div>
+        </div>
+
+        <!-- 設定画面 -->
+        <div id="settings-screen" class="screen">
+            <h2>設定</h2>
+            <div class="settings-container">
+                <div class="setting-item">
+                    <label>BGM音量</label>
+                    <input type="range" id="bgm-volume" min="0" max="100" value="50">
+                </div>
+                <div class="setting-item">
+                    <label>SE音量</label>
+                    <input type="range" id="se-volume" min="0" max="100" value="70">
+                </div>
+                <div class="setting-item">
+                    <label>テキスト速度</label>
+                    <select id="text-speed">
+                        <option value="fast">速い</option>
+                        <option value="normal" selected>普通</option>
+                        <option value="slow">遅い</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label>アニメーション</label>
+                    <select id="animation-setting">
+                        <option value="on" selected>オン</option>
+                        <option value="off">オフ</option>
+                    </select>
+                </div>
+            </div>
+            <button id="btn-back-settings" class="btn-secondary">戻る</button>
+        </div>
+
+        <!-- クレジット画面 -->
+        <div id="credits-screen" class="screen">
+            <div class="credits-content">
+                <h2>クレジット</h2>
+                <div class="credits-text">
+                    <p><strong>語源の旅人</strong></p>
+                    <p>Etymology Traveler</p>
+                    <br>
+                    <p>制作: Language RPG Team</p>
+                    <p>© 2024 All Rights Reserved</p>
+                    <br>
+                    <p>Special Thanks</p>
+                    <p>すべての言語学習者へ</p>
+                </div>
+            </div>
+            <button id="btn-back-credits" class="btn-secondary">戻る</button>
+        </div>
+
+        <!-- チュートリアルオーバーレイ -->
+        <div id="tutorial-overlay" class="overlay hidden">
+            <div class="tutorial-box">
+                <h3 id="tutorial-title">ようこそ！</h3>
+                <p id="tutorial-text">語源の旅人へようこそ。この世界では言葉の力が魔法となります。</p>
+                <button id="tutorial-next" class="btn-primary">次へ</button>
+                <button id="tutorial-skip" class="btn-secondary">スキップ</button>
+            </div>
+        </div>
+
+        <!-- 通知エリア -->
+        <div id="notification-area"></div>
     </div>
 
-    <script>
-        // ゲームデータ
-        const gameData = {
-            locations: {
-                "始まりの村": {
-                    name_en: "Starting Village",
-                    name_cn: "起始村庄",
-                    description: "英語と中国語が交じり合う不思議な村",
-                    npcs: ["村の長老", "言語の商人"],
-                    enemies: ["迷子のスライム"],
-                    connected: ["英語の森", "漢字の山"]
-                },
-                "英語の森": {
-                    name_en: "English Forest",
-                    name_cn: "英语森林",
-                    description: "英語の魔力が満ちた森。木々が英単語をささやく",
-                    npcs: ["英語の妖精"],
-                    enemies: ["文法ゴブリン", "単語の狼"],
-                    connected: ["始まりの村", "文法の洞窟"]
-                },
-                "漢字の山": {
-                    name_cn: "汉字山",
-                    name_en: "Kanji Mountain",
-                    description: "古代の漢字が眠る山。風に漢字の音が響く",
-                    npcs: ["書道の仙人"],
-                    enemies: ["難読ドラゴン", "四字熟語ゴーレム"],
-                    connected: ["始まりの村", "発音の谷"]
-                }
-            },
-            vocabulary: {
-                easy: [
-                    {jp: "水", en: "water", cn: "水 (shuǐ)", theme: "nature"},
-                    {jp: "火", en: "fire", cn: "火 (huǒ)", theme: "nature"},
-                    {jp: "木", en: "tree", cn: "木 (mù)", theme: "nature"},
-                    {jp: "山", en: "mountain", cn: "山 (shān)", theme: "nature"},
-                    {jp: "川", en: "river", cn: "河 (hé)", theme: "nature"},
-                    {jp: "猫", en: "cat", cn: "猫 (māo)", theme: "animal"},
-                    {jp: "犬", en: "dog", cn: "狗 (gǒu)", theme: "animal"},
-                    {jp: "鳥", en: "bird", cn: "鸟 (niǎo)", theme: "animal"},
-                    {jp: "食べる", en: "eat", cn: "吃 (chī)", theme: "action"},
-                    {jp: "飲む", en: "drink", cn: "喝 (hē)", theme: "action"},
-                    {jp: "行く", en: "go", cn: "去 (qù)", theme: "action"},
-                    {jp: "来る", en: "come", cn: "来 (lái)", theme: "action"},
-                    {jp: "大きい", en: "big", cn: "大 (dà)", theme: "adjective"},
-                    {jp: "小さい", en: "small", cn: "小 (xiǎo)", theme: "adjective"},
-                    {jp: "新しい", en: "new", cn: "新 (xīn)", theme: "adjective"},
-                    {jp: "古い", en: "old", cn: "旧 (jiù)", theme: "adjective"}
-                ],
-                medium: [
-                    {jp: "図書館", en: "library", cn: "图书馆 (túshūguǎn)", theme: "place"},
-                    {jp: "病院", en: "hospital", cn: "医院 (yīyuàn)", theme: "place"},
-                    {jp: "郵便局", en: "post office", cn: "邮局 (yóujú)", theme: "place"},
-                    {jp: "美術館", en: "art museum", cn: "美术馆 (měishùguǎn)", theme: "place"},
-                    {jp: "冒険", en: "adventure", cn: "冒险 (màoxiǎn)", theme: "concept"},
-                    {jp: "友情", en: "friendship", cn: "友谊 (yǒuyì)", theme: "concept"},
-                    {jp: "挑戦", en: "challenge", cn: "挑战 (tiǎozhàn)", theme: "concept"}
-                ]
-            },
-            battles: {
-                "文法ゴブリン": {
-                    hp: 30,
-                    questions: [
-                        {q: "「私は学生です」の英語は？", a: ["i am a student", "i'm a student"], type: "english", hint: "I am..."},
-                        {q: "「猫」の中国語は？", a: ["猫", "māo"], type: "chinese", hint: "動物の名前"}
-                    ]
-                },
-                "単語の狼": {
-                    hp: 40,
-                    questions: [
-                        {q: "「水」の英語は？", a: ["water"], type: "english", hint: "Wから始まる"},
-                        {q: "Fire の中国語は？", a: ["火", "huǒ"], type: "chinese", hint: "4画の漢字"}
-                    ]
-                },
-                "迷子のスライム": {
-                    hp: 20,
-                    questions: [
-                        {q: "「大きい」の英語は？", a: ["big", "large"], type: "english", hint: "Bから始まる"},
-                        {q: "「山」の中国語は？", a: ["山", "shān"], type: "chinese", hint: "3画の漢字"}
-                    ]
-                }
-            }
-        };
-
-        // プレイヤーデータ
-        let player = {
-            name: "",
-            level: 1,
-            exp: 0,
-            hp: 100,
-            maxHp: 100,
-            gold: 50,
-            englishExp: 0,
-            chineseExp: 0,
-            inventory: [],
-            currentLocation: "始まりの村",
-            inBattle: false,
-            currentEnemy: null
-        };
-
-        // ゲーム開始
-        function startGame() {
-            const nameInput = document.getElementById('playerName');
-            if (!nameInput.value.trim()) {
-                alert('名前を入力してください！');
-                return;
-            }
-            
-            player.name = nameInput.value.trim();
-            
-            document.getElementById('startScreen').classList.add('hidden');
-            document.getElementById('mainScreen').classList.remove('hidden');
-            document.getElementById('statusBar').style.display = 'flex';
-            document.getElementById('commandButtons').style.display = 'grid';
-            
-            updateStatus();
-            showMessage(`ようこそ、${player.name}！<br>あなたは「語源の旅人」として、英語と中国語が交じり合う不思議な世界を冒険します。<br><br>📍 現在の場所: <strong>${player.currentLocation}</strong><br><br>コマンドボタンをクリックして行動してください！`);
-        }
-
-        // メッセージ表示
-        function showMessage(text) {
-            const area = document.getElementById('messageArea');
-            const msg = document.createElement('div');
-            msg.className = 'message';
-            msg.innerHTML = text;
-            area.appendChild(msg);
-            area.scrollTop = area.scrollHeight;
-        }
-
-        // ステータス更新
-        function updateStatus() {
-            document.getElementById('hp').textContent = `${player.hp}/${player.maxHp}`;
-            document.getElementById('level').textContent = player.level;
-            document.getElementById('gold').textContent = player.gold;
-            document.getElementById('englishExp').textContent = player.englishExp;
-            document.getElementById('chineseExp').textContent = player.chineseExp;
-        }
-
-        // 探索
-        function explore() {
-            if (player.inBattle) return;
-            
-            const events = [
-                "古い言語の石碑を見つけた！",
-                "奇妙な音が聞こえる...",
-                "光る単語が浮かんでいる！",
-                "誰かの落とし物を見つけた",
-                "不思議な洞窟を発見した！"
-            ];
-            
-            const items = [
-                {name: "英語の辞書", effect: () => { player.englishExp += 10; return "🇬🇧 英語経験値 +10"; }},
-                {name: "中国語の字典", effect: () => { player.chineseExp += 10; return "🇨🇳 中国語経験値 +10"; }},
-                {name: "回復ポーション", effect: () => { 
-                    const heal = Math.min(20, player.maxHp - player.hp);
-                    player.hp += heal;
-                    return `<span class="heal">❤️ HP +${heal}</span>`;
-                }},
-                {name: "言語の石", effect: () => { player.exp += 5; return "⭐ 経験値 +5"; }},
-                {name: "金貨", effect: () => { player.gold += 10; return "<span class='gold-text'>💰 ゴールド +10</span>"; }}
-            ];
-            
-            const event = events[Math.floor(Math.random() * events.length)];
-            const item = items[Math.floor(Math.random() * items.length)];
-            
-            player.inventory.push(item.name);
-            const effectText = item.effect();
-            
-            const location = gameData.locations[player.currentLocation];
-            
-            showMessage(`
-                <strong>🔍 探索結果</strong><br><br>
-                ${event}<br><br>
-                手に入れた: <strong>${item.name}</strong><br>
-                ${effectText}<br><br>
-                <small>周囲の情報:<br>
-                NPC: ${location.npcs.join(', ')}<br>
-                危険: ${location.enemies.join(', ')}<br>
-                行ける場所: ${location.connected.join(', ')}</small>
-            `);
-            
-            checkLevelUp();
-            updateStatus();
-        }
-
-        // 勉強
-        function study() {
-            if (player.inBattle) return;
-            
-            const vocabList = gameData.vocabulary.easy;
-            const selected = [];
-            while (selected.length < 3) {
-                const word = vocabList[Math.floor(Math.random() * vocabList.length)];
-                if (!selected.includes(word)) selected.push(word);
-            }
-            
-            let html = '<strong>📚 言語学習セッション</strong><br><br>';
-            
-            selected.forEach(word => {
-                html += `
-                    <div class="word-card">
-                        <div class="jp">🇯🇵 ${word.jp}</div>
-                        <div class="en">🇬🇧 ${word.en}</div>
-                        <div class="cn">🇨🇳 ${word.cn}</div>
-                        <small>テーマ: ${word.theme}</small>
-                    </div>
-                `;
-            });
-            
-            const expGain = Math.floor(Math.random() * 10) + 5;
-            player.englishExp += expGain;
-            player.chineseExp += expGain;
-            player.exp += expGain;
-            
-            html += `<br>✨ <span class="exp">英語経験値 +${expGain} / 中国語経験値 +${expGain}</span>`;
-            
-            showMessage(html);
-            checkLevelUp();
-            updateStatus();
-        }
-
-        // バトル
-        function battle() {
-            if (player.inBattle) return;
-            
-            const location = gameData.locations[player.currentLocation];
-            if (location.enemies.length === 0) {
-                showMessage('この場所には敵がいないようだ...');
-                return;
-            }
-            
-            const enemyName = location.enemies[Math.floor(Math.random() * location.enemies.length)];
-            const enemy = gameData.battles[enemyName];
-            
-            player.inBattle = true;
-            player.currentEnemy = { name: enemyName, hp: enemy.hp, maxHp: enemy.hp };
-            
-            const question = enemy.questions[Math.floor(Math.random() * enemy.questions.length)];
-            
-            showMessage(`
-                <div class="battle-enemy">
-                    <h3>⚔️ ${enemyName} が現れた！</h3>
-                    <div>❤️ HP: ${enemy.hp}/${enemy.hp}</div>
-                </div>
-                <div class="question-box">
-                    <h4>❓ ${question.q}</h4>
-                    <div>💡 ヒント: ${question.hint}</div>
-                    <div class="input-group">
-                        <input type="text" id="battleAnswer" placeholder="答えを入力" onkeypress="if(event.key==='Enter')submitBattle()">
-                        <button onclick="submitBattle()">攻撃！</button>
-                    </div>
-                </div>
-            `);
-            
-            player.currentQuestion = question;
-        }
-
-        // バトル回答
-        function submitBattle() {
-            const answer = document.getElementById('battleAnswer').value.trim().toLowerCase();
-            const question = player.currentQuestion;
-            
-            if (question.a.includes(answer)) {
-                // 正解
-                const damage = Math.floor(Math.random() * 15) + 15;
-                const expGain = Math.floor(Math.random() * 10) + 10;
-                const goldGain = Math.floor(Math.random() * 10) + 5;
-                
-                player.exp += expGain;
-                player.gold += goldGain;
-                
-                if (question.type === 'english') {
-                    player.englishExp += 10;
-                } else {
-                    player.chineseExp += 10;
-                }
-                
-                showMessage(`
-                    ✅ <strong>正解！</strong><br><br>
-                    🗡️ <span class="damage">${damage}ダメージ</span>与えた！<br>
-                    ⭐ <span class="exp">経験値 +${expGain}</span><br>
-                    💰 <span class="gold-text">ゴールド +${goldGain}</span><br><br>
-                    ${player.currentEnemy.name}を倒した！
-                `);
-                
-                player.inBattle = false;
-                player.currentEnemy = null;
-            } else {
-                // 不正解
-                const damage = Math.floor(Math.random() * 10) + 5;
-                player.hp -= damage;
-                
-                showMessage(`
-                    ❌ <strong>不正解...</strong><br>
-                    正解は「<strong>${question.a[0]}</strong>」だった<br><br>
-                    💔 <span class="damage">${damage}ダメージ</span>受けた！<br>
-                    残りHP: ${player.hp}/${player.maxHp}
-                `);
-                
-                if (player.hp <= 0) {
-                    showMessage('<br>💀 <strong>あなたは倒れた...</strong><br>村に戻り、HPが回復しました。');
-                    player.hp = player.maxHp;
-                    player.currentLocation = '始まりの村';
-                    player.inBattle = false;
-                    player.gold = Math.floor(player.gold / 2);
-                }
-            }
-            
-            checkLevelUp();
-            updateStatus();
-        }
-
-        // 移動
-        function move() {
-            if (player.inBattle) return;
-            
-            const location = gameData.locations[player.currentLocation];
-            const destinations = location.connected;
-            
-            let html = '<strong>🚶 どこに移動する？</strong><br><br>';
-            
-            destinations.forEach(dest => {
-                const destData = gameData.locations[dest];
-                html += `
-                    <button onclick="moveTo('${dest}')" style="margin: 5px;">
-                        ${dest}<br>
-                        <small>🇬🇧 ${destData.name_en} | 🇨🇳 ${destData.name_cn}</small>
-                    </button>
-                `;
-            });
-            
-            showMessage(html);
-        }
-
-        function moveTo(destination) {
-            player.currentLocation = destination;
-            const loc = gameData.locations[destination];
-            
-            showMessage(`
-                <strong>🚶 ${destination}に到着！</strong><br><br>
-                🇬🇧 ${loc.name_en}<br>
-                🇨🇳 ${loc.name_cn}<br><br>
-                ${loc.description}<br><br>
-                <small>ここにいるNPC: ${loc.npcs.join(', ')}<br>
-                注意すべき敵: ${loc.enemies.join(', ')}</small>
-            `);
-            
-            updateStatus();
-        }
-
-        // ステータス表示
-        function showStatus() {
-            if (player.inBattle) return;
-            
-            showMessage(`
-                <strong>📊 ${player.name} のステータス</strong><br><br>
-                ❤️ HP: ${player.hp}/${player.maxHp}<br>
-                ⭐ Level: ${player.level}<br>
-                📈 経験値: ${player.exp}/${player.level * 50}<br>
-                💰 Gold: ${player.gold}<br>
-                📍 現在地: ${player.currentLocation}<br><br>
-                🇬🇧 英語経験値: ${player.englishExp}<br>
-                🇨🇳 中国語経験値: ${player.chineseExp}<br><br>
-                🎒 持ち物:<br>
-                ${player.inventory.length > 0 ? player.inventory.map(i => '- ' + i).join('<br>') : '- (なし)'}
-            `);
-        }
-
-        // 単語帳
-        function showVocab() {
-            if (player.inBattle) return;
-            
-            let html = '<strong>📖 単語帳</strong><br><br>';
-            
-            ['easy', 'medium'].forEach(level => {
-                html += `<strong>【${level === 'easy' ? '初級' : '中級'}】</strong><br>`;
-                gameData.vocabulary[level].slice(0, 5).forEach(word => {
-                    html += `
-                        <div style="margin: 10px 0; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px;">
-                            🇯🇵 ${word.jp} | 🇬🇧 ${word.en} | 🇨🇳 ${word.cn}
-                        </div>
-                    `;
-                });
-                html += '<br>';
-            });
-            
-            showMessage(html);
-        }
-
-        // レベルアップチェック
-        function checkLevelUp() {
-            const required = player.level * 50;
-            if (player.exp >= required) {
-                player.level++;
-                player.maxHp += 20;
-                player.hp = player.maxHp;
-                showMessage(`<br>🎉 <strong>LEVEL UP!</strong> Lv.${player.level}になった！<br>❤️ 最大HPが${player.maxHp}になった！`);
-            }
-        }
-    </script>
+    <!-- スクリプト読み込み -->
+    <script src="js/data.js"></script>
+    <script src="js/story.js"></script>
+    <script src="js/battle.js"></script>
+    <script src="js/game.js"></script>
 </body>
 </html>

@@ -1,0 +1,726 @@
+/* ============================================
+   語源の旅人 - ストーリーデータ
+   メインクエスト・サブクエスト・世界観
+   ============================================ */
+
+const StoryData = {
+    // ============================================
+    // 世界観設定
+    // ============================================
+    worldSetting: {
+        title: "語源の世界",
+        description: `遥か昔、この世界は「言葉の力」によって形作られた。
+        
+言葉は単なるコミュニケーションの手段ではなく、魔力の源であり、世界を動かす原動力であった。
+
+偉大な言語学者たちは、英語と中国語という二大言語体系の力を解明し、人々は言葉を学ぶことで魔法を使えるようになった。
+
+しかし、時代の流れとともに、言葉の真の力は忘れ去られ、人々は言葉を軽んじるようになった。
+
+そして今、言葉の力が失われつつあるこの世界に、新たな旅人が現れた...
+
+あなたは「語源の旅人」として、失われた言葉の力を取り戻す冒険に出るのだ。`,
+        
+        keyConcepts: [
+            {
+                name: "言霊（ことだま）",
+                description: "言葉に宿る魔力。英語と中国語の知識が深ければ深いほど、強力な魔法が使える。"
+            },
+            {
+                name: "語源の力",
+                description: "単語の語源を理解することで、その本質的な力を引き出せる。"
+            },
+            {
+                name: "言語の結界",
+                description: "特定の言語でしか突破できない障壁や、特定の言語に弱い魔物が存在する。"
+            },
+            {
+                name: "翻訳の魔法",
+                description: "言葉の意味を理解することで、世界の真理に近づくことができる。"
+            }
+        ]
+    },
+
+    // ============================================
+    // 主要キャラクター（5人以上）
+    // ============================================
+    characters: {
+        player: {
+            id: 'player',
+            name: '旅人',
+            description: '言葉の力を目覚めさせた主人公。プレイヤー自身が演じる。',
+            role: 'protagonist'
+        },
+        
+        elder_alpha: {
+            id: 'elder_alpha',
+            name: '長老アルファ',
+            title: '言葉の郷の長老',
+            description: '言葉の郷を治める賢き長老。若き日は偉大な言語学者であり、今もなお多くの知識を持つ。',
+            backstory: `かつて「語源の書」を完成させた伝説の言語学者。
+            50年前、大言語戦争で両親を失い、言葉の力の恐ろしさを知る。
+            以来、言葉の力を正しく使うことの重要性を説き続けている。
+            主人公の才能を見抜き、導き手となる。`,
+            icon: '👴',
+            location: 'village_home',
+            role: 'guide'
+        },
+        
+        luna_lexica: {
+            id: 'luna_lexica',
+            name: 'ルナ・レキシカ',
+            title: '星読みの語り部',
+            description: '言葉と星の運命を読む神秘の少女。物語の鍵を握る存在。',
+            backstory: `言葉の郷の外れで、星と語らいながら生きてきた少女。
+            生まれつき「言霊を視る」能力を持ち、人々の言葉の力の強さを
+            光の輝きとして見ることができる。
+            孤独な幼少期を過ごしたが、主人公との出会いが彼女を変える。
+            物語の進行とともに、彼女の正体が明らかになる...`,
+            icon: '🌙',
+            location: 'plains_wind',
+            role: 'ally'
+        },
+        
+        victor_verb: {
+            id: 'victor_verb',
+            name: 'ヴィクター・ヴァーブ',
+            title: '語学戦士団長',
+            description: '英語の力を極めた戦士。主人公のライバルであり、時に協力者となる。',
+            backstory: `貧しい出身ながら、英語の才能だけで戦士団の頂点に上り詰めた男。
+            当初は主人公をライバル視し、対立する。
+            しかし、共に戦ううちに友情を育み、最終的には頼れる仲間となる。
+            「言葉は力だ」が口癖。`,
+            icon: '⚔️',
+            location: 'tower_sage',
+            role: 'rival_ally'
+        },
+        
+        mei_character: {
+            id: 'mei_character',
+            name: 'メイ・キャラクター',
+            title: '漢字の魔女',
+            description: '中国語の力を極めた謎多き魔女。裏から世界を見守っている。',
+            backstory: `東方からやってきた言語術師。漢字一つ一つに宿る力を理解し、
+            それを魔法として使いこなす。
+            表立って行動することは少ないが、重要な局面で主人公を助ける。
+            彼女もまた、かつては「語源の書」を探して旅していたという...
+            長老アルファのかつての弟子。`,
+            icon: '🔮',
+            location: 'temple_water',
+            role: 'ally'
+        },
+        
+        logos: {
+            id: 'logos',
+            name: 'ロゴス',
+            title: '語源の化身',
+            description: 'すべての言葉の源。物語の最終ボス。',
+            backstory: `この世界で最初に生まれた「言葉」そのものが形を持った存在。
+            かつては人々を導く存在だったが、言葉が軽んじられる現状に絶望し、
+            世界を「言葉なき静寂」に戻そうとする。
+            決して悪ではないが、極端な理想のために世界を危険に晒している。
+            主人公との最終決戦で、言葉の真の意味を問う。`,
+            icon: '👑',
+            location: 'castle_final',
+            role: 'antagonist'
+        },
+        
+        shopkeeper_beta: {
+            id: 'shopkeeper_beta',
+            name: '商人ベータ',
+            title: '放浪の商人',
+            description: 'どこにでも現れる謎の商人。良いものを取り揃えている。',
+            backstory: `正体不明の商人。様々な場所に現れ、冒険者に道具を売る。
+            どうやって商品を調達しているのかは不明。
+            時折、重要な情報を漏らすことも...`,
+            icon: '👩‍💼',
+            location: 'various',
+            role: 'shopkeeper'
+        },
+        
+        sage_gamma: {
+            id: 'sage_gamma',
+            name: '賢者ガンマ',
+            title: '塔の守護者',
+            description: '賢者の塔を守る ancient な存在。試練を与える。',
+            backstory: `1000年以上生きる賢者。言葉の力の使い手として頂点に立つ。
+            主人公が成長したことを認めたとき、真の力を授ける。`,
+            icon: '🧙‍♂️',
+            location: 'tower_sage',
+            role: 'mentor'
+        }
+    },
+
+    // ============================================
+    // メインクエスト（10章以上）
+    // ============================================
+    mainQuests: [
+        {
+            id: 'mq_chapter1',
+            chapter: 1,
+            title: '始まりの言葉',
+            title_cn: '开始的话语',
+            description: '言葉の郷で目覚め、語学の基礎を学ぶ',
+            description_cn: '在语言之乡醒来，学习语言学基础',
+            objectives: [
+                { id: 'mq1_1', text: '長老アルファと話す', completed: false },
+                { id: 'mq1_2', text: 'クラスを選択する', completed: false },
+                { id: 'mq1_3', text: '初めてのバトルに勝利する', completed: false },
+                { id: 'mq1_4', text: 'レベル2に到達する', completed: false }
+            ],
+            reward: { exp: 100, gold: 50, items: ['potion_small'] },
+            unlockArea: 'forest_deep'
+        },
+        {
+            id: 'mq_chapter2',
+            chapter: 2,
+            title: '深淵の試練',
+            title_cn: '深渊的试炼',
+            description: '深淵の樹海で実戦を積む',
+            description_cn: '在深渊树海积累实战经验',
+            objectives: [
+                { id: 'mq2_1', text: '深淵の樹海に到達する', completed: false },
+                { id: 'mq2_2', text: 'ゴブリンを5体倒す', completed: false },
+                { id: 'mq2_3', text: 'レベル5に到達する', completed: false },
+                { id: 'mq2_4', text: '新しいスキルを覚える', completed: false }
+            ],
+            reward: { exp: 200, gold: 100, items: ['sword_iron'] },
+            requiredLevel: 3,
+            unlockArea: 'plains_wind'
+        },
+        {
+            id: 'mq_chapter3',
+            chapter: 3,
+            title: '語源の平原',
+            title_cn: '语源的平原',
+            description: '語源の平原でルナと出会う',
+            description_cn: '在语源平原与露娜相遇',
+            objectives: [
+                { id: 'mq3_1', text: '語源の平原に到達する', completed: false },
+                { id: 'mq3_2', text: 'ルナ・レキシカと話す', completed: false },
+                { id: 'mq3_3', text: '星読みの儀式を手伝う', completed: false },
+                { id: 'mq3_4', text: '平原の魔物を倒す', completed: false }
+            ],
+            reward: { exp: 300, gold: 150, items: ['ring_wisdom'] },
+            requiredLevel: 5,
+            unlockArea: 'library_ruins'
+        },
+        {
+            id: 'mq_chapter4',
+            chapter: 4,
+            title: '忘却の知識',
+            title_cn: '忘却的知识',
+            description: '忘却の図書館で古代の秘密を探る',
+            description_cn: '在忘却图书馆探索古代秘密',
+            objectives: [
+                { id: 'mq4_1', text: '忘却の図書館に到達する', completed: false },
+                { id: 'mq4_2', text: '古代の書物を見つける', completed: false },
+                { id: 'mq4_3', text: '司書の幽霊を倒す', completed: false },
+                { id: 'mq4_4', text: '「語源の書」の断片を入手', completed: false }
+            ],
+            reward: { exp: 400, gold: 200, items: ['ancient_page'] },
+            requiredLevel: 8,
+            unlockArea: 'cave_crystal'
+        },
+        {
+            id: 'mq_chapter5',
+            chapter: 5,
+            title: '水晶の輝き',
+            title_cn: '水晶的光辉',
+            description: '水晶の洞窟で魔力を高める',
+            description_cn: '在水晶洞窟提升魔力',
+            objectives: [
+                { id: 'mq5_1', text: '水晶の洞窟に到達する', completed: false },
+                { id: 'mq5_2', text: '水晶スライムを3体倒す', completed: false },
+                { id: 'mq5_3', text: '結晶の欠片を10個集める', completed: false },
+                { id: 'mq5_4', text: 'レベル12に到達する', completed: false }
+            ],
+            reward: { exp: 500, gold: 250, items: ['staff_crystal'] },
+            requiredLevel: 10,
+            unlockArea: 'lake_mirrors'
+        },
+        {
+            id: 'mq_chapter6',
+            chapter: 6,
+            title: '鏡に映る真実',
+            title_cn: '镜中映出的真实',
+            description: '鏡の湖で自分自身と向き合う',
+            description_cn: '在镜之湖面对自己',
+            objectives: [
+                { id: 'mq6_1', text: '鏡の湖に到達する', completed: false },
+                { id: 'mq6_2', text: '鏡像を倒す', completed: false },
+                { id: 'mq6_3', text: '水の神殿への道を開く', completed: false },
+                { id: 'mq6_4', text: 'メイ・キャラクターと出会う', completed: false }
+            ],
+            reward: { exp: 600, gold: 300, items: ['armor_magic'] },
+            requiredLevel: 12,
+            unlockArea: 'temple_water'
+        },
+        {
+            id: 'mq_chapter7',
+            chapter: 7,
+            title: '水神の試練',
+            title_cn: '水神的试炼',
+            description: '水の神殿で最初のボスと対峙',
+            description_cn: '在水之神殿与第一个Boss对峙',
+            objectives: [
+                { id: 'mq7_1', text: '水の神殿に到達する', completed: false },
+                { id: 'mq7_2', text: '神殿の謎を解く', completed: false },
+                { id: 'mq7_3', text: '水神の化身を倒す', completed: false },
+                { id: 'mq7_4', text: '水の言霊を習得する', completed: false }
+            ],
+            reward: { exp: 800, gold: 500, items: ['ring_life'] },
+            requiredLevel: 15,
+            unlockArea: 'mountain_foot'
+        },
+        {
+            id: 'mq_chapter8',
+            chapter: 8,
+            title: '語山の挑戦',
+            title_cn: '语山的挑战',
+            description: '語山を登り、ヴィクターと競い合う',
+            description_cn: '攀登语山，与维克多竞争',
+            objectives: [
+                { id: 'mq8_1', text: '語山の麓に到達する', completed: false },
+                { id: 'mq8_2', text: 'ヴィクター・ヴァーブと戦う', completed: false },
+                { id: 'mq8_3', text: '語山の頂に到達する', completed: false },
+                { id: 'mq8_4', text: '岩竜バジリスクを倒す', completed: false }
+            ],
+            reward: { exp: 1000, gold: 600, items: ['sword_legend'] },
+            requiredLevel: 18,
+            unlockArea: 'tower_sage'
+        },
+        {
+            id: 'mq_chapter9',
+            chapter: 9,
+            title: '賢者の教え',
+            title_cn: '贤者的教诲',
+            description: '賢者の塔で真の力を覚醒させる',
+            description_cn: '在贤者之塔觉醒真正的力量',
+            objectives: [
+                { id: 'mq9_1', text: '賢者の塔に到達する', completed: false },
+                { id: 'mq9_2', text: '賢者ガンマの試練を受ける', completed: false },
+                { id: 'mq9_3', text: '「語源の書」を完成させる', completed: false },
+                { id: 'mq9_4', text: 'レベル25に到達する', completed: false }
+            ],
+            reward: { exp: 1200, gold: 800, items: ['staff_sage'] },
+            requiredLevel: 22,
+            unlockArea: 'sky_garden'
+        },
+        {
+            id: 'mq_chapter10',
+            chapter: 10,
+            title: '天空の決戦',
+            title_cn: '天空的决战',
+            description: '天空庭園で天空王と戦う',
+            description_cn: '在天空庭园与天空王战斗',
+            objectives: [
+                { id: 'mq10_1', text: '天空庭園に到達する', completed: false },
+                { id: 'mq10_2', text: '天空王グリフォンを倒す', completed: false },
+                { id: 'mq10_3', text: '空の言霊を習得する', completed: false },
+                { id: 'mq10_4', text: '語源城への道を開く', completed: false }
+            ],
+            reward: { exp: 1500, gold: 1000, items: ['armor_legend'] },
+            requiredLevel: 25,
+            unlockArea: 'ruins_dark'
+        },
+        {
+            id: 'mq_chapter11',
+            chapter: 11,
+            title: '闇の深淵',
+            title_cn: '黑暗的深渊',
+            description: '闇の遺跡で禁忌の言葉に触れる',
+            description_cn: '在黑暗遗迹接触禁忌的话语',
+            objectives: [
+                { id: 'mq11_1', text: '闇の遺跡に到達する', completed: false },
+                { id: 'mq11_2', text: '禁忌の言語者を倒す', completed: false },
+                { id: 'mq11_3', text: 'ロゴスの正体を知る', completed: false },
+                { id: 'mq11_4', text: 'レベル28に到達する', completed: false }
+            ],
+            reward: { exp: 1800, gold: 1200, items: ['amulet_exp'] },
+            requiredLevel: 25,
+            unlockArea: 'castle_final'
+        },
+        {
+            id: 'mq_chapter12',
+            chapter: 12,
+            title: '語源の真実',
+            title_cn: '语源的真相',
+            description: '語源城でロゴスと最終決戦',
+            description_cn: '在语源城与Logos最终决战',
+            objectives: [
+                { id: 'mq12_1', text: '語源城に到達する', completed: false },
+                { id: 'mq12_2', text: '城の守護者を倒す', completed: false },
+                { id: 'mq12_3', text: 'ロゴスとの最終決戦に勝利する', completed: false },
+                { id: 'mq12_4', text: '世界を救う', completed: false }
+            ],
+            reward: { exp: 5000, gold: 5000, items: ['ring_guard'] },
+            requiredLevel: 30,
+            isFinal: true
+        }
+    ],
+
+    // ============================================
+    // サブクエスト（20以上）
+    // ============================================
+    subQuests: [
+        // 言葉の郷周辺
+        {
+            id: 'sq_001',
+            title: '薬草集め',
+            title_cn: '收集药草',
+            description: '長老のために薬草を10個集める',
+            description_cn: '为长老收集10个药草',
+            giver: 'elder_alpha',
+            objectives: [
+                { id: 'sq001_1', text: '薬草を10個集める', target: 'herb', count: 10, current: 0 }
+            ],
+            reward: { exp: 50, gold: 30, items: ['potion_small'] },
+            requiredLevel: 1
+        },
+        {
+            id: 'sq_002',
+            title: '森の平和',
+            title_cn: '森林的和平',
+            description: '始まりの森のスライムを倒して平和を取り戻す',
+            description_cn: '打倒开始之森的史莱姆，恢复和平',
+            giver: 'village_guard',
+            objectives: [
+                { id: 'sq002_1', text: 'スライムを10体倒す', target: 'slime', count: 10, current: 0 }
+            ],
+            reward: { exp: 80, gold: 50 },
+            requiredLevel: 1
+        },
+        {
+            id: 'sq_003',
+            title: '初心者の試練',
+            title_cn: '新手的试炼',
+            description: 'レベル3に到達して実力を証明する',
+            description_cn: '到达等级3证明实力',
+            giver: 'trainer',
+            objectives: [
+                { id: 'sq003_1', text: 'レベル3に到達する', target: 'level', count: 3, current: 0 }
+            ],
+            reward: { exp: 100, gold: 100, items: ['armor_leather'] },
+            requiredLevel: 1
+        },
+        
+        // 深淵の樹海
+        {
+            id: 'sq_004',
+            title: 'ゴブリン討伐',
+            title_cn: '讨伐哥布林',
+            description: '樹海のゴブリンを一掃する',
+            description_cn: '扫荡树海的哥布林',
+            giver: 'village_guard',
+            objectives: [
+                { id: 'sq004_1', text: 'ゴブリンを5体倒す', target: 'goblin', count: 5, current: 0 }
+            ],
+            reward: { exp: 150, gold: 100 },
+            requiredLevel: 3
+        },
+        {
+            id: 'sq_005',
+            title: '牙の収集',
+            title_cn: '收集牙齿',
+            description: '武器の材料として魔物の牙が必要',
+            description_cn: '需要魔物的牙作为武器材料',
+            giver: 'blacksmith',
+            objectives: [
+                { id: 'sq005_1', text: '魔物の牙を5個集める', target: 'monster_fang', count: 5, current: 0 }
+            ],
+            reward: { exp: 120, gold: 80, items: ['sword_iron'] },
+            requiredLevel: 3
+        },
+        
+        // 語源の平原
+        {
+            id: 'sq_006',
+            title: '星の光を探して',
+            title_cn: '寻找星光',
+            description: 'ルナのために星の光を集める',
+            description_cn: '为露娜收集星光',
+            giver: 'luna_lexica',
+            objectives: [
+                { id: 'sq006_1', text: '星の光を3つ集める', target: 'star_light', count: 3, current: 0 }
+            ],
+            reward: { exp: 200, gold: 150, items: ['amulet_luck'] },
+            requiredLevel: 5
+        },
+        {
+            id: 'sq_007',
+            title: '風精の調査',
+            title_cn: '风精的调查',
+            description: '風精の生態を調査する',
+            description_cn: '调查风精的生态',
+            giver: 'researcher',
+            objectives: [
+                { id: 'sq007_1', text: '風精を3体倒す', target: 'wind_spirit', count: 3, current: 0 }
+            ],
+            reward: { exp: 180, gold: 120 },
+            requiredLevel: 5
+        },
+        {
+            id: 'sq_008',
+            title: '盗賊団の追跡',
+            title_cn: '追踪盗贼团',
+            description: '言葉狩りを追い詰める',
+            description_cn: '追缉语言猎人',
+            giver: 'village_guard',
+            objectives: [
+                { id: 'sq008_1', text: '言葉狩りを5体倒す', target: 'bandit', count: 5, current: 0 }
+            ],
+            reward: { exp: 250, gold: 200 },
+            requiredLevel: 6
+        },
+        
+        // 忘却の図書館
+        {
+            id: 'sq_009',
+            title: '失われたページ',
+            title_cn: '失落的书页',
+            description: '古代の書物のページを集める',
+            description_cn: '收集古代书物的书页',
+            giver: 'librarian_ghost',
+            objectives: [
+                { id: 'sq009_1', text: '古びたページを5枚集める', target: 'ancient_page', count: 5, current: 0 }
+            ],
+            reward: { exp: 300, gold: 200, items: ['scroll_return'] },
+            requiredLevel: 8
+        },
+        {
+            id: 'sq_010',
+            title: '書の亡霊の鎮魂',
+            title_cn: '书之亡灵的镇魂',
+            description: '図書館の亡霊を鎮める',
+            description_cn: '镇图书馆的亡灵',
+            giver: 'researcher',
+            objectives: [
+                { id: 'sq010_1', text: '書の亡霊を3体倒す', target: 'book_wraith', count: 3, current: 0 }
+            ],
+            reward: { exp: 350, gold: 250 },
+            requiredLevel: 8
+        },
+        
+        // 水晶の洞窟
+        {
+            id: 'sq_011',
+            title: '水晶採集',
+            title_cn: '水晶采集',
+            description: '美しい水晶を集める',
+            description_cn: '收集美丽的水晶',
+            giver: 'shopkeeper_beta',
+            objectives: [
+                { id: 'sq011_1', text: '結晶の欠片を5個集める', target: 'crystal_shard', count: 5, current: 0 }
+            ],
+            reward: { exp: 400, gold: 300 },
+            requiredLevel: 10
+        },
+        {
+            id: 'sq_012',
+            title: '洞窟の安全確保',
+            title_cn: '确保洞窟安全',
+            description: '洞窟の魔物を一掃する',
+            description_cn: '扫荡洞窟的魔物',
+            giver: 'miner_ghost',
+            objectives: [
+                { id: 'sq012_1', text: '水晶スライムを5体倒す', target: 'crystal_slime', count: 5, current: 0 }
+            ],
+            reward: { exp: 450, gold: 350 },
+            requiredLevel: 10
+        },
+        
+        // 鏡の湖・水の神殿
+        {
+            id: 'sq_013',
+            title: '湖の清浄',
+            title_cn: '湖的清净',
+            description: '湖を汚す魔物を倒す',
+            description_cn: '打倒污染湖的魔物',
+            giver: 'mei_character',
+            objectives: [
+                { id: 'sq013_1', text: '湖蛇を3体倒す', target: 'lake_serpent', count: 3, current: 0 }
+            ],
+            reward: { exp: 500, gold: 400 },
+            requiredLevel: 12
+        },
+        {
+            id: 'sq_014',
+            title: '水精のお願い',
+            title_cn: '水精的请求',
+            description: '水精の願いを叶える',
+            description_cn: '实现水精的愿望',
+            giver: 'water_sprite',
+            objectives: [
+                { id: 'sq014_1', text: '水精と話す', target: 'talk', count: 1, current: 0 },
+                { id: 'sq014_2', text: '魔石を3個集める', target: 'magic_stone', count: 3, current: 0 }
+            ],
+            reward: { exp: 450, gold: 350, items: ['ether_medium'] },
+            requiredLevel: 12
+        },
+        
+        // 語山
+        {
+            id: 'sq_015',
+            title: '山の覇者',
+            title_cn: '山之霸者',
+            description: '語山の強敵を倒す',
+            description_cn: '打倒语山的强敌',
+            giver: 'victor_verb',
+            objectives: [
+                { id: 'sq015_1', text: '岩ゴーレムを3体倒す', target: 'rock_golem', count: 3, current: 0 }
+            ],
+            reward: { exp: 600, gold: 500 },
+            requiredLevel: 15
+        },
+        {
+            id: 'sq_016',
+            title: '鉱石の収集',
+            title_cn: '矿石收集',
+            description: '鉄鉱石を集める',
+            description_cn: '收集铁矿石',
+            giver: 'blacksmith',
+            objectives: [
+                { id: 'sq016_1', text: '鉄鉱石を10個集める', target: 'iron_ore', count: 10, current: 0 }
+            ],
+            reward: { exp: 550, gold: 450, items: ['armor_chain'] },
+            requiredLevel: 15
+        },
+        
+        // 賢者の塔
+        {
+            id: 'sq_017',
+            title: '魔術師の試練',
+            title_cn: '魔术师的试炼',
+            description: '塔の魔術師を倒す',
+            description_cn: '打倒塔的魔术师',
+            giver: 'sage_gamma',
+            objectives: [
+                { id: 'sq017_1', text: '見習い魔術師を5体倒す', target: 'apprentice_wizard', count: 5, current: 0 }
+            ],
+            reward: { exp: 700, gold: 600 },
+            requiredLevel: 18
+        },
+        {
+            id: 'sq_018',
+            title: '魔導書の封印',
+            title_cn: '魔导书的封印',
+            description: '暴走した魔導書を封印する',
+            description_cn: '封印暴走的魔导书',
+            giver: 'sage_gamma',
+            objectives: [
+                { id: 'sq018_1', text: '魔導書を3体倒す', target: 'magic_book', count: 3, current: 0 }
+            ],
+            reward: { exp: 750, gold: 650, items: ['scroll_escape'] },
+            requiredLevel: 18
+        },
+        
+        // 霧の沼
+        {
+            id: 'sq_019',
+            title: '沼の浄化',
+            title_cn: '沼泽的净化',
+            description: '霧の沼を浄化する',
+            description_cn: '净化雾之沼泽',
+            giver: 'mei_character',
+            objectives: [
+                { id: 'sq019_1', text: '沼ゾンビを5体倒す', target: 'swamp_zombie', count: 5, current: 0 },
+                { id: 'sq019_2', text: '霧の亡霊を3体倒す', target: 'fog_wraith', count: 3, current: 0 }
+            ],
+            reward: { exp: 800, gold: 700 },
+            requiredLevel: 20
+        },
+        {
+            id: 'sq_020',
+            title: '錬金術の材料',
+            title_cn: '炼金术的材料',
+            description: '強力な薬の材料を集める',
+            description_cn: '收集强力药的材料',
+            giver: 'alchemist',
+            objectives: [
+                { id: 'sq020_1', text: '魔物の牙を10個集める', target: 'monster_fang', count: 10, current: 0 },
+                { id: 'sq020_2', text: '薬草を10個集める', target: 'herb', count: 10, current: 0 }
+            ],
+            reward: { exp: 850, gold: 750, items: ['elixir'] },
+            requiredLevel: 20
+        },
+        
+        // 天空庭園
+        {
+            id: 'sq_021',
+            title: '天空の覇者',
+            title_cn: '天空的霸者',
+            description: '天空の強敵を倒す',
+            description_cn: '打倒天空的强敌',
+            giver: 'victor_verb',
+            objectives: [
+                { id: 'sq021_1', text: '風竜を倒す', target: 'wind_dragon', count: 1, current: 0 }
+            ],
+            reward: { exp: 1000, gold: 1000 },
+            requiredLevel: 25
+        },
+        {
+            id: 'sq_022',
+            title: '雲の収集',
+            title_cn: '云的收集',
+            description: '雲の精の雫を集める',
+            description_cn: '收集云之精的滴露',
+            giver: 'luna_lexica',
+            objectives: [
+                { id: 'sq022_1', text: '雲精を5体倒す', target: 'cloud_sprite', count: 5, current: 0 }
+            ],
+            reward: { exp: 900, gold: 800, items: ['ether_large'] },
+            requiredLevel: 25
+        },
+        
+        // 闇の遺跡
+        {
+            id: 'sq_023',
+            title: '闇の討伐',
+            title_cn: '黑暗的讨伐',
+            description: '闇の勢力を一掃する',
+            description_cn: '扫荡黑暗势力',
+            giver: 'elder_alpha',
+            objectives: [
+                { id: 'sq023_1', text: '暗黒騎士を3体倒す', target: 'dark_knight', count: 3, current: 0 },
+                { id: 'sq023_2', text: '影魔術師を3体倒す', target: 'shadow_mage', count: 3, current: 0 }
+            ],
+            reward: { exp: 1200, gold: 1000 },
+            requiredLevel: 28
+        },
+        {
+            id: 'sq_024',
+            title: '古代の知識',
+            title_cn: '古代的知识',
+            description: '古代の知識を集める',
+            description_cn: '收集古代的知识',
+            giver: 'sage_gamma',
+            objectives: [
+                { id: 'sq024_1', text: '古びたページを10枚集める', target: 'ancient_page', count: 10, current: 0 }
+            ],
+            reward: { exp: 1100, gold: 900, items: ['ring_wisdom'] },
+            requiredLevel: 28
+        },
+        
+        // 語源城
+        {
+            id: 'sq_025',
+            title: '最後の準備',
+            title_cn: '最后的准备',
+            description: '最終決戦に備えて強くなる',
+            description_cn: '为最终决战变强',
+            giver: 'elder_alpha',
+            objectives: [
+                { id: 'sq025_1', text: 'レベル30に到達する', target: 'level', count: 30, current: 0 },
+                { id: 'sq025_2', text: '王宮衛兵を5体倒す', target: 'royal_guard', count: 5, current: 0 }
+            ],
+            reward: { exp: 2000, gold: 2000, items: ['elixir'] },
+            requiredLevel: 30
+        }
+    ]
+};
+
+// グローバルにエクスポート
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = StoryData;
+}

@@ -1,0 +1,619 @@
+/* ============================================
+   語源の旅人 - アイテムデータ
+   JSON形式のアイテム定義
+   ============================================ */
+
+{
+  "items": {
+    "consumables": {
+      "potion_small": {
+        "id": "potion_small",
+        "name": "小さな回復薬",
+        "name_cn": "小恢复药",
+        "description": "HPを30回復する",
+        "description_cn": "恢复30点HP",
+        "type": "consumable",
+        "effect": { "type": "heal", "value": 30 },
+        "icon": "🧪",
+        "buyPrice": 50,
+        "sellPrice": 25,
+        "rarity": "common"
+      },
+      "potion_medium": {
+        "id": "potion_medium",
+        "name": "回復薬",
+        "name_cn": "恢复药",
+        "description": "HPを60回復する",
+        "description_cn": "恢复60点HP",
+        "type": "consumable",
+        "effect": { "type": "heal", "value": 60 },
+        "icon": "🧪",
+        "buyPrice": 100,
+        "sellPrice": 50,
+        "rarity": "common"
+      },
+      "potion_large": {
+        "id": "potion_large",
+        "name": "大きな回復薬",
+        "name_cn": "大恢复药",
+        "description": "HPを120回復する",
+        "description_cn": "恢复120点HP",
+        "type": "consumable",
+        "effect": { "type": "heal", "value": 120 },
+        "icon": "🧪",
+        "buyPrice": 200,
+        "sellPrice": 100,
+        "rarity": "uncommon"
+      },
+      "potion_full": {
+        "id": "potion_full",
+        "name": "完全回復薬",
+        "name_cn": "完全恢复药",
+        "description": "HPを全回復する",
+        "description_cn": "完全恢复HP",
+        "type": "consumable",
+        "effect": { "type": "heal", "value": "full" },
+        "icon": "🧪",
+        "buyPrice": 500,
+        "sellPrice": 250,
+        "rarity": "rare"
+      },
+      "ether_small": {
+        "id": "ether_small",
+        "name": "小さなエーテル",
+        "name_cn": "小以太",
+        "description": "MPを20回復する",
+        "description_cn": "恢复20点MP",
+        "type": "consumable",
+        "effect": { "type": "restore_mp", "value": 20 },
+        "icon": "💧",
+        "buyPrice": 60,
+        "sellPrice": 30,
+        "rarity": "common"
+      },
+      "ether_medium": {
+        "id": "ether_medium",
+        "name": "エーテル",
+        "name_cn": "以太",
+        "description": "MPを40回復する",
+        "description_cn": "恢复40点MP",
+        "type": "consumable",
+        "effect": { "type": "restore_mp", "value": 40 },
+        "icon": "💧",
+        "buyPrice": 120,
+        "sellPrice": 60,
+        "rarity": "common"
+      },
+      "ether_large": {
+        "id": "ether_large",
+        "name": "大きなエーテル",
+        "name_cn": "大以太",
+        "description": "MPを80回復する",
+        "description_cn": "恢复80点MP",
+        "type": "consumable",
+        "effect": { "type": "restore_mp", "value": 80 },
+        "icon": "💧",
+        "buyPrice": 240,
+        "sellPrice": 120,
+        "rarity": "uncommon"
+      },
+      "elixir": {
+        "id": "elixir",
+        "name": "エリクサー",
+        "name_cn": "灵药",
+        "description": "HPとMPを全回復する",
+        "description_cn": "完全恢复HP和MP",
+        "type": "consumable",
+        "effect": { "type": "heal_full" },
+        "icon": "✨",
+        "buyPrice": 1000,
+        "sellPrice": 500,
+        "rarity": "rare"
+      }
+    },
+    
+    "boosts": {
+      "power_boost": {
+        "id": "power_boost",
+        "name": "力の粉末",
+        "name_cn": "力量粉末",
+        "description": "攻撃力を一時的に上昇",
+        "description_cn": "暂时提升攻击力",
+        "type": "consumable",
+        "effect": { "type": "buff", "stat": "attack", "value": 0.2, "duration": 3 },
+        "icon": "💪",
+        "buyPrice": 80,
+        "sellPrice": 40,
+        "rarity": "common"
+      },
+      "defense_boost": {
+        "id": "defense_boost",
+        "name": "守りの粉末",
+        "name_cn": "守护粉末",
+        "description": "防御力を一時的に上昇",
+        "description_cn": "暂时提升防御力",
+        "type": "consumable",
+        "effect": { "type": "buff", "stat": "defense", "value": 0.2, "duration": 3 },
+        "icon": "🛡️",
+        "buyPrice": 80,
+        "sellPrice": 40,
+        "rarity": "common"
+      },
+      "speed_boost": {
+        "id": "speed_boost",
+        "name": "速さの粉末",
+        "name_cn": "速度粉末",
+        "description": "素早さを一時的に上昇",
+        "description_cn": "暂时提升速度",
+        "type": "consumable",
+        "effect": { "type": "buff", "stat": "speed", "value": 0.2, "duration": 3 },
+        "icon": "⚡",
+        "buyPrice": 80,
+        "sellPrice": 40,
+        "rarity": "common"
+      }
+    },
+    
+    "scrolls": {
+      "scroll_return": {
+        "id": "scroll_return",
+        "name": "帰還の巻物",
+        "name_cn": "归还卷轴",
+        "description": "最後に訪れた安全地帯に戻る",
+        "description_cn": "返回最后访问的安全区域",
+        "type": "consumable",
+        "effect": { "type": "return" },
+        "icon": "📜",
+        "buyPrice": 150,
+        "sellPrice": 75,
+        "rarity": "common"
+      },
+      "scroll_escape": {
+        "id": "scroll_escape",
+        "name": "脱出の巻物",
+        "name_cn": "逃脱卷轴",
+        "description": "戦闘から必ず逃げられる",
+        "description_cn": "必定能从战斗中逃脱",
+        "type": "consumable",
+        "effect": { "type": "escape" },
+        "icon": "📜",
+        "buyPrice": 200,
+        "sellPrice": 100,
+        "rarity": "uncommon"
+      }
+    },
+    
+    "cures": {
+      "antidote": {
+        "id": "antidote",
+        "name": "解毒薬",
+        "name_cn": "解毒药",
+        "description": "毒状態を回復",
+        "description_cn": "解除中毒状态",
+        "type": "consumable",
+        "effect": { "type": "cure", "status": "poison" },
+        "icon": "💊",
+        "buyPrice": 50,
+        "sellPrice": 25,
+        "rarity": "common"
+      },
+      "eye_drops": {
+        "id": "eye_drops",
+        "name": "目薬",
+        "name_cn": "眼药水",
+        "description": "暗闇状態を回復",
+        "description_cn": "解除黑暗状态",
+        "type": "consumable",
+        "effect": { "type": "cure", "status": "blind" },
+        "icon": "👁️",
+        "buyPrice": 50,
+        "sellPrice": 25,
+        "rarity": "common"
+      },
+      "smelling_salts": {
+        "id": "smelling_salts",
+        "name": "嗅ぎ薬",
+        "name_cn": "嗅盐",
+        "description": "混乱状態を回復",
+        "description_cn": "解除混乱状态",
+        "type": "consumable",
+        "effect": { "type": "cure", "status": "confuse" },
+        "icon": "👃",
+        "buyPrice": 50,
+        "sellPrice": 25,
+        "rarity": "common"
+      }
+    },
+    
+    "weapons": {
+      "sword_rusty": {
+        "id": "sword_rusty",
+        "name": "錆びた剣",
+        "name_cn": "生锈的剑",
+        "description": "初心者用の剣",
+        "description_cn": "新手用剑",
+        "type": "weapon",
+        "slot": "weapon",
+        "stats": { "attack": 5 },
+        "icon": "🗡️",
+        "buyPrice": 100,
+        "sellPrice": 50,
+        "rarity": "common"
+      },
+      "sword_iron": {
+        "id": "sword_iron",
+        "name": "鉄の剣",
+        "name_cn": "铁剑",
+        "description": "標準的な剣",
+        "description_cn": "标准剑",
+        "type": "weapon",
+        "slot": "weapon",
+        "stats": { "attack": 12 },
+        "icon": "⚔️",
+        "buyPrice": 300,
+        "sellPrice": 150,
+        "rarity": "common"
+      },
+      "sword_steel": {
+        "id": "sword_steel",
+        "name": "鋼の剣",
+        "name_cn": "钢剑",
+        "description": "鋼で作られた頑丈な剣",
+        "description_cn": "钢制的坚固剑",
+        "type": "weapon",
+        "slot": "weapon",
+        "stats": { "attack": 25 },
+        "icon": "⚔️",
+        "buyPrice": 800,
+        "sellPrice": 400,
+        "rarity": "uncommon"
+      },
+      "sword_magic": {
+        "id": "sword_magic",
+        "name": "魔法剣",
+        "name_cn": "魔法剑",
+        "description": "魔力を帯びた剣",
+        "description_cn": "带有魔力的剑",
+        "type": "weapon",
+        "slot": "weapon",
+        "stats": { "attack": 35, "magic": 10 },
+        "icon": "🔮",
+        "buyPrice": 1500,
+        "sellPrice": 750,
+        "rarity": "rare"
+      },
+      "sword_legend": {
+        "id": "sword_legend",
+        "name": "伝説の剣",
+        "name_cn": "传说之剑",
+        "description": "古の英雄が使った剣",
+        "description_cn": "古代英雄使用的剑",
+        "type": "weapon",
+        "slot": "weapon",
+        "stats": { "attack": 50, "magic": 20 },
+        "icon": "⚔️",
+        "buyPrice": 5000,
+        "sellPrice": 2500,
+        "rarity": "legendary"
+      },
+      "staff_wood": {
+        "id": "staff_wood",
+        "name": "木の杖",
+        "name_cn": "木杖",
+        "description": "初心者用の杖",
+        "description_cn": "新手用杖",
+        "type": "weapon",
+        "slot": "weapon",
+        "stats": { "attack": 3, "magic": 5 },
+        "icon": "🦯",
+        "buyPrice": 100,
+        "sellPrice": 50,
+        "rarity": "common"
+      },
+      "staff_crystal": {
+        "id": "staff_crystal",
+        "name": "水晶の杖",
+        "name_cn": "水晶杖",
+        "description": "魔力を増幅する杖",
+        "description_cn": "增幅魔力的杖",
+        "type": "weapon",
+        "slot": "weapon",
+        "stats": { "attack": 8, "magic": 20 },
+        "icon": "🔮",
+        "buyPrice": 1000,
+        "sellPrice": 500,
+        "rarity": "rare"
+      },
+      "staff_sage": {
+        "id": "staff_sage",
+        "name": "賢者の杖",
+        "name_cn": "贤者之杖",
+        "description": "大賢者が使っていた杖",
+        "description_cn": "大贤者使用的杖",
+        "type": "weapon",
+        "slot": "weapon",
+        "stats": { "attack": 15, "magic": 40 },
+        "icon": "🔮",
+        "buyPrice": 3000,
+        "sellPrice": 1500,
+        "rarity": "legendary"
+      }
+    },
+    
+    "armor": {
+      "armor_cloth": {
+        "id": "armor_cloth",
+        "name": "布の服",
+        "name_cn": "布衣",
+        "description": "普通の衣服",
+        "description_cn": "普通衣服",
+        "type": "armor",
+        "slot": "armor",
+        "stats": { "defense": 3 },
+        "icon": "👕",
+        "buyPrice": 50,
+        "sellPrice": 25,
+        "rarity": "common"
+      },
+      "armor_leather": {
+        "id": "armor_leather",
+        "name": "革の鎧",
+        "name_cn": "皮甲",
+        "description": "革で作られた軽い鎧",
+        "description_cn": "皮制的轻甲",
+        "type": "armor",
+        "slot": "armor",
+        "stats": { "defense": 8 },
+        "icon": "🦺",
+        "buyPrice": 200,
+        "sellPrice": 100,
+        "rarity": "common"
+      },
+      "armor_chain": {
+        "id": "armor_chain",
+        "name": "鎖かたびら",
+        "name_cn": "锁子甲",
+        "description": "鎖で編まれた鎧",
+        "description_cn": "锁链编织的甲",
+        "type": "armor",
+        "slot": "armor",
+        "stats": { "defense": 15 },
+        "icon": "👔",
+        "buyPrice": 600,
+        "sellPrice": 300,
+        "rarity": "uncommon"
+      },
+      "armor_plate": {
+        "id": "armor_plate",
+        "name": "板金鎧",
+        "name_cn": "板甲",
+        "description": "金属板で作られた重い鎧",
+        "description_cn": "金属板制的重甲",
+        "type": "armor",
+        "slot": "armor",
+        "stats": { "defense": 25 },
+        "icon": "🛡️",
+        "buyPrice": 1200,
+        "sellPrice": 600,
+        "rarity": "rare"
+      },
+      "armor_magic": {
+        "id": "armor_magic",
+        "name": "魔法の鎧",
+        "name_cn": "魔法甲",
+        "description": "魔力で強化された鎧",
+        "description_cn": "魔力强化的甲",
+        "type": "armor",
+        "slot": "armor",
+        "stats": { "defense": 20, "magic": 10 },
+        "icon": "✨",
+        "buyPrice": 2000,
+        "sellPrice": 1000,
+        "rarity": "rare"
+      },
+      "armor_legend": {
+        "id": "armor_legend",
+        "name": "伝説の鎧",
+        "name_cn": "传说之甲",
+        "description": "古の英雄が纏った鎧",
+        "description_cn": "古代英雄穿戴的甲",
+        "type": "armor",
+        "slot": "armor",
+        "stats": { "defense": 40, "magic": 15 },
+        "icon": "👑",
+        "buyPrice": 5000,
+        "sellPrice": 2500,
+        "rarity": "legendary"
+      }
+    },
+    
+    "accessories": {
+      "ring_power": {
+        "id": "ring_power",
+        "name": "力の指輪",
+        "name_cn": "力量戒指",
+        "description": "攻撃力が上昇する指輪",
+        "description_cn": "提升攻击力的戒指",
+        "type": "accessory",
+        "slot": "accessory",
+        "stats": { "attack": 5 },
+        "icon": "💍",
+        "buyPrice": 500,
+        "sellPrice": 250,
+        "rarity": "uncommon"
+      },
+      "ring_guard": {
+        "id": "ring_guard",
+        "name": "守りの指輪",
+        "name_cn": "守护戒指",
+        "description": "防御力が上昇する指輪",
+        "description_cn": "提升防御力的戒指",
+        "type": "accessory",
+        "slot": "accessory",
+        "stats": { "defense": 5 },
+        "icon": "💍",
+        "buyPrice": 500,
+        "sellPrice": 250,
+        "rarity": "uncommon"
+      },
+      "ring_wisdom": {
+        "id": "ring_wisdom",
+        "name": "知恵の指輪",
+        "name_cn": "智慧戒指",
+        "description": "MPが上昇する指輪",
+        "description_cn": "提升MP的戒指",
+        "type": "accessory",
+        "slot": "accessory",
+        "stats": { "mp": 20 },
+        "icon": "💍",
+        "buyPrice": 600,
+        "sellPrice": 300,
+        "rarity": "rare"
+      },
+      "ring_life": {
+        "id": "ring_life",
+        "name": "生命の指輪",
+        "name_cn": "生命戒指",
+        "description": "HPが上昇する指輪",
+        "description_cn": "提升HP的戒指",
+        "type": "accessory",
+        "slot": "accessory",
+        "stats": { "hp": 30 },
+        "icon": "💍",
+        "buyPrice": 600,
+        "sellPrice": 300,
+        "rarity": "rare"
+      },
+      "amulet_exp": {
+        "id": "amulet_exp",
+        "name": "経験の護符",
+        "name_cn": "经验护符",
+        "description": "獲得経験値が増加する",
+        "description_cn": "增加获得的经验值",
+        "type": "accessory",
+        "slot": "accessory",
+        "stats": { "expBonus": 0.1 },
+        "icon": "📿",
+        "buyPrice": 1000,
+        "sellPrice": 500,
+        "rarity": "rare"
+      },
+      "amulet_luck": {
+        "id": "amulet_luck",
+        "name": "幸運の護符",
+        "name_cn": "幸运护符",
+        "description": "アイテムドロップ率が上昇",
+        "description_cn": "提升物品掉落率",
+        "type": "accessory",
+        "slot": "accessory",
+        "stats": { "luck": 10 },
+        "icon": "🍀",
+        "buyPrice": 800,
+        "sellPrice": 400,
+        "rarity": "rare"
+      }
+    },
+    
+    "materials": {
+      "herb": {
+        "id": "herb",
+        "name": "薬草",
+        "name_cn": "药草",
+        "description": "回復薬の材料",
+        "description_cn": "恢复药的材料",
+        "type": "material",
+        "icon": "🌿",
+        "sellPrice": 10,
+        "rarity": "common"
+      },
+      "magic_stone": {
+        "id": "magic_stone",
+        "name": "魔石",
+        "name_cn": "魔石",
+        "description": "魔力を帯びた石",
+        "description_cn": "带有魔力的石头",
+        "type": "material",
+        "icon": "💎",
+        "sellPrice": 50,
+        "rarity": "uncommon"
+      },
+      "iron_ore": {
+        "id": "iron_ore",
+        "name": "鉄鉱石",
+        "name_cn": "铁矿石",
+        "description": "鉄を含む鉱石",
+        "description_cn": "含有铁的矿石",
+        "type": "material",
+        "icon": "⛏️",
+        "sellPrice": 30,
+        "rarity": "common"
+      },
+      "crystal_shard": {
+        "id": "crystal_shard",
+        "name": "結晶の欠片",
+        "name_cn": "结晶碎片",
+        "description": "魔法の結晶のかけら",
+        "description_cn": "魔法结晶的碎片",
+        "type": "material",
+        "icon": "✨",
+        "sellPrice": 100,
+        "rarity": "rare"
+      },
+      "monster_fang": {
+        "id": "monster_fang",
+        "name": "魔物の牙",
+        "name_cn": "魔物之牙",
+        "description": "魔物から取れた牙",
+        "description_cn": "从魔物身上取得的牙",
+        "type": "material",
+        "icon": "🦷",
+        "sellPrice": 40,
+        "rarity": "common"
+      },
+      "ancient_page": {
+        "id": "ancient_page",
+        "name": "古びたページ",
+        "name_cn": "古旧书页",
+        "description": "古代の文献の一部",
+        "description_cn": "古代文献的一部分",
+        "type": "material",
+        "icon": "📄",
+        "sellPrice": 80,
+        "rarity": "uncommon"
+      }
+    }
+  },
+  
+  "recipes": {
+    "potion_small": {
+      "result": "potion_small",
+      "count": 1,
+      "materials": { "herb": 2 }
+    },
+    "potion_medium": {
+      "result": "potion_medium",
+      "count": 1,
+      "materials": { "herb": 3, "magic_stone": 1 }
+    },
+    "ether_small": {
+      "result": "ether_small",
+      "count": 1,
+      "materials": { "magic_stone": 2 }
+    },
+    "power_boost": {
+      "result": "power_boost",
+      "count": 1,
+      "materials": { "herb": 2, "monster_fang": 1 }
+    },
+    "sword_iron": {
+      "result": "sword_iron",
+      "count": 1,
+      "materials": { "iron_ore": 5, "monster_fang": 2 }
+    },
+    "armor_leather": {
+      "result": "armor_leather",
+      "count": 1,
+      "materials": { "monster_fang": 3, "herb": 2 }
+    }
+  }
+}

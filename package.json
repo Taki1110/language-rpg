@@ -1,0 +1,24 @@
+{
+  "name": "etymology-traveler",
+  "version": "2.0.0",
+  "description": "英語・中国語学習RPGゲーム - 語源の旅人",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "build": "echo 'Static site - no build needed'",
+    "test": "echo 'Tests not implemented yet'"
+  },
+  "keywords": [
+    "rpg",
+    "game",
+    "english",
+    "chinese",
+    "language-learning",
+    "education"
+  ],
+  "author": "Language RPG Team",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.0.0"
+  }
+}

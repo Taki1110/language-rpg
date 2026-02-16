@@ -1,0 +1,695 @@
+/* ============================================
+   語源の旅人 - 単語データベース
+   500語以上（初級200、中級200、上級100）
+   ============================================ */
+
+const VocabularyData = {
+    // ============================================
+    // 初級レベル（200語）
+    // ============================================
+    beginner: {
+        // 挨拶・基本表現（20語）
+        greetings: [
+            { en: 'Hello', cn: '你好', jp: 'こんにちは', hint: '最も基本的な挨拶' },
+            { en: 'Good morning', cn: '早上好', jp: 'おはようございます', hint: '朝の挨拶' },
+            { en: 'Good afternoon', cn: '下午好', jp: 'こんにちは', hint: '昼の挨拶' },
+            { en: 'Good evening', cn: '晚上好', jp: 'こんばんは', hint: '夕方・夜の挨拶' },
+            { en: 'Good night', cn: '晚安', jp: 'おやすみなさい', hint: '寝る時の挨拶' },
+            { en: 'Goodbye', cn: '再见', jp: 'さようなら', hint: '別れの挨拶' },
+            { en: 'See you', cn: '回头见', jp: 'またね', hint: '気軽な別れ' },
+            { en: 'Thank you', cn: '谢谢', jp: 'ありがとう', hint: '感謝の言葉' },
+            { en: 'You\'re welcome', cn: '不客气', jp: 'どういたしまして', hint: 'お礼への返事' },
+            { en: 'Please', cn: '请', jp: 'お願いします', hint: '丁寧な依頼' },
+            { en: 'Excuse me', cn: '打扰一下', jp: 'すみません', hint: '注意を引く時' },
+            { en: 'I\'m sorry', cn: '对不起', jp: 'ごめんなさい', hint: '謝る時' },
+            { en: 'Yes', cn: '是', jp: 'はい', hint: '肯定' },
+            { en: 'No', cn: '不是', jp: 'いいえ', hint: '否定' },
+            { en: 'OK', cn: '好的', jp: 'オーケー', hint: '了解・承諾' },
+            { en: 'How are you?', cn: '你好吗？', jp: 'お元気ですか？', hint: '調子を尋ねる' },
+            { en: 'Nice to meet you', cn: '很高兴认识你', jp: 'はじめまして', hint: '初対面の挨拶' },
+            { en: 'My name is', cn: '我叫', jp: '私の名前は', hint: '自己紹介' },
+            { en: 'What\'s your name?', cn: '你叫什么名字？', jp: 'お名前は？', hint: '名前を尋ねる' },
+            { en: 'I don\'t understand', cn: '我不懂', jp: 'わかりません', hint: '理解できない時' }
+        ],
+        
+        // 数字（20語）
+        numbers: [
+            { en: 'One', cn: '一', jp: '1', hint: '数字の1' },
+            { en: 'Two', cn: '二', jp: '2', hint: '数字の2' },
+            { en: 'Three', cn: '三', jp: '3', hint: '数字の3' },
+            { en: 'Four', cn: '四', jp: '4', hint: '数字の4' },
+            { en: 'Five', cn: '五', jp: '5', hint: '数字の5' },
+            { en: 'Six', cn: '六', jp: '6', hint: '数字の6' },
+            { en: 'Seven', cn: '七', jp: '7', hint: '数字の7' },
+            { en: 'Eight', cn: '八', jp: '8', hint: '数字の8' },
+            { en: 'Nine', cn: '九', jp: '9', hint: '数字の9' },
+            { en: 'Ten', cn: '十', jp: '10', hint: '数字の10' },
+            { en: 'Eleven', cn: '十一', jp: '11', hint: '数字の11' },
+            { en: 'Twelve', cn: '十二', jp: '12', hint: '数字の12' },
+            { en: 'Twenty', cn: '二十', jp: '20', hint: '数字の20' },
+            { en: 'Thirty', cn: '三十', jp: '30', hint: '数字の30' },
+            { en: 'Hundred', cn: '百', jp: '100', hint: '100' },
+            { en: 'Thousand', cn: '千', jp: '1000', hint: '1000' },
+            { en: 'First', cn: '第一', jp: '1番目', hint: '序数詞1' },
+            { en: 'Second', cn: '第二', jp: '2番目', hint: '序数詞2' },
+            { en: 'Third', cn: '第三', jp: '3番目', hint: '序数詞3' },
+            { en: 'Last', cn: '最后', jp: '最後', hint: '最後' }
+        ],
+        
+        // 家族・人（20語）
+        family: [
+            { en: 'Family', cn: '家庭', jp: '家族', hint: '家族' },
+            { en: 'Father', cn: '父亲', jp: '父', hint: '父親' },
+            { en: 'Mother', cn: '母亲', jp: '母', hint: '母親' },
+            { en: 'Parents', cn: '父母', jp: '両親', hint: '両親' },
+            { en: 'Brother', cn: '兄弟', jp: '兄弟', hint: '兄弟' },
+            { en: 'Sister', cn: '姐妹', jp: '姉妹', hint: '姉妹' },
+            { en: 'Son', cn: '儿子', jp: '息子', hint: '息子' },
+            { en: 'Daughter', cn: '女儿', jp: '娘', hint: '娘' },
+            { en: 'Grandfather', cn: '祖父', jp: '祖父', hint: '祖父' },
+            { en: 'Grandmother', cn: '祖母', jp: '祖母', hint: '祖母' },
+            { en: 'Friend', cn: '朋友', jp: '友達', hint: '友人' },
+            { en: 'Man', cn: '男人', jp: '男性', hint: '男性' },
+            { en: 'Woman', cn: '女人', jp: '女性', hint: '女性' },
+            { en: 'Boy', cn: '男孩', jp: '男の子', hint: '男の子' },
+            { en: 'Girl', cn: '女孩', jp: '女の子', hint: '女の子' },
+            { en: 'Baby', cn: '婴儿', jp: '赤ちゃん', hint: '赤ちゃん' },
+            { en: 'People', cn: '人们', jp: '人々', hint: '人々' },
+            { en: 'Person', cn: '人', jp: '人', hint: '人' },
+            { en: 'Child', cn: '孩子', jp: '子供', hint: '子供' },
+            { en: 'Adult', cn: '成人', jp: '大人', hint: '大人' }
+        ],
+        
+        // 食べ物（20語）
+        food: [
+            { en: 'Food', cn: '食物', jp: '食べ物', hint: '食べ物' },
+            { en: 'Water', cn: '水', jp: '水', hint: '水' },
+            { en: 'Rice', cn: '米饭', jp: 'ご飯', hint: 'ご飯' },
+            { en: 'Bread', cn: '面包', jp: 'パン', hint: 'パン' },
+            { en: 'Meat', cn: '肉', jp: '肉', hint: '肉' },
+            { en: 'Fish', cn: '鱼', jp: '魚', hint: '魚' },
+            { en: 'Egg', cn: '鸡蛋', jp: '卵', hint: '卵' },
+            { en: 'Milk', cn: '牛奶', jp: '牛乳', hint: '牛乳' },
+            { en: 'Fruit', cn: '水果', jp: '果物', hint: '果物' },
+            { en: 'Apple', cn: '苹果', jp: 'りんご', hint: 'りんご' },
+            { en: 'Banana', cn: '香蕉', jp: 'バナナ', hint: 'バナナ' },
+            { en: 'Orange', cn: '橙子', jp: 'オレンジ', hint: 'オレンジ' },
+            { en: 'Vegetable', cn: '蔬菜', jp: '野菜', hint: '野菜' },
+            { en: 'Tea', cn: '茶', jp: 'お茶', hint: 'お茶' },
+            { en: 'Coffee', cn: '咖啡', jp: 'コーヒー', hint: 'コーヒー' },
+            { en: 'Sugar', cn: '糖', jp: '砂糖', hint: '砂糖' },
+            { en: 'Salt', cn: '盐', jp: '塩', hint: '塩' },
+            { en: 'Breakfast', cn: '早餐', jp: '朝食', hint: '朝食' },
+            { en: 'Lunch', cn: '午餐', jp: '昼食', hint: '昼食' },
+            { en: 'Dinner', cn: '晚餐', jp: '夕食', hint: '夕食' }
+        ],
+        
+        // 動物（20語）
+        animals: [
+            { en: 'Dog', cn: '狗', jp: '犬', hint: '犬' },
+            { en: 'Cat', cn: '猫', jp: '猫', hint: '猫' },
+            { en: 'Bird', cn: '鸟', jp: '鳥', hint: '鳥' },
+            { en: 'Fish', cn: '鱼', jp: '魚', hint: '魚' },
+            { en: 'Horse', cn: '马', jp: '馬', hint: '馬' },
+            { en: 'Cow', cn: '牛', jp: '牛', hint: '牛' },
+            { en: 'Pig', cn: '猪', jp: '豚', hint: '豚' },
+            { en: 'Sheep', cn: '羊', jp: '羊', hint: '羊' },
+            { en: 'Chicken', cn: '鸡', jp: '鶏', hint: '鶏' },
+            { en: 'Mouse', cn: '老鼠', jp: '鼠', hint: '鼠' },
+            { en: 'Rabbit', cn: '兔子', jp: '兎', hint: '兎' },
+            { en: 'Bear', cn: '熊', jp: '熊', hint: '熊' },
+            { en: 'Lion', cn: '狮子', jp: 'ライオン', hint: 'ライオン' },
+            { en: 'Tiger', cn: '老虎', jp: 'トラ', hint: 'トラ' },
+            { en: 'Elephant', cn: '大象', jp: '象', hint: '象' },
+            { en: 'Monkey', cn: '猴子', jp: '猿', hint: '猿' },
+            { en: 'Snake', cn: '蛇', jp: '蛇', hint: '蛇' },
+            { en: 'Frog', cn: '青蛙', jp: '蛙', hint: '蛙' },
+            { en: 'Butterfly', cn: '蝴蝶', jp: '蝶', hint: '蝶' },
+            { en: 'Bee', cn: '蜜蜂', jp: '蜂', hint: '蜂' }
+        ],
+        
+        // 色（15語）
+        colors: [
+            { en: 'Red', cn: '红色', jp: '赤', hint: '赤色' },
+            { en: 'Blue', cn: '蓝色', jp: '青', hint: '青色' },
+            { en: 'Green', cn: '绿色', jp: '緑', hint: '緑色' },
+            { en: 'Yellow', cn: '黄色', jp: '黄色', hint: '黄色' },
+            { en: 'Black', cn: '黑色', jp: '黒', hint: '黒色' },
+            { en: 'White', cn: '白色', jp: '白', hint: '白色' },
+            { en: 'Pink', cn: '粉色', jp: 'ピンク', hint: 'ピンク色' },
+            { en: 'Purple', cn: '紫色', jp: '紫', hint: '紫色' },
+            { en: 'Orange', cn: '橙色', jp: 'オレンジ', hint: 'オレンジ色' },
+            { en: 'Brown', cn: '棕色', jp: '茶色', hint: '茶色' },
+            { en: 'Gray', cn: '灰色', jp: '灰色', hint: '灰色' },
+            { en: 'Gold', cn: '金色', jp: '金色', hint: '金色' },
+            { en: 'Silver', cn: '银色', jp: '銀色', hint: '銀色' },
+            { en: 'Color', cn: '颜色', jp: '色', hint: '色' },
+            { en: 'Rainbow', cn: '彩虹', jp: '虹', hint: '虹' }
+        ],
+        
+        // 時間・曜日（20語）
+        time: [
+            { en: 'Time', cn: '时间', jp: '時間', hint: '時間' },
+            { en: 'Day', cn: '天', jp: '日', hint: '日' },
+            { en: 'Week', cn: '星期', jp: '週', hint: '週' },
+            { en: 'Month', cn: '月', jp: '月', hint: '月' },
+            { en: 'Year', cn: '年', jp: '年', hint: '年' },
+            { en: 'Today', cn: '今天', jp: '今日', hint: '今日' },
+            { en: 'Tomorrow', cn: '明天', jp: '明日', hint: '明日' },
+            { en: 'Yesterday', cn: '昨天', jp: '昨日', hint: '昨日' },
+            { en: 'Morning', cn: '早上', jp: '朝', hint: '朝' },
+            { en: 'Afternoon', cn: '下午', jp: '午後', hint: '午後' },
+            { en: 'Evening', cn: '晚上', jp: '夕方', hint: '夕方' },
+            { en: 'Night', cn: '夜晚', jp: '夜', hint: '夜' },
+            { en: 'Monday', cn: '星期一', jp: '月曜日', hint: '月曜日' },
+            { en: 'Tuesday', cn: '星期二', jp: '火曜日', hint: '火曜日' },
+            { en: 'Wednesday', cn: '星期三', jp: '水曜日', hint: '水曜日' },
+            { en: 'Thursday', cn: '星期四', jp: '木曜日', hint: '木曜日' },
+            { en: 'Friday', cn: '星期五', jp: '金曜日', hint: '金曜日' },
+            { en: 'Saturday', cn: '星期六', jp: '土曜日', hint: '土曜日' },
+            { en: 'Sunday', cn: '星期日', jp: '日曜日', hint: '日曜日' },
+            { en: 'Weekend', cn: '周末', jp: '週末', hint: '週末' }
+        ],
+        
+        // 場所・方向（20語）
+        places: [
+            { en: 'House', cn: '房子', jp: '家', hint: '家' },
+            { en: 'Home', cn: '家', jp: '家庭', hint: '家庭' },
+            { en: 'School', cn: '学校', jp: '学校', hint: '学校' },
+            { en: 'Store', cn: '商店', jp: '店', hint: '店' },
+            { en: 'Hospital', cn: '医院', jp: '病院', hint: '病院' },
+            { en: 'Park', cn: '公园', jp: '公園', hint: '公園' },
+            { en: 'Station', cn: '车站', jp: '駅', hint: '駅' },
+            { en: 'Airport', cn: '机场', jp: '空港', hint: '空港' },
+            { en: 'Restaurant', cn: '餐厅', jp: 'レストラン', hint: 'レストラン' },
+            { en: 'Hotel', cn: '酒店', jp: 'ホテル', hint: 'ホテル' },
+            { en: 'Bathroom', cn: '浴室', jp: 'お手洗い', hint: 'お手洗い' },
+            { en: 'Kitchen', cn: '厨房', jp: '台所', hint: '台所' },
+            { en: 'Bedroom', cn: '卧室', jp: '寝室', hint: '寝室' },
+            { en: 'Room', cn: '房间', jp: '部屋', hint: '部屋' },
+            { en: 'Door', cn: '门', jp: 'ドア', hint: 'ドア' },
+            { en: 'Window', cn: '窗户', jp: '窓', hint: '窓' },
+            { en: 'City', cn: '城市', jp: '都市', hint: '都市' },
+            { en: 'Country', cn: '国家', jp: '国', hint: '国' },
+            { en: 'World', cn: '世界', jp: '世界', hint: '世界' },
+            { en: 'Place', cn: '地方', jp: '場所', hint: '場所' }
+        ],
+        
+        // 動詞（25語）
+        verbs: [
+            { en: 'Go', cn: '去', jp: '行く', hint: '移動する' },
+            { en: 'Come', cn: '来', jp: '来る', hint: '近づく' },
+            { en: 'Eat', cn: '吃', jp: '食べる', hint: '食べる' },
+            { en: 'Drink', cn: '喝', jp: '飲む', hint: '飲む' },
+            { en: 'Sleep', cn: '睡觉', jp: '寝る', hint: '寝る' },
+            { en: 'Wake up', cn: '醒来', jp: '起きる', hint: '目覚める' },
+            { en: 'Walk', cn: '走路', jp: '歩く', hint: '歩く' },
+            { en: 'Run', cn: '跑步', jp: '走る', hint: '走る' },
+            { en: 'Sit', cn: '坐', jp: '座る', hint: '座る' },
+            { en: 'Stand', cn: '站', jp: '立つ', hint: '立つ' },
+            { en: 'Read', cn: '读', jp: '読む', hint: '読む' },
+            { en: 'Write', cn: '写', jp: '書く', hint: '書く' },
+            { en: 'Speak', cn: '说', jp: '話す', hint: '話す' },
+            { en: 'Listen', cn: '听', jp: '聞く', hint: '聞く' },
+            { en: 'Look', cn: '看', jp: '見る', hint: '見る' },
+            { en: 'Buy', cn: '买', jp: '買う', hint: '買う' },
+            { en: 'Sell', cn: '卖', jp: '売る', hint: '売る' },
+            { en: 'Work', cn: '工作', jp: '働く', hint: '働く' },
+            { en: 'Study', cn: '学习', jp: '勉強する', hint: '勉強する' },
+            { en: 'Play', cn: '玩', jp: '遊ぶ', hint: '遊ぶ' },
+            { en: 'Like', cn: '喜欢', jp: '好き', hint: '好き' },
+            { en: 'Love', cn: '爱', jp: '愛する', hint: '愛する' },
+            { en: 'Want', cn: '想要', jp: '欲しい', hint: '欲しい' },
+            { en: 'Need', cn: '需要', jp: '必要', hint: '必要' },
+            { en: 'Have', cn: '有', jp: '持つ', hint: '持つ' }
+        ]
+    },
+
+    // ============================================
+    // 中級レベル（200語）
+    // ============================================
+    intermediate: {
+        // 感情・表現（20語）
+        emotions: [
+            { en: 'Happy', cn: '快乐', jp: '幸せ', hint: '幸せな' },
+            { en: 'Sad', cn: '悲伤', jp: '悲しい', hint: '悲しい' },
+            { en: 'Angry', cn: '生气', jp: '怒っている', hint: '怒っている' },
+            { en: 'Afraid', cn: '害怕', jp: '怖い', hint: '怖い' },
+            { en: 'Surprised', cn: '惊讶', jp: '驚いた', hint: '驚いた' },
+            { en: 'Tired', cn: '累', jp: '疲れた', hint: '疲れた' },
+            { en: 'Excited', cn: '兴奋', jp: '興奮した', hint: '興奮した' },
+            { en: 'Bored', cn: '无聊', jp: '退屈した', hint: '退屈した' },
+            { en: 'Worried', cn: '担心', jp: '心配した', hint: '心配した' },
+            { en: 'Proud', cn: '骄傲', jp: '誇りに思う', hint: '誇りに思う' },
+            { en: 'Embarrassed', cn: '尴尬', jp: '恥ずかしい', hint: '恥ずかしい' },
+            { en: 'Nervous', cn: '紧张', jp: '緊張した', hint: '緊張した' },
+            { en: 'Relaxed', cn: '放松', jp: 'リラックスした', hint: 'リラックスした' },
+            { en: 'Confused', cn: '困惑', jp: '困惑した', hint: '困惑した' },
+            { en: 'Disappointed', cn: '失望', jp: '失望した', hint: '失望した' },
+            { en: 'Jealous', cn: '嫉妒', jp: '嫉妬した', hint: '嫉妬した' },
+            { en: 'Grateful', cn: '感激', jp: '感謝している', hint: '感謝している' },
+            { en: 'Lonely', cn: '孤独', jp: '孤独な', hint: '孤独な' },
+            { en: 'Curious', cn: '好奇', jp: '好奇心旺盛な', hint: '好奇心旺盛な' },
+            { en: 'Satisfied', cn: '满意', jp: '満足した', hint: '満足した' }
+        ],
+        
+        // 仕事・職業（20語）
+        jobs: [
+            { en: 'Teacher', cn: '老师', jp: '先生', hint: '教師' },
+            { en: 'Doctor', cn: '医生', jp: '医者', hint: '医者' },
+            { en: 'Nurse', cn: '护士', jp: '看護師', hint: '看護師' },
+            { en: 'Engineer', cn: '工程师', jp: 'エンジニア', hint: 'エンジニア' },
+            { en: 'Lawyer', cn: '律师', jp: '弁護士', hint: '弁護士' },
+            { en: 'Police officer', cn: '警察', jp: '警察官', hint: '警察官' },
+            { en: 'Firefighter', cn: '消防员', jp: '消防士', hint: '消防士' },
+            { en: 'Chef', cn: '厨师', jp: 'シェフ', hint: 'シェフ' },
+            { en: 'Driver', cn: '司机', jp: '運転手', hint: '運転手' },
+            { en: 'Artist', cn: '艺术家', jp: '芸術家', hint: '芸術家' },
+            { en: 'Musician', cn: '音乐家', jp: '音楽家', hint: '音楽家' },
+            { en: 'Writer', cn: '作家', jp: '作家', hint: '作家' },
+            { en: 'Scientist', cn: '科学家', jp: '科学者', hint: '科学者' },
+            { en: 'Manager', cn: '经理', jp: 'マネージャー', hint: 'マネージャー' },
+            { en: 'Secretary', cn: '秘书', jp: '秘書', hint: '秘書' },
+            { en: 'Farmer', cn: '农民', jp: '農家', hint: '農家' },
+            { en: 'Worker', cn: '工人', jp: '労働者', hint: '労働者' },
+            { en: 'Businessman', cn: '商人', jp: 'ビジネスマン', hint: 'ビジネスマン' },
+            { en: 'Soldier', cn: '士兵', jp: '兵士', hint: '兵士' },
+            { en: 'President', cn: '总统', jp: '社長', hint: '社長・大統領' }
+        ],
+        
+        // 旅行・交通（20語）
+        travel: [
+            { en: 'Airplane', cn: '飞机', jp: '飛行機', hint: '飛行機' },
+            { en: 'Train', cn: '火车', jp: '電車', hint: '電車' },
+            { en: 'Bus', cn: '公共汽车', jp: 'バス', hint: 'バス' },
+            { en: 'Car', cn: '汽车', jp: '車', hint: '車' },
+            { en: 'Taxi', cn: '出租车', jp: 'タクシー', hint: 'タクシー' },
+            { en: 'Bicycle', cn: '自行车', jp: '自転車', hint: '自転車' },
+            { en: 'Ship', cn: '船', jp: '船', hint: '船' },
+            { en: 'Boat', cn: '小船', jp: 'ボート', hint: 'ボート' },
+            { en: 'Ticket', cn: '票', jp: '切符', hint: '切符' },
+            { en: 'Passport', cn: '护照', jp: 'パスポート', hint: 'パスポート' },
+            { en: 'Luggage', cn: '行李', jp: '荷物', hint: '荷物' },
+            { en: 'Suitcase', cn: '手提箱', jp: 'スーツケース', hint: 'スーツケース' },
+            { en: 'Map', cn: '地图', jp: '地図', hint: '地図' },
+            { en: 'Guide', cn: '导游', jp: 'ガイド', hint: 'ガイド' },
+            { en: 'Hotel', cn: '酒店', jp: 'ホテル', hint: 'ホテル' },
+            { en: 'Reservation', cn: '预订', jp: '予約', hint: '予約' },
+            { en: 'Check in', cn: '入住', jp: 'チェックイン', hint: 'チェックイン' },
+            { en: 'Check out', cn: '退房', jp: 'チェックアウト', hint: 'チェックアウト' },
+            { en: 'Souvenir', cn: '纪念品', jp: 'お土産', hint: 'お土産' },
+            { en: 'Trip', cn: '旅行', jp: '旅行', hint: '旅行' }
+        ],
+        
+        // 体・健康（20語）
+        body_health: [
+            { en: 'Head', cn: '头', jp: '頭', hint: '頭' },
+            { en: 'Face', cn: '脸', jp: '顔', hint: '顔' },
+            { en: 'Eye', cn: '眼睛', jp: '目', hint: '目' },
+            { en: 'Ear', cn: '耳朵', jp: '耳', hint: '耳' },
+            { en: 'Nose', cn: '鼻子', jp: '鼻', hint: '鼻' },
+            { en: 'Mouth', cn: '嘴巴', jp: '口', hint: '口' },
+            { en: 'Hand', cn: '手', jp: '手', hint: '手' },
+            { en: 'Foot', cn: '脚', jp: '足', hint: '足' },
+            { en: 'Leg', cn: '腿', jp: '脚', hint: '脚' },
+            { en: 'Arm', cn: '手臂', jp: '腕', hint: '腕' },
+            { en: 'Stomach', cn: '胃', jp: 'お腹', hint: 'お腹' },
+            { en: 'Back', cn: '背', jp: '背中', hint: '背中' },
+            { en: 'Heart', cn: '心脏', jp: '心臓', hint: '心臓' },
+            { en: 'Sick', cn: '生病', jp: '病気', hint: '病気' },
+            { en: 'Pain', cn: '疼痛', jp: '痛み', hint: '痛み' },
+            { en: 'Fever', cn: '发烧', jp: '熱', hint: '熱' },
+            { en: 'Cold', cn: '感冒', jp: '風邪', hint: '風邪' },
+            { en: 'Medicine', cn: '药', jp: '薬', hint: '薬' },
+            { en: 'Exercise', cn: '运动', jp: '運動', hint: '運動' },
+            { en: 'Healthy', cn: '健康', jp: '健康な', hint: '健康な' }
+        ],
+        
+        // 天気・自然（20語）
+        weather: [
+            { en: 'Weather', cn: '天气', jp: '天気', hint: '天気' },
+            { en: 'Sunny', cn: '晴天', jp: '晴れ', hint: '晴れ' },
+            { en: 'Rainy', cn: '雨天', jp: '雨', hint: '雨' },
+            { en: 'Cloudy', cn: '多云', jp: '曇り', hint: '曇り' },
+            { en: 'Snow', cn: '雪', jp: '雪', hint: '雪' },
+            { en: 'Wind', cn: '风', jp: '風', hint: '風' },
+            { en: 'Storm', cn: '暴风雨', jp: '嵐', hint: '嵐' },
+            { en: 'Hot', cn: '热', jp: '暑い', hint: '暑い' },
+            { en: 'Cold', cn: '冷', jp: '寒い', hint: '寒い' },
+            { en: 'Warm', cn: '温暖', jp: '暖かい', hint: '暖かい' },
+            { en: 'Cool', cn: '凉爽', jp: '涼しい', hint: '涼しい' },
+            { en: 'Temperature', cn: '温度', jp: '気温', hint: '気温' },
+            { en: 'Season', cn: '季节', jp: '季節', hint: '季節' },
+            { en: 'Spring', cn: '春天', jp: '春', hint: '春' },
+            { en: 'Summer', cn: '夏天', jp: '夏', hint: '夏' },
+            { en: 'Autumn', cn: '秋天', jp: '秋', hint: '秋' },
+            { en: 'Winter', cn: '冬天', jp: '冬', hint: '冬' },
+            { en: 'Nature', cn: '自然', jp: '自然', hint: '自然' },
+            { en: 'Mountain', cn: '山', jp: '山', hint: '山' },
+            { en: 'River', cn: '河', jp: '川', hint: '川' }
+        ],
+        
+        // 学校・教育（20語）
+        education: [
+            { en: 'Student', cn: '学生', jp: '学生', hint: '学生' },
+            { en: 'Class', cn: '班级', jp: 'クラス', hint: 'クラス' },
+            { en: 'Lesson', cn: '课程', jp: '授業', hint: '授業' },
+            { en: 'Homework', cn: '作业', jp: '宿題', hint: '宿題' },
+            { en: 'Test', cn: '考试', jp: '試験', hint: '試験' },
+            { en: 'Grade', cn: '成绩', jp: '成績', hint: '成績' },
+            { en: 'Subject', cn: '科目', jp: '科目', hint: '科目' },
+            { en: 'Math', cn: '数学', jp: '数学', hint: '数学' },
+            { en: 'Science', cn: '科学', jp: '理科', hint: '理科' },
+            { en: 'History', cn: '历史', jp: '歴史', hint: '歴史' },
+            { en: 'Geography', cn: '地理', jp: '地理', hint: '地理' },
+            { en: 'Art', cn: '美术', jp: '美術', hint: '美術' },
+            { en: 'Music', cn: '音乐', jp: '音楽', hint: '音楽' },
+            { en: 'Sports', cn: '体育', jp: 'スポーツ', hint: 'スポーツ' },
+            { en: 'Library', cn: '图书馆', jp: '図書館', hint: '図書館' },
+            { en: 'Book', cn: '书', jp: '本', hint: '本' },
+            { en: 'Pen', cn: '笔', jp: 'ペン', hint: 'ペン' },
+            { en: 'Paper', cn: '纸', jp: '紙', hint: '紙' },
+            { en: 'Dictionary', cn: '字典', jp: '辞書', hint: '辞書' },
+            { en: 'Knowledge', cn: '知识', jp: '知識', hint: '知識' }
+        ],
+        
+        // 買い物・値段（20語）
+        shopping: [
+            { en: 'Money', cn: '钱', jp: 'お金', hint: 'お金' },
+            { en: 'Price', cn: '价格', jp: '値段', hint: '値段' },
+            { en: 'Cheap', cn: '便宜', jp: '安い', hint: '安い' },
+            { en: 'Expensive', cn: '贵', jp: '高い', hint: '高い' },
+            { en: 'Discount', cn: '折扣', jp: '割引', hint: '割引' },
+            { en: 'Sale', cn: '促销', jp: 'セール', hint: 'セール' },
+            { en: 'Cash', cn: '现金', jp: '現金', hint: '現金' },
+            { en: 'Credit card', cn: '信用卡', jp: 'クレジットカード', hint: 'クレジットカード' },
+            { en: 'Receipt', cn: '收据', jp: 'レシート', hint: 'レシート' },
+            { en: 'Change', cn: '零钱', jp: 'お釣り', hint: 'お釣り' },
+            { en: 'Customer', cn: '顾客', jp: '客', hint: '客' },
+            { en: 'Shop assistant', cn: '店员', jp: '店員', hint: '店員' },
+            { en: 'Size', cn: '尺寸', jp: 'サイズ', hint: 'サイズ' },
+            { en: 'Color', cn: '颜色', jp: '色', hint: '色' },
+            { en: 'Quality', cn: '质量', jp: '品質', hint: '品質' },
+            { en: 'Choice', cn: '选择', jp: '選択', hint: '選択' },
+            { en: 'Compare', cn: '比较', jp: '比較する', hint: '比較する' },
+            { en: 'Decide', cn: '决定', jp: '決める', hint: '決める' },
+            { en: 'Recommend', cn: '推荐', jp: 'おすすめ', hint: 'おすすめ' },
+            { en: 'Popular', cn: '流行', jp: '人気', hint: '人気' }
+        ],
+        
+        // 技術・インターネット（20語）
+        technology: [
+            { en: 'Computer', cn: '电脑', jp: 'コンピュータ', hint: 'コンピュータ' },
+            { en: 'Phone', cn: '电话', jp: '電話', hint: '電話' },
+            { en: 'Smartphone', cn: '智能手机', jp: 'スマートフォン', hint: 'スマートフォン' },
+            { en: 'Internet', cn: '互联网', jp: 'インターネット', hint: 'インターネット' },
+            { en: 'Email', cn: '电子邮件', jp: 'メール', hint: 'メール' },
+            { en: 'Website', cn: '网站', jp: 'ウェブサイト', hint: 'ウェブサイト' },
+            { en: 'Password', cn: '密码', jp: 'パスワード', hint: 'パスワード' },
+            { en: 'Download', cn: '下载', jp: 'ダウンロード', hint: 'ダウンロード' },
+            { en: 'Upload', cn: '上传', jp: 'アップロード', hint: 'アップロード' },
+            { en: 'Application', cn: '应用程序', jp: 'アプリ', hint: 'アプリ' },
+            { en: 'Software', cn: '软件', jp: 'ソフトウェア', hint: 'ソフトウェア' },
+            { en: 'Hardware', cn: '硬件', jp: 'ハードウェア', hint: 'ハードウェア' },
+            { en: 'Screen', cn: '屏幕', jp: '画面', hint: '画面' },
+            { en: 'Keyboard', cn: '键盘', jp: 'キーボード', hint: 'キーボード' },
+            { en: 'Mouse', cn: '鼠标', jp: 'マウス', hint: 'マウス' },
+            { en: 'Camera', cn: '相机', jp: 'カメラ', hint: 'カメラ' },
+            { en: 'Video', cn: '视频', jp: '動画', hint: '動画' },
+            { en: 'Message', cn: '消息', jp: 'メッセージ', hint: 'メッセージ' },
+            { en: 'Social media', cn: '社交媒体', jp: 'SNS', hint: 'SNS' },
+            { en: 'Data', cn: '数据', jp: 'データ', hint: 'データ' }
+        ],
+        
+        // 形容詞・副詞（20語）
+        adjectives: [
+            { en: 'Beautiful', cn: '美丽', jp: '美しい', hint: '美しい' },
+            { en: 'Ugly', cn: '丑陋', jp: '醜い', hint: '醜い' },
+            { en: 'Big', cn: '大', jp: '大きい', hint: '大きい' },
+            { en: 'Small', cn: '小', jp: '小さい', hint: '小さい' },
+            { en: 'Tall', cn: '高', jp: '高い', hint: '高い' },
+            { en: 'Short', cn: '矮', jp: '短い', hint: '短い' },
+            { en: 'Long', cn: '长', jp: '長い', hint: '長い' },
+            { en: 'Fast', cn: '快', jp: '速い', hint: '速い' },
+            { en: 'Slow', cn: '慢', jp: '遅い', hint: '遅い' },
+            { en: 'New', cn: '新', jp: '新しい', hint: '新しい' },
+            { en: 'Old', cn: '旧', jp: '古い', hint: '古い' },
+            { en: 'Young', cn: '年轻', jp: '若い', hint: '若い' },
+            { en: 'Good', cn: '好', jp: '良い', hint: '良い' },
+            { en: 'Bad', cn: '坏', jp: '悪い', hint: '悪い' },
+            { en: 'Easy', cn: '容易', jp: '簡単', hint: '簡単' },
+            { en: 'Difficult', cn: '困难', jp: '難しい', hint: '難しい' },
+            { en: 'Important', cn: '重要', jp: '重要', hint: '重要' },
+            { en: 'Different', cn: '不同', jp: '違う', hint: '違う' },
+            { en: 'Similar', cn: '相似', jp: '似ている', hint: '似ている' },
+            { en: 'Special', cn: '特别', jp: '特別', hint: '特別' }
+        ],
+        
+        // 前置詞・接続詞（20語）
+        prepositions: [
+            { en: 'In', cn: '在...里', jp: '～の中に', hint: '中に' },
+            { en: 'On', cn: '在...上', jp: '～の上に', hint: '上に' },
+            { en: 'At', cn: '在', jp: '～で', hint: 'で' },
+            { en: 'To', cn: '到', jp: '～へ', hint: 'へ' },
+            { en: 'From', cn: '从', jp: '～から', hint: 'から' },
+            { en: 'With', cn: '和', jp: '～と一緒に', hint: 'と一緒に' },
+            { en: 'Without', cn: '没有', jp: '～なしで', hint: 'なしで' },
+            { en: 'For', cn: '为了', jp: '～のために', hint: 'ために' },
+            { en: 'About', cn: '关于', jp: '～について', hint: 'について' },
+            { en: 'Before', cn: '在...之前', jp: '～の前に', hint: '前に' },
+            { en: 'After', cn: '在...之后', jp: '～の後に', hint: '後に' },
+            { en: 'During', cn: '在...期间', jp: '～の間に', hint: '間に' },
+            { en: 'Between', cn: '在...之间', jp: '～の間に', hint: '間に' },
+            { en: 'Under', cn: '在...下', jp: '～の下に', hint: '下に' },
+            { en: 'Over', cn: '在...上', jp: '～の上に', hint: '上に' },
+            { en: 'Through', cn: '通过', jp: '～を通って', hint: '通って' },
+            { en: 'Because', cn: '因为', jp: 'なぜなら', hint: 'なぜなら' },
+            { en: 'Although', cn: '虽然', jp: '～だけれども', hint: 'だけれども' },
+            { en: 'However', cn: '然而', jp: 'しかし', hint: 'しかし' },
+            { en: 'Therefore', cn: '因此', jp: 'したがって', hint: 'したがって' }
+        ]
+    },
+
+    // ============================================
+    // 上級レベル（100語）
+    // ============================================
+    advanced: {
+        // ビジネス・経済（20語）
+        business: [
+            { en: 'Investment', cn: '投资', jp: '投資', hint: '投資' },
+            { en: 'Revenue', cn: '收入', jp: '収益', hint: '収益' },
+            { en: 'Profit', cn: '利润', jp: '利益', hint: '利益' },
+            { en: 'Loss', cn: '损失', jp: '損失', hint: '損失' },
+            { en: 'Budget', cn: '预算', jp: '予算', hint: '予算' },
+            { en: 'Strategy', cn: '战略', jp: '戦略', hint: '戦略' },
+            { en: 'Negotiation', cn: '谈判', jp: '交渉', hint: '交渉' },
+            { en: 'Contract', cn: '合同', jp: '契約', hint: '契約' },
+            { en: 'Partnership', cn: '合作', jp: 'パートナーシップ', hint: 'パートナーシップ' },
+            { en: 'Competition', cn: '竞争', jp: '競争', hint: '競争' },
+            { en: 'Market share', cn: '市场份额', jp: '市場シェア', hint: '市場シェア' },
+            { en: 'Customer satisfaction', cn: '客户满意度', jp: '顧客満足度', hint: '顧客満足度' },
+            { en: 'Innovation', cn: '创新', jp: '革新', hint: '革新' },
+            { en: 'Entrepreneur', cn: '企业家', jp: '起業家', hint: '起業家' },
+            { en: 'Leadership', cn: '领导力', jp: 'リーダーシップ', hint: 'リーダーシップ' },
+            { en: 'Decision making', cn: '决策', jp: '意思決定', hint: '意思決定' },
+            { en: 'Risk management', cn: '风险管理', jp: 'リスク管理', hint: 'リスク管理' },
+            { en: 'Supply chain', cn: '供应链', jp: 'サプライチェーン', hint: 'サプライチェーン' },
+            { en: 'Globalization', cn: '全球化', jp: 'グローバル化', hint: 'グローバル化' },
+            { en: 'Sustainability', cn: '可持续性', jp: '持続可能性', hint: '持続可能性' }
+        ],
+        
+        // 学術・研究（20語）
+        academic: [
+            { en: 'Hypothesis', cn: '假设', jp: '仮説', hint: '仮説' },
+            { en: 'Theory', cn: '理论', jp: '理論', hint: '理論' },
+            { en: 'Experiment', cn: '实验', jp: '実験', hint: '実験' },
+            { en: 'Analysis', cn: '分析', jp: '分析', hint: '分析' },
+            { en: 'Evidence', cn: '证据', jp: '証拠', hint: '証拠' },
+            { en: 'Conclusion', cn: '结论', jp: '結論', hint: '結論' },
+            { en: 'Research', cn: '研究', jp: '研究', hint: '研究' },
+            { en: 'Methodology', cn: '方法论', jp: '方法論', hint: '方法論' },
+            { en: 'Statistics', cn: '统计学', jp: '統計学', hint: '統計学' },
+            { en: 'Significant', cn: '显著的', jp: '有意な', hint: '有意な' },
+            { en: 'Correlation', cn: '相关性', jp: '相関', hint: '相関' },
+            { en: 'Phenomenon', cn: '现象', jp: '現象', hint: '現象' },
+            { en: 'Paradigm', cn: '范式', jp: 'パラダイム', hint: 'パラダイム' },
+            { en: 'Empirical', cn: '实证的', jp: '経験的な', hint: '経験的な' },
+            { en: 'Qualitative', cn: '定性的', jp: '定性的な', hint: '定性的な' },
+            { en: 'Quantitative', cn: '定量的', jp: '定量的な', hint: '定量的な' },
+            { en: 'Peer review', cn: '同行评审', jp: '査読', hint: '査読' },
+            { en: 'Citation', cn: '引用', jp: '引用', hint: '引用' },
+            { en: 'Plagiarism', cn: '抄袭', jp: '剽窃', hint: '剽窃' },
+            { en: 'Intellectual property', cn: '知识产权', jp: '知的財産', hint: '知的財産' }
+        ],
+        
+        // 政治・社会（20語）
+        politics: [
+            { en: 'Democracy', cn: '民主', jp: '民主主義', hint: '民主主義' },
+            { en: 'Republic', cn: '共和国', jp: '共和国', hint: '共和国' },
+            { en: 'Constitution', cn: '宪法', jp: '憲法', hint: '憲法' },
+            { en: 'Legislation', cn: '立法', jp: '立法', hint: '立法' },
+            { en: 'Diplomacy', cn: '外交', jp: '外交', hint: '外交' },
+            { en: 'Sanction', cn: '制裁', jp: '制裁', hint: '制裁' },
+            { en: 'Immigration', cn: '移民', jp: '移民', hint: '移民' },
+            { en: 'Refugee', cn: '难民', jp: '難民', hint: '難民' },
+            { en: 'Inequality', cn: '不平等', jp: '不平等', hint: '不平等' },
+            { en: 'Discrimination', cn: '歧视', jp: '差別', hint: '差別' },
+            { en: 'Advocacy', cn: '倡导', jp: '擁護', hint: '擁護' },
+            { en: 'Activism', cn: '行动主义', jp: '活動主義', hint: '活動主義' },
+            { en: 'Bureaucracy', cn: '官僚制', jp: '官僚制', hint: '官僚制' },
+            { en: 'Corruption', cn: '腐败', jp: '腐敗', hint: '腐敗' },
+            { en: 'Transparency', cn: '透明性', jp: '透明性', hint: '透明性' },
+            { en: 'Accountability', cn: '问责制', jp: '説明責任', hint: '説明責任' },
+            { en: 'Sovereignty', cn: '主权', jp: '主権', hint: '主権' },
+            { en: 'Coalition', cn: '联盟', jp: '連立', hint: '連立' },
+            { en: 'Referendum', cn: '全民公投', jp: '国民投票', hint: '国民投票' },
+            { en: 'Impeachment', cn: '弹劾', jp: '弾劾', hint: '弾劾' }
+        ],
+        
+        // 環境・科学（20語）
+        environment: [
+            { en: 'Climate change', cn: '气候变化', jp: '気候変動', hint: '気候変動' },
+            { en: 'Global warming', cn: '全球变暖', jp: '地球温暖化', hint: '地球温暖化' },
+            { en: 'Carbon footprint', cn: '碳足迹', jp: 'カーボンフットプリント', hint: 'カーボンフットプリント' },
+            { en: 'Renewable energy', cn: '可再生能源', jp: '再生可能エネルギー', hint: '再生可能エネルギー' },
+            { en: 'Biodiversity', cn: '生物多样性', jp: '生物多様性', hint: '生物多様性' },
+            { en: 'Ecosystem', cn: '生态系统', jp: '生態系', hint: '生態系' },
+            { en: 'Deforestation', cn: '森林砍伐', jp: '森林破壊', hint: '森林破壊' },
+            { en: 'Pollution', cn: '污染', jp: '汚染', hint: '汚染' },
+            { en: 'Waste management', cn: '废物管理', jp: '廃棄物管理', hint: '廃棄物管理' },
+            { en: 'Conservation', cn: '保护', jp: '保護', hint: '保護' },
+            { en: 'Extinction', cn: '灭绝', jp: '絶滅', hint: '絶滅' },
+            { en: 'Habitat', cn: '栖息地', jp: '生息地', hint: '生息地' },
+            { en: 'Greenhouse effect', cn: '温室效应', jp: '温室効果', hint: '温室効果' },
+            { en: 'Ozone layer', cn: '臭氧层', jp: 'オゾン層', hint: 'オゾン層' },
+            { en: 'Acid rain', cn: '酸雨', jp: '酸性雨', hint: '酸性雨' },
+            { en: 'Natural disaster', cn: '自然灾害', jp: '自然災害', hint: '自然災害' },
+            { en: 'Earthquake', cn: '地震', jp: '地震', hint: '地震' },
+            { en: 'Tsunami', cn: '海啸', jp: '津波', hint: '津波' },
+            { en: 'Hurricane', cn: '飓风', jp: 'ハリケーン', hint: 'ハリケーン' },
+            { en: 'Drought', cn: '干旱', jp: '干ばつ', hint: '干ばつ' }
+        ],
+        
+        // 文化・芸術（20語）
+        culture: [
+            { en: 'Contemporary', cn: '当代的', jp: '現代の', hint: '現代の' },
+            { en: 'Renaissance', cn: '文艺复兴', jp: 'ルネサンス', hint: 'ルネサンス' },
+            { en: 'Aesthetics', cn: '美学', jp: '美学', hint: '美学' },
+            { en: 'Composition', cn: '构图', jp: '構図', hint: '構図' },
+            { en: 'Perspective', cn: '透视', jp: '遠近法', hint: '遠近法' },
+            { en: 'Symbolism', cn: '象征主义', jp: '象徴主義', hint: '象徴主義' },
+            { en: 'Abstract', cn: '抽象的', jp: '抽象的な', hint: '抽象的な' },
+            { en: 'Masterpiece', cn: '杰作', jp: '傑作', hint: '傑作' },
+            { en: 'Exhibition', cn: '展览', jp: '展覧会', hint: '展覧会' },
+            { en: 'Curator', cn: '策展人', jp: '学芸員', hint: '学芸員' },
+            { en: 'Heritage', cn: '遗产', jp: '遺産', hint: '遺産' },
+            { en: 'Tradition', cn: '传统', jp: '伝統', hint: '伝統' },
+            { en: 'Ritual', cn: '仪式', jp: '儀式', hint: '儀式' },
+            { en: 'Mythology', cn: '神话', jp: '神話', hint: '神話' },
+            { en: 'Philosophy', cn: '哲学', jp: '哲学', hint: '哲学' },
+            { en: 'Ethics', cn: '伦理', jp: '倫理', hint: '倫理' },
+            { en: 'Metaphor', cn: '隐喻', jp: '隠喩', hint: '隠喩' },
+            { en: 'Irony', cn: '讽刺', jp: '皮肉', hint: '皮肉' },
+            { en: 'Allegory', cn: '寓言', jp: '寓意', hint: '寓意' },
+            { en: 'Critique', cn: '批评', jp: '批評', hint: '批評' }
+        ]
+    },
+
+    // ============================================
+    // ユーティリティ関数
+    // ============================================
+    
+    // 全単語をフラットな配列で取得
+    getAllWords() {
+        const allWords = [];
+        
+        // 初級
+        Object.values(this.beginner).forEach(category => {
+            allWords.push(...category.map(w => ({ ...w, level: 'beginner' })));
+        });
+        
+        // 中級
+        Object.values(this.intermediate).forEach(category => {
+            allWords.push(...category.map(w => ({ ...w, level: 'intermediate' })));
+        });
+        
+        // 上級
+        Object.values(this.advanced).forEach(category => {
+            allWords.push(...category.map(w => ({ ...w, level: 'advanced' })));
+        });
+        
+        return allWords;
+    },
+    
+    // レベル別に単語を取得
+    getWordsByLevel(level) {
+        if (this[level]) {
+            const words = [];
+            Object.values(this[level]).forEach(category => {
+                words.push(...category.map(w => ({ ...w, level })));
+            });
+            return words;
+        }
+        return [];
+    },
+    
+    // ランダムに単語を取得
+    getRandomWords(count, level = null) {
+        let words;
+        if (level) {
+            words = this.getWordsByLevel(level);
+        } else {
+            words = this.getAllWords();
+        }
+        
+        // シャッフルして指定数返す
+        const shuffled = [...words].sort(() => Math.random() - 0.5);
+        return shuffled.slice(0, Math.min(count, shuffled.length));
+    },
+    
+    // クイズ用の選択肢を生成
+    generateQuizOptions(correctWord, count = 4, level = null) {
+        const options = [correctWord];
+        let words;
+        
+        if (level) {
+            words = this.getWordsByLevel(level).filter(w => 
+                w.en !== correctWord.en && w.cn !== correctWord.cn
+            );
+        } else {
+            words = this.getAllWords().filter(w => 
+                w.en !== correctWord.en && w.cn !== correctWord.cn
+            );
+        }
+        
+        // ランダムに選択
+        const shuffled = [...words].sort(() => Math.random() - 0.5);
+        options.push(...shuffled.slice(0, count - 1));
+        
+        // シャッフルして返す
+        return options.sort(() => Math.random() - 0.5);
+    },
+    
+    // 単語数をカウント
+    countWords() {
+        let beginner = 0;
+        let intermediate = 0;
+        let advanced = 0;
+        
+        Object.values(this.beginner).forEach(cat => beginner += cat.length);
+        Object.values(this.intermediate).forEach(cat => intermediate += cat.length);
+        Object.values(this.advanced).forEach(cat => advanced += cat.length);
+        
+        return {
+            beginner,
+            intermediate,
+            advanced,
+            total: beginner + intermediate + advanced
+        };
+    }
+};
+
+// グローバルにエクスポート
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = VocabularyData;
+}

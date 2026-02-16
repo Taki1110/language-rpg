@@ -1,0 +1,882 @@
+/* ============================================
+   語源の旅人 - 敵データファイル
+   30種類以上の敵キャラクター定義
+   ============================================ */
+
+const EnemyData = {
+    // ============================================
+    // 一般敵キャラクター（25種類）
+    // ============================================
+    
+    // レベル1-3: 始まりの森・言葉の郷
+    slime: {
+        id: 'slime',
+        name: 'スライム',
+        description: '言葉の力を失った存在。最も弱い魔物。',
+        icon: '💧',
+        level: 1,
+        hp: 30,
+        attack: 8,
+        defense: 3,
+        speed: 5,
+        exp: 10,
+        gold: 5,
+        weakness: 'english',
+        resistance: null,
+        drops: [
+            { item: 'herb', chance: 0.3 },
+            { item: 'potion_small', chance: 0.1 }
+        ],
+        patterns: ['normal']
+    },
+    small_fairy: {
+        id: 'small_fairy',
+        name: '小妖精',
+        description: '森に住む小さな妖精。英語が苦手。',
+        icon: '🧚',
+        level: 2,
+        hp: 25,
+        attack: 10,
+        defense: 2,
+        speed: 12,
+        exp: 12,
+        gold: 8,
+        weakness: 'english',
+        resistance: 'chinese',
+        drops: [
+            { item: 'magic_stone', chance: 0.2 },
+            { item: 'ether_small', chance: 0.1 }
+        ],
+        patterns: ['normal']
+    },
+    
+    // レベル3-5: 深淵の樹海
+    goblin: {
+        id: 'goblin',
+        name: 'ゴブリン',
+        description: '暗い森に潜む小さな魔物。中国語が弱点。',
+        icon: '👺',
+        level: 3,
+        hp: 50,
+        attack: 15,
+        defense: 8,
+        speed: 10,
+        exp: 18,
+        gold: 12,
+        weakness: 'chinese',
+        resistance: null,
+        drops: [
+            { item: 'monster_fang', chance: 0.4 },
+            { item: 'sword_rusty', chance: 0.05 }
+        ],
+        patterns: ['normal', 'aggressive']
+    },
+    wolf: {
+        id: 'wolf',
+        name: '森狼',
+        description: '凶暴な森の狼。素早い攻撃が特徴。',
+        icon: '🐺',
+        level: 4,
+        hp: 60,
+        attack: 20,
+        defense: 6,
+        speed: 15,
+        exp: 25,
+        gold: 15,
+        weakness: 'english',
+        resistance: null,
+        drops: [
+            { item: 'monster_fang', chance: 0.5 },
+            { item: 'potion_small', chance: 0.15 }
+        ],
+        patterns: ['fast', 'aggressive']
+    },
+    dark_sprite: {
+        id: 'dark_sprite',
+        name: '闇妖精',
+        description: '闇に染まった妖精。中国語で浄化できる。',
+        icon: '🧚‍♀️',
+        level: 5,
+        hp: 55,
+        attack: 22,
+        defense: 10,
+        speed: 14,
+        exp: 30,
+        gold: 20,
+        weakness: 'chinese',
+        resistance: 'english',
+        drops: [
+            { item: 'magic_stone', chance: 0.3 },
+            { item: 'crystal_shard', chance: 0.1 }
+        ],
+        patterns: ['magic', 'evasive']
+    },
+    
+    // レベル4-6: 語源の平原
+    wind_spirit: {
+        id: 'wind_spirit',
+        name: '風精',
+        description: '風の力を持つ精霊。英語で呼び止められる。',
+        icon: '🌪️',
+        level: 5,
+        hp: 70,
+        attack: 18,
+        defense: 12,
+        speed: 20,
+        exp: 35,
+        gold: 25,
+        weakness: 'english',
+        resistance: null,
+        drops: [
+            { item: 'magic_stone', chance: 0.4 },
+            { item: 'ether_medium', chance: 0.1 }
+        ],
+        patterns: ['fast', 'magic']
+    },
+    wild_boar: {
+        id: 'wild_boar',
+        name: '大野猪',
+        description: '巨大なイノシシ。中国語で落ち着かせられる。',
+        icon: '🐗',
+        level: 6,
+        hp: 100,
+        attack: 25,
+        defense: 15,
+        speed: 8,
+        exp: 40,
+        gold: 30,
+        weakness: 'chinese',
+        resistance: null,
+        drops: [
+            { item: 'monster_fang', chance: 0.6 },
+            { item: 'power_boost', chance: 0.1 }
+        ],
+        patterns: ['aggressive', 'tank']
+    },
+    bandit: {
+        id: 'bandit',
+        name: '言葉狩り',
+        description: '言葉を奪う盗賊。バランスが取れた弱点。',
+        icon: '🥷',
+        level: 6,
+        hp: 80,
+        attack: 24,
+        defense: 14,
+        speed: 12,
+        exp: 42,
+        gold: 50,
+        weakness: 'both',
+        resistance: null,
+        drops: [
+            { item: 'potion_medium', chance: 0.2 },
+            { item: 'iron_ore', chance: 0.3 }
+        ],
+        patterns: ['normal', 'steal']
+    },
+    
+    // レベル5-7: 忘却の図書館
+    book_wraith: {
+        id: 'book_wraith',
+        name: '書の亡霊',
+        description: '呪われた本の亡霊。中国語の呪文で祓える。',
+        icon: '📚',
+        level: 7,
+        hp: 90,
+        attack: 28,
+        defense: 10,
+        speed: 8,
+        exp: 50,
+        gold: 40,
+        weakness: 'chinese',
+        resistance: 'physical',
+        drops: [
+            { item: 'ancient_page', chance: 0.4 },
+            { item: 'ether_medium', chance: 0.15 }
+        ],
+        patterns: ['magic', 'curse']
+    },
+    paper_golem: {
+        id: 'paper_golem',
+        name: '紙のゴーレム',
+        description: '古代の紙で作られた魔法人形。',
+        icon: '📄',
+        level: 8,
+        hp: 120,
+        attack: 22,
+        defense: 20,
+        speed: 5,
+        exp: 55,
+        gold: 35,
+        weakness: 'english',
+        resistance: 'physical',
+        drops: [
+            { item: 'ancient_page', chance: 0.5 },
+            { item: 'scroll_return', chance: 0.1 }
+        ],
+        patterns: ['tank', 'slow']
+    },
+    librarian_ghost: {
+        id: 'librarian_ghost',
+        name: '司書の幽霊',
+        description: '図書館を守る幽霊司書。両方の言語が必要。',
+        icon: '👻',
+        level: 9,
+        hp: 100,
+        attack: 30,
+        defense: 15,
+        speed: 10,
+        exp: 60,
+        gold: 45,
+        weakness: 'both',
+        resistance: 'magic',
+        drops: [
+            { item: 'ancient_page', chance: 0.6 },
+            { item: 'ring_wisdom', chance: 0.05 }
+        ],
+        patterns: ['magic', 'silence']
+    },
+    
+    // レベル6-8: 水晶の洞窟
+    crystal_slime: {
+        id: 'crystal_slime',
+        name: '水晶スライム',
+        description: '水晶に変異したスライム。魔法に弱い。',
+        icon: '💎',
+        level: 8,
+        hp: 110,
+        attack: 26,
+        defense: 25,
+        speed: 6,
+        exp: 65,
+        gold: 50,
+        weakness: 'magic',
+        resistance: 'physical',
+        drops: [
+            { item: 'crystal_shard', chance: 0.5 },
+            { item: 'magic_stone', chance: 0.3 }
+        ],
+        patterns: ['tank', 'reflect']
+    },
+    bat: {
+        id: 'bat',
+        name: '洞窟コウモリ',
+        description: '暗闇に住むコウモリ。素早い動きが特徴。',
+        icon: '🦇',
+        level: 7,
+        hp: 70,
+        attack: 24,
+        defense: 8,
+        speed: 22,
+        exp: 48,
+        gold: 25,
+        weakness: 'english',
+        resistance: null,
+        drops: [
+            { item: 'monster_fang', chance: 0.3 },
+            { item: 'potion_small', chance: 0.2 }
+        ],
+        patterns: ['fast', 'evasive']
+    },
+    miner_ghost: {
+        id: 'miner_ghost',
+        name: '鉱夫の幽霊',
+        description: '洞窟で命を落とした鉱夫の亡霊。',
+        icon: '⛏️',
+        level: 9,
+        hp: 130,
+        attack: 32,
+        defense: 18,
+        speed: 7,
+        exp: 70,
+        gold: 55,
+        weakness: 'chinese',
+        resistance: null,
+        drops: [
+            { item: 'iron_ore', chance: 0.6 },
+            { item: 'crystal_shard', chance: 0.2 }
+        ],
+        patterns: ['aggressive', 'heavy']
+    },
+    
+    // レベル7-9: 鏡の湖
+    water_sprite: {
+        id: 'water_sprite',
+        name: '水精',
+        description: '湖に住む水の精霊。英語で呼び出せる。',
+        icon: '💧',
+        level: 9,
+        hp: 100,
+        attack: 28,
+        defense: 16,
+        speed: 14,
+        exp: 68,
+        gold: 50,
+        weakness: 'english',
+        resistance: 'water',
+        drops: [
+            { item: 'magic_stone', chance: 0.4 },
+            { item: 'ether_medium', chance: 0.2 }
+        ],
+        patterns: ['magic', 'heal']
+    },
+    lake_serpent: {
+        id: 'lake_serpent',
+        name: '湖蛇',
+        description: '湖に潜む巨大な蛇。中国語で眠らせられる。',
+        icon: '🐍',
+        level: 10,
+        hp: 150,
+        attack: 35,
+        defense: 20,
+        speed: 10,
+        exp: 80,
+        gold: 70,
+        weakness: 'chinese',
+        resistance: null,
+        drops: [
+            { item: 'monster_fang', chance: 0.7 },
+            { item: 'potion_large', chance: 0.1 }
+        ],
+        patterns: ['aggressive', 'poison']
+    },
+    reflection: {
+        id: 'reflection',
+        name: '鏡像',
+        description: '鏡に映る自身の姿。両方の言語が必要。',
+        icon: '🪞',
+        level: 11,
+        hp: 120,
+        attack: 32,
+        defense: 25,
+        speed: 15,
+        exp: 85,
+        gold: 60,
+        weakness: 'both',
+        resistance: 'physical',
+        drops: [
+            { item: 'crystal_shard', chance: 0.4 },
+            { item: 'ring_life', chance: 0.05 }
+        ],
+        patterns: ['mirror', 'magic']
+    },
+    
+    // レベル8-10: 語山の麓
+    rock_golem: {
+        id: 'rock_golem',
+        name: '岩ゴーレム',
+        description: '岩で作られた巨像。物理攻撃が苦手。',
+        icon: '🗿',
+        level: 10,
+        hp: 180,
+        attack: 30,
+        defense: 35,
+        speed: 3,
+        exp: 90,
+        gold: 65,
+        weakness: 'magic',
+        resistance: 'physical',
+        drops: [
+            { item: 'iron_ore', chance: 0.5 },
+            { item: 'crystal_shard', chance: 0.2 }
+        ],
+        patterns: ['tank', 'slow', 'heavy']
+    },
+    mountain_eagle: {
+        id: 'mountain_eagle',
+        name: '山鷲',
+        description: '山岳地帯に住む巨大な鷲。英語で呼び止められる。',
+        icon: '🦅',
+        level: 11,
+        hp: 110,
+        attack: 38,
+        defense: 14,
+        speed: 25,
+        exp: 88,
+        gold: 60,
+        weakness: 'english',
+        resistance: null,
+        drops: [
+            { item: 'monster_fang', chance: 0.4 },
+            { item: 'speed_boost', chance: 0.1 }
+        ],
+        patterns: ['fast', 'aggressive']
+    },
+    goat: {
+        id: 'goat',
+        name: '岩山羊',
+        description: '険しい山を登る山羊。中国語で落ち着かせられる。',
+        icon: '🐐',
+        level: 9,
+        hp: 100,
+        attack: 28,
+        defense: 18,
+        speed: 16,
+        exp: 65,
+        gold: 40,
+        weakness: 'chinese',
+        resistance: null,
+        drops: [
+            { item: 'herb', chance: 0.4 },
+            { item: 'potion_small', chance: 0.2 }
+        ],
+        patterns: ['normal', 'charge']
+    },
+    
+    // レベル10-12: 賢者の塔
+    apprentice_wizard: {
+        id: 'apprentice_wizard',
+        name: '見習い魔術師',
+        description: '塔で修行中の魔術師。英語の魔法が弱点。',
+        icon: '🧙‍♂️',
+        level: 12,
+        hp: 130,
+        attack: 40,
+        defense: 18,
+        speed: 12,
+        exp: 100,
+        gold: 80,
+        weakness: 'english',
+        resistance: 'magic',
+        drops: [
+            { item: 'magic_stone', chance: 0.5 },
+            { item: 'staff_wood', chance: 0.1 }
+        ],
+        patterns: ['magic', 'buff']
+    },
+    magic_book: {
+        id: 'magic_book',
+        name: '魔導書',
+        description: '自律して動く魔法の本。中国語で封印できる。',
+        icon: '📖',
+        level: 13,
+        hp: 140,
+        attack: 45,
+        defense: 22,
+        speed: 8,
+        exp: 110,
+        gold: 90,
+        weakness: 'chinese',
+        resistance: 'physical',
+        drops: [
+            { item: 'ancient_page', chance: 0.6 },
+            { item: 'ether_large', chance: 0.1 }
+        ],
+        patterns: ['magic', 'debuff']
+    },
+    golem_guard: {
+        id: 'golem_guard',
+        name: '守護ゴーレム',
+        description: '塔を守る古代のゴーレム。',
+        icon: '🤖',
+        level: 14,
+        hp: 200,
+        attack: 38,
+        defense: 40,
+        speed: 4,
+        exp: 120,
+        gold: 100,
+        weakness: 'magic',
+        resistance: 'physical',
+        drops: [
+            { item: 'crystal_shard', chance: 0.4 },
+            { item: 'iron_ore', chance: 0.4 }
+        ],
+        patterns: ['tank', 'counter']
+    },
+    
+    // レベル12-14: 霧の沼
+    swamp_zombie: {
+        id: 'swamp_zombie',
+        name: '沼ゾンビ',
+        description: '沼に沈んだ死者。中国語で成仏できる。',
+        icon: '🧟',
+        level: 13,
+        hp: 160,
+        attack: 42,
+        defense: 20,
+        speed: 4,
+        exp: 115,
+        gold: 70,
+        weakness: 'chinese',
+        resistance: 'physical',
+        drops: [
+            { item: 'herb', chance: 0.3 },
+            { item: 'antidote', chance: 0.2 }
+        ],
+        patterns: ['slow', 'poison', 'undead']
+    },
+    fog_wraith: {
+        id: 'fog_wraith',
+        name: '霧の亡霊',
+        description: '霧に潜む不気味な亡霊。英語で追い払える。',
+        icon: '👻',
+        level: 14,
+        hp: 140,
+        attack: 48,
+        defense: 15,
+        speed: 18,
+        exp: 125,
+        gold: 85,
+        weakness: 'english',
+        resistance: 'physical',
+        drops: [
+            { item: 'magic_stone', chance: 0.4 },
+            { item: 'crystal_shard', chance: 0.2 }
+        ],
+        patterns: ['evasive', 'fear', 'magic']
+    },
+    mud_golem: {
+        id: 'mud_golem',
+        name: '泥ゴーレム',
+        description: '沼の泥で作られたゴーレム。',
+        icon: '💩',
+        level: 15,
+        hp: 220,
+        attack: 40,
+        defense: 30,
+        speed: 3,
+        exp: 130,
+        gold: 75,
+        weakness: 'magic',
+        resistance: 'physical',
+        drops: [
+            { item: 'herb', chance: 0.5 },
+            { item: 'potion_medium', chance: 0.15 }
+        ],
+        patterns: ['tank', 'slow', 'mud']
+    },
+    
+    // レベル14-16: 天空庭園
+    cloud_sprite: {
+        id: 'cloud_sprite',
+        name: '雲精',
+        description: '雲から生まれた精霊。英語で形を固定できる。',
+        icon: '☁️',
+        level: 15,
+        hp: 150,
+        attack: 45,
+        defense: 20,
+        speed: 22,
+        exp: 140,
+        gold: 100,
+        weakness: 'english',
+        resistance: 'physical',
+        drops: [
+            { item: 'crystal_shard', chance: 0.5 },
+            { item: 'ether_large', chance: 0.15 }
+        ],
+        patterns: ['fast', 'evasive', 'magic']
+    },
+    sky_knight: {
+        id: 'sky_knight',
+        name: '天空騎士',
+        description: '空を守る騎士の亡霊。両方の言語が必要。',
+        icon: '🏇',
+        level: 16,
+        hp: 180,
+        attack: 50,
+        defense: 35,
+        speed: 18,
+        exp: 155,
+        gold: 120,
+        weakness: 'both',
+        resistance: null,
+        drops: [
+            { item: 'sword_steel', chance: 0.1 },
+            { item: 'armor_chain', chance: 0.1 }
+        ],
+        patterns: ['aggressive', 'honor']
+    },
+    wind_dragon: {
+        id: 'wind_dragon',
+        name: '風竜',
+        description: '風を操る小型の竜。中国語で呼び寄せられる。',
+        icon: '🐉',
+        level: 17,
+        hp: 250,
+        attack: 55,
+        defense: 28,
+        speed: 24,
+        exp: 180,
+        gold: 150,
+        weakness: 'chinese',
+        resistance: 'wind',
+        drops: [
+            { item: 'crystal_shard', chance: 0.6 },
+            { item: 'ring_power', chance: 0.08 }
+        ],
+        patterns: ['fast', 'dragon', 'wind']
+    },
+    
+    // レベル15-18: 闇の遺跡
+    dark_knight: {
+        id: 'dark_knight',
+        name: '暗黒騎士',
+        description: '闇に堕ちた騎士。強力な敵。',
+        icon: '🛡️',
+        level: 17,
+        hp: 220,
+        attack: 58,
+        defense: 45,
+        speed: 12,
+        exp: 170,
+        gold: 140,
+        weakness: 'both',
+        resistance: 'dark',
+        drops: [
+            { item: 'armor_plate', chance: 0.1 },
+            { item: 'monster_fang', chance: 0.5 }
+        ],
+        patterns: ['aggressive', 'dark', 'heavy']
+    },
+    shadow_mage: {
+        id: 'shadow_mage',
+        name: '影魔術師',
+        description: '闇の魔術師。英語の光で追い払える。',
+        icon: '🧙‍♀️',
+        level: 18,
+        hp: 180,
+        attack: 65,
+        defense: 25,
+        speed: 16,
+        exp: 185,
+        gold: 160,
+        weakness: 'english',
+        resistance: 'dark',
+        drops: [
+            { item: 'magic_stone', chance: 0.6 },
+            { item: 'staff_crystal', chance: 0.08 }
+        ],
+        patterns: ['magic', 'dark', 'debuff']
+    },
+    forbidden_construct: {
+        id: 'forbidden_construct',
+        name: '禁忌の人造人間',
+        description: '禁じられた技術で作られた存在。',
+        icon: '🎭',
+        level: 19,
+        hp: 280,
+        attack: 60,
+        defense: 40,
+        speed: 10,
+        exp: 200,
+        gold: 180,
+        weakness: 'magic',
+        resistance: 'physical',
+        drops: [
+            { item: 'crystal_shard', chance: 0.5 },
+            { item: 'ancient_page', chance: 0.4 }
+        ],
+        patterns: ['tank', 'berserk', 'forbidden']
+    },
+    
+    // レベル18-20: 語源城
+    royal_guard: {
+        id: 'royal_guard',
+        name: '王宮衛兵',
+        description: '語源城を守る精鋭兵士。',
+        icon: '💂',
+        level: 19,
+        hp: 250,
+        attack: 62,
+        defense: 50,
+        speed: 14,
+        exp: 210,
+        gold: 200,
+        weakness: 'both',
+        resistance: null,
+        drops: [
+            { item: 'armor_plate', chance: 0.15 },
+            { item: 'sword_steel', chance: 0.15 }
+        ],
+        patterns: ['defensive', 'honor', 'teamwork']
+    },
+    word_master: {
+        id: 'word_master',
+        name: '言葉の達人',
+        description: '言葉の力を極めた者。',
+        icon: '📜',
+        level: 20,
+        hp: 230,
+        attack: 70,
+        defense: 35,
+        speed: 20,
+        exp: 230,
+        gold: 250,
+        weakness: 'both',
+        resistance: 'magic',
+        drops: [
+            { item: 'ancient_page', chance: 0.7 },
+            { item: 'ring_wisdom', chance: 0.1 }
+        ],
+        patterns: ['magic', 'word', 'counter']
+    },
+    language_sage: {
+        id: 'language_sage',
+        name: '言語の賢者',
+        description: '言語の真理に触れた賢者。',
+        icon: '👴',
+        level: 22,
+        hp: 300,
+        attack: 75,
+        defense: 45,
+        speed: 18,
+        exp: 280,
+        gold: 300,
+        weakness: 'both',
+        resistance: null,
+        drops: [
+            { item: 'crystal_shard', chance: 0.8 },
+            { item: 'staff_sage', chance: 0.05 }
+        ],
+        patterns: ['magic', 'wisdom', 'heal']
+    },
+
+    // ============================================
+    // ボスキャラクター（5体）
+    // ============================================
+    
+    water_temple_boss: {
+        id: 'water_temple_boss',
+        name: '水神の化身',
+        description: '水の神殿を守る神の化身。流れるような言葉を操る。',
+        icon: '🌊',
+        level: 15,
+        hp: 600,
+        attack: 55,
+        defense: 35,
+        speed: 20,
+        exp: 500,
+        gold: 1000,
+        weakness: 'english',
+        resistance: 'water',
+        isBoss: true,
+        drops: [
+            { item: 'armor_magic', chance: 1.0 },
+            { item: 'crystal_shard', chance: 1.0 },
+            { item: 'ring_life', chance: 0.3 }
+        ],
+        patterns: ['boss_water', 'phase_change'],
+        phases: [
+            { hpThreshold: 0.5, pattern: 'aggressive', message: '水神の怒りが増している！' },
+            { hpThreshold: 0.25, pattern: 'desperate', message: '水神が最後の力を振るう！' }
+        ]
+    },
+    
+    mountain_boss: {
+        id: 'mountain_boss',
+        name: '岩竜バジリスク',
+        description: '語山の頂に住む巨大な岩竜。',
+        icon: '🐲',
+        level: 18,
+        hp: 800,
+        attack: 65,
+        defense: 60,
+        speed: 8,
+        exp: 700,
+        gold: 1500,
+        weakness: 'chinese',
+        resistance: 'earth',
+        isBoss: true,
+        drops: [
+            { item: 'sword_legend', chance: 0.5 },
+            { item: 'crystal_shard', chance: 1.0 },
+            { item: 'ring_power', chance: 0.4 }
+        ],
+        patterns: ['boss_dragon', 'earthquake', 'roar'],
+        phases: [
+            { hpThreshold: 0.6, pattern: 'flying', message: '岩竜が空へ飛び立った！' },
+            { hpThreshold: 0.3, pattern: 'berserk', message: '岩竜が狂暴になった！' }
+        ]
+    },
+    
+    dark_ruins_boss: {
+        id: 'dark_ruins_boss',
+        name: '禁忌の言語者',
+        description: '禁忌の言葉を使う邪悪な言語学者。',
+        icon: '😈',
+        level: 22,
+        hp: 1000,
+        attack: 80,
+        defense: 50,
+        speed: 25,
+        exp: 1000,
+        gold: 2000,
+        weakness: 'both',
+        resistance: 'dark',
+        isBoss: true,
+        drops: [
+            { item: 'staff_sage', chance: 0.5 },
+            { item: 'ancient_page', chance: 1.0 },
+            { item: 'amulet_exp', chance: 0.5 }
+        ],
+        patterns: ['boss_dark', 'forbidden_words', 'summon'],
+        phases: [
+            { hpThreshold: 0.7, pattern: 'summon', message: '禁忌の言語者が眷属を召喚した！' },
+            { hpThreshold: 0.4, pattern: 'desperate', message: '禁忌の言葉が暴走し始めた！' },
+            { hpThreshold: 0.15, pattern: 'final', message: '禁忌の言語者が最後の呪文を唱えた！' }
+        ]
+    },
+    
+    sky_boss: {
+        id: 'sky_boss',
+        name: '天空王グリフォン',
+        description: '天空庭園を支配する伝説の魔獣。',
+        icon: '🦅',
+        level: 25,
+        hp: 1200,
+        attack: 90,
+        defense: 55,
+        speed: 35,
+        exp: 1500,
+        gold: 3000,
+        weakness: 'both',
+        resistance: 'wind',
+        isBoss: true,
+        drops: [
+            { item: 'armor_legend', chance: 0.5 },
+            { item: 'crystal_shard', chance: 1.0 },
+            { item: 'amulet_luck', chance: 0.5 }
+        ],
+        patterns: ['boss_sky', 'dive', 'wind_storm'],
+        phases: [
+            { hpThreshold: 0.6, pattern: 'sky_high', message: '天空王が高空へ舞い上がった！' },
+            { hpThreshold: 0.3, pattern: 'divine_wrath', message: '天空王が神の怒りを呼び起こした！' }
+        ]
+    },
+    
+    final_boss: {
+        id: 'final_boss',
+        name: '語源の化身・ロゴス',
+        description: 'すべての言葉の源。最強の敵。',
+        icon: '👑',
+        level: 30,
+        hp: 2000,
+        attack: 120,
+        defense: 80,
+        speed: 40,
+        exp: 5000,
+        gold: 10000,
+        weakness: 'both',
+        resistance: null,
+        isBoss: true,
+        isFinal: true,
+        drops: [
+            { item: 'sword_legend', chance: 1.0 },
+            { item: 'armor_legend', chance: 1.0 },
+            { item: 'ring_guard', chance: 1.0 }
+        ],
+        patterns: ['final_boss', 'word_creation', 'language_control', 'reality_warp'],
+        phases: [
+            { hpThreshold: 0.75, pattern: 'awakened', message: 'ロゴスが目覚め始めた...' },
+            { hpThreshold: 0.5, pattern: 'serious', message: 'ロゴス「面白い...本気を出すとしよう」' },
+            { hpThreshold: 0.25, pattern: 'ultimate', message: 'ロゴス「これが言葉の真の力だ！」' },
+            { hpThreshold: 0.1, pattern: 'desperate', message: 'ロゴス「私が...負ける...？」' }
+        ]
+    }
+};
+
+// グローバルにエクスポート
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = EnemyData;
+}

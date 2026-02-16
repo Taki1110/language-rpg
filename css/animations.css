@@ -1,0 +1,825 @@
+/* ============================================
+   語源の旅人 - アニメーションスタイルシート
+   ============================================ */
+
+/* ============================================
+   エフェクトアニメーション
+   ============================================ */
+
+/* ダメージエフェクト */
+.damage-effect {
+    position: absolute;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--accent);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    animation: damage-float 1s ease-out forwards;
+    pointer-events: none;
+    z-index: 100;
+}
+
+@keyframes damage-float {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(-30px) scale(1.2);
+    }
+    100% {
+        transform: translateY(-60px) scale(0.8);
+        opacity: 0;
+    }
+}
+
+/* 回復エフェクト */
+.heal-effect {
+    position: absolute;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--success);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    animation: heal-float 1.2s ease-out forwards;
+    pointer-events: none;
+    z-index: 100;
+}
+
+@keyframes heal-float {
+    0% {
+        transform: translateY(0) scale(0.5);
+        opacity: 0;
+    }
+    30% {
+        transform: translateY(-20px) scale(1.1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-50px) scale(1);
+        opacity: 0;
+    }
+}
+
+/* 経験値獲得エフェクト */
+.exp-effect {
+    position: absolute;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--warning);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    animation: exp-float 1.5s ease-out forwards;
+    pointer-events: none;
+    z-index: 100;
+}
+
+@keyframes exp-float {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-40px);
+        opacity: 0;
+    }
+}
+
+/* ============================================
+   バトルアニメーション
+   ============================================ */
+
+/* 敵の揺れアニメーション */
+.shake {
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+    20%, 40%, 60%, 80% { transform: translateX(10px); }
+}
+
+/* 敵の攻撃アニメーション */
+.enemy-attack {
+    animation: enemy-lunge 0.4s ease-in-out;
+}
+
+@keyframes enemy-lunge {
+    0% { transform: translateX(0) scale(1); }
+    50% { transform: translateX(-50px) scale(1.1); }
+    100% { transform: translateX(0) scale(1); }
+}
+
+/* プレイヤー攻撃アニメーション */
+.player-attack {
+    animation: player-lunge 0.4s ease-in-out;
+}
+
+@keyframes player-lunge {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(30px); }
+    100% { transform: translateX(0); }
+}
+
+/* スキル使用エフェクト */
+.skill-cast {
+    animation: skill-glow 0.8s ease-out;
+}
+
+@keyframes skill-glow {
+    0% {
+        box-shadow: 0 0 0 0 rgba(107, 92, 231, 0.8);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 0 50px 20px rgba(107, 92, 231, 0);
+        transform: scale(1.1);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(107, 92, 231, 0);
+        transform: scale(1);
+    }
+}
+
+/* 魔法陣エフェクト */
+.magic-circle {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border: 3px solid var(--primary-light);
+    border-radius: 50%;
+    animation: magic-spin 2s linear infinite, magic-pulse 1s ease-in-out infinite alternate;
+    pointer-events: none;
+}
+
+.magic-circle::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    border: 2px solid var(--secondary);
+    border-radius: 50%;
+    animation: magic-spin-reverse 3s linear infinite;
+}
+
+@keyframes magic-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes magic-spin-reverse {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
+}
+
+@keyframes magic-pulse {
+    from { opacity: 0.5; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1.1); }
+}
+
+/* ============================================
+   レベルアップアニメーション
+   ============================================ */
+
+.level-up-effect {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 500;
+    animation: level-up-pop 2s ease-out forwards;
+}
+
+.level-up-effect h2 {
+    font-size: 3rem;
+    background: linear-gradient(135deg, var(--warning) 0%, var(--success) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: level-up-text 2s ease-out;
+}
+
+.level-up-effect .level-number {
+    font-size: 5rem;
+    font-weight: bold;
+    color: var(--warning);
+    text-shadow: 0 0 30px rgba(255, 217, 61, 0.8);
+}
+
+@keyframes level-up-pop {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+    }
+    20% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 1;
+    }
+    40% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0;
+    }
+}
+
+@keyframes level-up-text {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(1.5); }
+}
+
+/* レベルアップ光エフェクト */
+.level-up-light {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(255, 217, 61, 0.3) 0%, transparent 70%);
+    z-index: 400;
+    animation: level-up-light 2s ease-out forwards;
+    pointer-events: none;
+}
+
+@keyframes level-up-light {
+    0% { opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* ============================================
+   アイテム獲得アニメーション
+   ============================================ */
+
+.item-get-effect {
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 400;
+    animation: item-get 2s ease-out forwards;
+}
+
+.item-get-effect .item-icon {
+    font-size: 4rem;
+    animation: item-bounce 0.5s ease-in-out infinite alternate;
+}
+
+.item-get-effect .item-name {
+    font-size: 1.5rem;
+    color: var(--secondary);
+    margin-top: 10px;
+}
+
+@keyframes item-get {
+    0% {
+        transform: translateX(-50%) translateY(50px);
+        opacity: 0;
+    }
+    20% {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(-50%) translateY(-30px);
+        opacity: 0;
+    }
+}
+
+@keyframes item-bounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-10px); }
+}
+
+/* ============================================
+   画面遷移アニメーション
+   ============================================ */
+
+.screen-transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--bg-dark);
+    z-index: 1000;
+    animation: screen-fade 0.5s ease-out forwards;
+    pointer-events: none;
+}
+
+@keyframes screen-fade {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* ワイプトランジション */
+.wipe-transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--primary);
+    z-index: 1000;
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: wipe 0.6s ease-in-out;
+}
+
+@keyframes wipe {
+    0% { transform: scaleX(0); }
+    50% { transform: scaleX(1); }
+    100% { transform: scaleX(0); transform-origin: right; }
+}
+
+/* ============================================
+   ボタンアニメーション
+   ============================================ */
+
+/* ボタンクリックエフェクト */
+.btn-click-effect {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-click-effect::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+    to {
+        width: 200px;
+        height: 200px;
+        opacity: 0;
+    }
+}
+
+/* ホバー時の光エフェクト */
+.hover-glow:hover {
+    animation: glow-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+    0%, 100% { box-shadow: 0 0 5px var(--primary-light); }
+    50% { box-shadow: 0 0 20px var(--primary-light), 0 0 40px var(--primary); }
+}
+
+/* ============================================
+   ステータスバーアニメーション
+   ============================================ */
+
+/* HP回復アニメーション */
+.hp-heal .bar-fill {
+    animation: hp-heal-glow 0.5s ease-out;
+}
+
+@keyframes hp-heal-glow {
+    0% { filter: brightness(1); }
+    50% { filter: brightness(1.5) drop-shadow(0 0 10px var(--success)); }
+    100% { filter: brightness(1); }
+}
+
+/* MP回復アニメーション */
+.mp-heal .bar-fill {
+    animation: mp-heal-glow 0.5s ease-out;
+}
+
+@keyframes mp-heal-glow {
+    0% { filter: brightness(1); }
+    50% { filter: brightness(1.5) drop-shadow(0 0 10px var(--mp-color)); }
+    100% { filter: brightness(1); }
+}
+
+/* ダメージ時の揺れ */
+.damage-shake {
+    animation: bar-shake 0.3s ease-in-out;
+}
+
+@keyframes bar-shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-3px); }
+    75% { transform: translateX(3px); }
+}
+
+/* ============================================
+   敵キャラクターアニメーション
+   ============================================ */
+
+/* スライムの動き */
+.enemy-slime {
+    animation: slime-bounce 2s ease-in-out infinite;
+}
+
+@keyframes slime-bounce {
+    0%, 100% { 
+        transform: translateY(0) scaleY(1);
+        border-radius: 50%;
+    }
+    50% { 
+        transform: translateY(-15px) scaleY(0.9);
+        border-radius: 50% 50% 45% 45%;
+    }
+}
+
+/* ゴブリンの動き */
+.enemy-goblin {
+    animation: goblin-idle 1.5s ease-in-out infinite;
+}
+
+@keyframes goblin-idle {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-5px) rotate(-2deg); }
+    75% { transform: translateY(-5px) rotate(2deg); }
+}
+
+/* ドラゴンの動き */
+.enemy-dragon {
+    animation: dragon-hover 3s ease-in-out infinite;
+}
+
+@keyframes dragon-hover {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+/* ボス出現アニメーション */
+.boss-appear {
+    animation: boss-entrance 1.5s ease-out;
+}
+
+@keyframes boss-entrance {
+    0% {
+        transform: scale(0) rotate(-180deg);
+        opacity: 0;
+        filter: brightness(3);
+    }
+    50% {
+        transform: scale(1.2) rotate(10deg);
+        filter: brightness(1.5);
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+        filter: brightness(1);
+    }
+}
+
+/* ============================================
+   パーティクルエフェクト
+   ============================================ */
+
+.particle {
+    position: absolute;
+    pointer-events: none;
+    border-radius: 50%;
+}
+
+.particle-star {
+    animation: particle-float 1s ease-out forwards;
+}
+
+@keyframes particle-float {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--tx), var(--ty)) scale(0);
+        opacity: 0;
+    }
+}
+
+/* 星のパーティクル */
+.star-particle {
+    width: 10px;
+    height: 10px;
+    background: var(--warning);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+/* ハートのパーティクル */
+.heart-particle {
+    width: 12px;
+    height: 12px;
+    background: var(--accent);
+    transform: rotate(-45deg);
+}
+
+.heart-particle::before,
+.heart-particle::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: var(--accent);
+    border-radius: 50%;
+}
+
+.heart-particle::before {
+    top: -6px;
+    left: 0;
+}
+
+.heart-particle::after {
+    left: 6px;
+    top: 0;
+}
+
+/* ============================================
+   タイピングエフェクト
+   ============================================ */
+
+.typing-text {
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 2s steps(40, end);
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+/* カーソル点滅 */
+.typing-cursor::after {
+    content: '|';
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+/* ============================================
+   ロード画面アニメーション
+   ============================================ */
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid var(--bg-card);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ロードドット */
+.loading-dots {
+    display: flex;
+    gap: 8px;
+}
+
+.loading-dots span {
+    width: 12px;
+    height: 12px;
+    background: var(--primary);
+    border-radius: 50%;
+    animation: loading-dot 1.4s ease-in-out infinite;
+}
+
+.loading-dots span:nth-child(1) { animation-delay: 0s; }
+.loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+.loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes loading-dot {
+    0%, 80%, 100% { transform: scale(0); opacity: 0.5; }
+    40% { transform: scale(1); opacity: 1; }
+}
+
+/* ============================================
+   成功/失敗アニメーション
+   ============================================ */
+
+/* 正解エフェクト */
+.correct-answer {
+    animation: correct-pulse 0.5s ease-out;
+}
+
+@keyframes correct-pulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(46, 213, 115, 0.7); }
+    50% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(46, 213, 115, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(46, 213, 115, 0); }
+}
+
+/* 不正解エフェクト */
+.wrong-answer {
+    animation: wrong-shake 0.5s ease-in-out;
+}
+
+@keyframes wrong-shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-10px); }
+    40% { transform: translateX(10px); }
+    60% { transform: translateX(-10px); }
+    80% { transform: translateX(10px); }
+}
+
+/* ============================================
+   探索アニメーション
+   ============================================ */
+
+/* 発見エフェクト */
+.discovery-effect {
+    animation: discovery-pop 0.8s ease-out;
+}
+
+@keyframes discovery-pop {
+    0% {
+        transform: scale(0) rotate(-10deg);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1) rotate(5deg);
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+/* 移動エフェクト */
+.move-transition {
+    animation: move-slide 0.5s ease-out;
+}
+
+@keyframes move-slide {
+    0% { transform: translateX(-100%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+}
+
+/* ============================================
+   スキルツリーアニメーション
+   ============================================ */
+
+/* スキル解放エフェクト */
+.skill-unlock {
+    animation: skill-unlock-glow 1s ease-out;
+}
+
+@keyframes skill-unlock-glow {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(0, 212, 170, 0.8);
+    }
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 30px 10px rgba(0, 212, 170, 0);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(0, 212, 170, 0);
+    }
+}
+
+/* スキル接続線アニメーション */
+.skill-line {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    animation: draw-line 1s ease-out forwards;
+}
+
+@keyframes draw-line {
+    to { stroke-dashoffset: 0; }
+}
+
+/* ============================================
+   通知アニメーション
+   ============================================ */
+
+.notification-slide-in {
+    animation: notification-in 0.3s ease-out;
+}
+
+@keyframes notification-in {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.notification-slide-out {
+    animation: notification-out 0.3s ease-in forwards;
+}
+
+@keyframes notification-out {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* ============================================
+   特殊エフェクト
+   ============================================ */
+
+/* クリティカルヒット */
+.critical-hit {
+    animation: critical-flash 0.3s ease-out;
+}
+
+@keyframes critical-flash {
+    0% { filter: brightness(1); }
+    50% { filter: brightness(3) saturate(2); }
+    100% { filter: brightness(1); }
+}
+
+/* ミス */
+.miss-effect {
+    animation: miss-fade 0.5s ease-out;
+    opacity: 0.5;
+}
+
+@keyframes miss-fade {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-20px); opacity: 0; }
+}
+
+/* バリアエフェクト */
+.barrier-effect {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 3px solid var(--mp-color);
+    border-radius: 50%;
+    animation: barrier-pulse 1s ease-in-out infinite;
+}
+
+@keyframes barrier-pulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+/* 毒/状態異常 */
+.poison-effect {
+    animation: poison-damage 2s ease-in-out infinite;
+}
+
+@keyframes poison-damage {
+    0%, 100% { filter: hue-rotate(0deg); }
+    50% { filter: hue-rotate(90deg) saturate(1.5); }
+}
+
+/* ============================================
+   レスポンシブアニメーション調整
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .damage-effect,
+    .heal-effect {
+        font-size: 1.5rem;
+    }
+    
+    .level-up-effect h2 {
+        font-size: 2rem;
+    }
+    
+    .level-up-effect .level-number {
+        font-size: 3rem;
+    }
+    
+    .magic-circle {
+        width: 150px;
+        height: 150px;
+    }
+}
