@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>語源の旅人 - Language RPG</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Hiragino Sans', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #eee;
+            padding: 20px;
+        }
+        
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #e94560, #ff6b6b, #feca57);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #aaa;
+            margin-bottom: 30px;
+        }
+        
+        .status-bar {
+            display: flex;
+            justify-content: space-around;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .status-item {
+            text-align: center;
+        }
+        
+        .status-item .label {
+            font-size: 0.8em;
+            color: #888;
+        }
+        
+        .status-item .value {
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+        
+        .hp { color: #e94560; }
+        .level { color: #feca57; }
+        .gold { color: #ffd700; }
+        .english { color: #74b9ff; }
+        .chinese { color: #ff6b6b; }
+        
+        .game-screen {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 25px;
+            min-height: 300px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            line-height: 1.8;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .word-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        
+        .word-card .jp { font-size: 1.5em; margin-bottom: 10px; }
+        .word-card .en { color: #74b9ff; font-size: 1.3em; margin-bottom: 5px; }
+        .word-card .cn { color: #ff6b6b; font-size: 1.3em; }
+        
+        .battle-enemy {
+            background: linear-gradient(135deg, #e94560 0%, #c0392b 100%);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .battle-enemy h3 { margin-bottom: 10px; }
+        
+        .question-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .question-box h4 {
+            color: #feca57;
+            margin-bottom: 15px;
+        }
+        
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        input[type="text"] {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 1em;
+        }
+        
+        input[type="text"]::placeholder {
+            color: #888;
+        }
+        
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #e94560, #c0392b);
+            color: #fff;
+            font-size: 1em;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(233, 69, 96, 0.4);
+        }
+        
+        .command-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .command-btn {
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .command-btn:hover {
+            background: rgba(233, 69, 96, 0.3);
+            border-color: #e94560;
+        }
+        
+        .command-btn .icon {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        .start-screen {
+            text-align: center;
+            padding: 50px 20px;
+        }
+        
+        .start-screen h2 {
+            margin-bottom: 30px;
+            color: #feca57;
+        }
+        
+        .damage {
+            color: #e94560;
+            font-weight: bold;
+        }
+        
+        .heal {
+            color: #55efc4;
+            font-weight: bold;
+        }
+        
+        .exp {
+            color: #feca57;
+            font-weight: bold;
+        }
+        
+        .gold-text {
+            color: #ffd700;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>🎮 語源の旅人</h1>
+        <p class="subtitle">Language RPG - 英語と中国語を同時に学ぶ冒険</p>
+        
+        <!-- ステータスバー -->
+        <div class="status-bar" id="statusBar" style="display: none;">
+            <div class="status-item">
+                <div class="label">❤️ HP</div>
+                <div class="value hp" id="hp">100/100</div>
+            </div>
+            <div class="status-item">
+                <div class="label">⭐ Level</div>
+                <div class="value level" id="level">1</div>
+            </div>
+            <div class="status-item">
+                <div class="label">💰 Gold</div>
+                <div class="value gold" id="gold">50</div>
+            </div>
+            <div class="status-item">
+                <div class="label">🇬🇧 English</div>
+                <div class="value english" id="englishExp">0</div>
+            </div>
+            <div class="status-item">
+                <div class="label">🇨🇳 Chinese</div>
+                <div class="value chinese" id="chineseExp">0</div>
+            </div>
+        </div>
+        
+        <!-- ゲーム画面 -->
+        <div class="game-screen" id="gameScreen">
+            <!-- スタート画面 -->
+            <div class="start-screen" id="startScreen">
+                <h2>あなたの名前は？</h2>
+                <div class="input-group">
+                    <input type="text" id="playerName" placeholder="名前を入力" maxlength="10">
+                    <button onclick="startGame()">冒険を始める</button>
+                </div>
+            </div>
+            
+            <!-- メイン画面 -->
+            <div id="mainScreen" class="hidden">
+                <div id="messageArea"></div>
+            </div>
+        </div>
+        
+        <!-- コマンドボタン -->
+        <div class="command-buttons" id="commandButtons" style="display: none;">
+            <div class="command-btn" onclick="explore()">
+                <div class="icon">🔍</div>
+                <div>探索</div>
+            </div>
+            <div class="command-btn" onclick="study()">
+                <div class="icon">📚</div>
+                <div>勉強</div>
+            </div>
+            <div class="command-btn" onclick="battle()">
+                <div class="icon">⚔️</div>
+                <div>戦闘</div>
+            </div>
+            <div class="command-btn" onclick="move()">
+                <div class="icon">🚶</div>
+                <div>移動</div>
+            </div>
+            <div class="command-btn" onclick="showStatus()">
+                <div class="icon">📊</div>
+                <div>ステータス</div>
+            </div>
+            <div class="command-btn" onclick="showVocab()">
+                <div class="icon">📖</div>
+                <div>単語帳</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ゲームデータ
+        const gameData = {
+            locations: {
+                "始まりの村": {
+                    name_en: "Starting Village",
+                    name_cn: "起始村庄",
+                    description: "英語と中国語が交じり合う不思議な村",
+                    npcs: ["村の長老", "言語の商人"],
+                    enemies: ["迷子のスライム"],
+                    connected: ["英語の森", "漢字の山"]
+                },
+                "英語の森": {
+                    name_en: "English Forest",
+                    name_cn: "英语森林",
+                    description: "英語の魔力が満ちた森。木々が英単語をささやく",
+                    npcs: ["英語の妖精"],
+                    enemies: ["文法ゴブリン", "単語の狼"],
+                    connected: ["始まりの村", "文法の洞窟"]
+                },
+                "漢字の山": {
+                    name_cn: "汉字山",
+                    name_en: "Kanji Mountain",
+                    description: "古代の漢字が眠る山。風に漢字の音が響く",
+                    npcs: ["書道の仙人"],
+                    enemies: ["難読ドラゴン", "四字熟語ゴーレム"],
+                    connected: ["始まりの村", "発音の谷"]
+                }
+            },
+            vocabulary: {
+                easy: [
+                    {jp: "水", en: "water", cn: "水 (shuǐ)", theme: "nature"},
+                    {jp: "火", en: "fire", cn: "火 (huǒ)", theme: "nature"},
+                    {jp: "木", en: "tree", cn: "木 (mù)", theme: "nature"},
+                    {jp: "山", en: "mountain", cn: "山 (shān)", theme: "nature"},
+                    {jp: "川", en: "river", cn: "河 (hé)", theme: "nature"},
+                    {jp: "猫", en: "cat", cn: "猫 (māo)", theme: "animal"},
+                    {jp: "犬", en: "dog", cn: "狗 (gǒu)", theme: "animal"},
+                    {jp: "鳥", en: "bird", cn: "鸟 (niǎo)", theme: "animal"},
+                    {jp: "食べる", en: "eat", cn: "吃 (chī)", theme: "action"},
+                    {jp: "飲む", en: "drink", cn: "喝 (hē)", theme: "action"},
+                    {jp: "行く", en: "go", cn: "去 (qù)", theme: "action"},
+                    {jp: "来る", en: "come", cn: "来 (lái)", theme: "action"},
+                    {jp: "大きい", en: "big", cn: "大 (dà)", theme: "adjective"},
+                    {jp: "小さい", en: "small", cn: "小 (xiǎo)", theme: "adjective"},
+                    {jp: "新しい", en: "new", cn: "新 (xīn)", theme: "adjective"},
+                    {jp: "古い", en: "old", cn: "旧 (jiù)", theme: "adjective"}
+                ],
+                medium: [
+                    {jp: "図書館", en: "library", cn: "图书馆 (túshūguǎn)", theme: "place"},
+                    {jp: "病院", en: "hospital", cn: "医院 (yīyuàn)", theme: "place"},
+                    {jp: "郵便局", en: "post office", cn: "邮局 (yóujú)", theme: "place"},
+                    {jp: "美術館", en: "art museum", cn: "美术馆 (měishùguǎn)", theme: "place"},
+                    {jp: "冒険", en: "adventure", cn: "冒险 (màoxiǎn)", theme: "concept"},
+                    {jp: "友情", en: "friendship", cn: "友谊 (yǒuyì)", theme: "concept"},
+                    {jp: "挑戦", en: "challenge", cn: "挑战 (tiǎozhàn)", theme: "concept"}
+                ]
+            },
+            battles: {
+                "文法ゴブリン": {
+                    hp: 30,
+                    questions: [
+                        {q: "「私は学生です」の英語は？", a: ["i am a student", "i'm a student"], type: "english", hint: "I am..."},
+                        {q: "「猫」の中国語は？", a: ["猫", "māo"], type: "chinese", hint: "動物の名前"}
+                    ]
+                },
+                "単語の狼": {
+                    hp: 40,
+                    questions: [
+                        {q: "「水」の英語は？", a: ["water"], type: "english", hint: "Wから始まる"},
+                        {q: "Fire の中国語は？", a: ["火", "huǒ"], type: "chinese", hint: "4画の漢字"}
+                    ]
+                },
+                "迷子のスライム": {
+                    hp: 20,
+                    questions: [
+                        {q: "「大きい」の英語は？", a: ["big", "large"], type: "english", hint: "Bから始まる"},
+                        {q: "「山」の中国語は？", a: ["山", "shān"], type: "chinese", hint: "3画の漢字"}
+                    ]
+                }
+            }
+        };
+
+        // プレイヤーデータ
+        let player = {
+            name: "",
+            level: 1,
+            exp: 0,
+            hp: 100,
+            maxHp: 100,
+            gold: 50,
+            englishExp: 0,
+            chineseExp: 0,
+            inventory: [],
+            currentLocation: "始まりの村",
+            inBattle: false,
+            currentEnemy: null
+        };
+
+        // ゲーム開始
+        function startGame() {
+            const nameInput = document.getElementById('playerName');
+            if (!nameInput.value.trim()) {
+                alert('名前を入力してください！');
+                return;
+            }
+            
+            player.name = nameInput.value.trim();
+            
+            document.getElementById('startScreen').classList.add('hidden');
+            document.getElementById('mainScreen').classList.remove('hidden');
+            document.getElementById('statusBar').style.display = 'flex';
+            document.getElementById('commandButtons').style.display = 'grid';
+            
+            updateStatus();
+            showMessage(`ようこそ、${player.name}！<br>あなたは「語源の旅人」として、英語と中国語が交じり合う不思議な世界を冒険します。<br><br>📍 現在の場所: <strong>${player.currentLocation}</strong><br><br>コマンドボタンをクリックして行動してください！`);
+        }
+
+        // メッセージ表示
+        function showMessage(text) {
+            const area = document.getElementById('messageArea');
+            const msg = document.createElement('div');
+            msg.className = 'message';
+            msg.innerHTML = text;
+            area.appendChild(msg);
+            area.scrollTop = area.scrollHeight;
+        }
+
+        // ステータス更新
+        function updateStatus() {
+            document.getElementById('hp').textContent = `${player.hp}/${player.maxHp}`;
+            document.getElementById('level').textContent = player.level;
+            document.getElementById('gold').textContent = player.gold;
+            document.getElementById('englishExp').textContent = player.englishExp;
+            document.getElementById('chineseExp').textContent = player.chineseExp;
+        }
+
+        // 探索
+        function explore() {
+            if (player.inBattle) return;
+            
+            const events = [
+                "古い言語の石碑を見つけた！",
+                "奇妙な音が聞こえる...",
+                "光る単語が浮かんでいる！",
+                "誰かの落とし物を見つけた",
+                "不思議な洞窟を発見した！"
+            ];
+            
+            const items = [
+                {name: "英語の辞書", effect: () => { player.englishExp += 10; return "🇬🇧 英語経験値 +10"; }},
+                {name: "中国語の字典", effect: () => { player.chineseExp += 10; return "🇨🇳 中国語経験値 +10"; }},
+                {name: "回復ポーション", effect: () => { 
+                    const heal = Math.min(20, player.maxHp - player.hp);
+                    player.hp += heal;
+                    return `<span class="heal">❤️ HP +${heal}</span>`;
+                }},
+                {name: "言語の石", effect: () => { player.exp += 5; return "⭐ 経験値 +5"; }},
+                {name: "金貨", effect: () => { player.gold += 10; return "<span class='gold-text'>💰 ゴールド +10</span>"; }}
+            ];
+            
+            const event = events[Math.floor(Math.random() * events.length)];
+            const item = items[Math.floor(Math.random() * items.length)];
+            
+            player.inventory.push(item.name);
+            const effectText = item.effect();
+            
+            const location = gameData.locations[player.currentLocation];
+            
+            showMessage(`
+                <strong>🔍 探索結果</strong><br><br>
+                ${event}<br><br>
+                手に入れた: <strong>${item.name}</strong><br>
+                ${effectText}<br><br>
+                <small>周囲の情報:<br>
+                NPC: ${location.npcs.join(', ')}<br>
+                危険: ${location.enemies.join(', ')}<br>
+                行ける場所: ${location.connected.join(', ')}</small>
+            `);
+            
+            checkLevelUp();
+            updateStatus();
+        }
+
+        // 勉強
+        function study() {
+            if (player.inBattle) return;
+            
+            const vocabList = gameData.vocabulary.easy;
+            const selected = [];
+            while (selected.length < 3) {
+                const word = vocabList[Math.floor(Math.random() * vocabList.length)];
+                if (!selected.includes(word)) selected.push(word);
+            }
+            
+            let html = '<strong>📚 言語学習セッション</strong><br><br>';
+            
+            selected.forEach(word => {
+                html += `
+                    <div class="word-card">
+                        <div class="jp">🇯🇵 ${word.jp}</div>
+                        <div class="en">🇬🇧 ${word.en}</div>
+                        <div class="cn">🇨🇳 ${word.cn}</div>
+                        <small>テーマ: ${word.theme}</small>
+                    </div>
+                `;
+            });
+            
+            const expGain = Math.floor(Math.random() * 10) + 5;
+            player.englishExp += expGain;
+            player.chineseExp += expGain;
+            player.exp += expGain;
+            
+            html += `<br>✨ <span class="exp">英語経験値 +${expGain} / 中国語経験値 +${expGain}</span>`;
+            
+            showMessage(html);
+            checkLevelUp();
+            updateStatus();
+        }
+
+        // バトル
+        function battle() {
+            if (player.inBattle) return;
+            
+            const location = gameData.locations[player.currentLocation];
+            if (location.enemies.length === 0) {
+                showMessage('この場所には敵がいないようだ...');
+                return;
+            }
+            
+            const enemyName = location.enemies[Math.floor(Math.random() * location.enemies.length)];
+            const enemy = gameData.battles[enemyName];
+            
+            player.inBattle = true;
+            player.currentEnemy = { name: enemyName, hp: enemy.hp, maxHp: enemy.hp };
+            
+            const question = enemy.questions[Math.floor(Math.random() * enemy.questions.length)];
+            
+            showMessage(`
+                <div class="battle-enemy">
+                    <h3>⚔️ ${enemyName} が現れた！</h3>
+                    <div>❤️ HP: ${enemy.hp}/${enemy.hp}</div>
+                </div>
+                <div class="question-box">
+                    <h4>❓ ${question.q}</h4>
+                    <div>💡 ヒント: ${question.hint}</div>
+                    <div class="input-group">
+                        <input type="text" id="battleAnswer" placeholder="答えを入力" onkeypress="if(event.key==='Enter')submitBattle()">
+                        <button onclick="submitBattle()">攻撃！</button>
+                    </div>
+                </div>
+            `);
+            
+            player.currentQuestion = question;
+        }
+
+        // バトル回答
+        function submitBattle() {
+            const answer = document.getElementById('battleAnswer').value.trim().toLowerCase();
+            const question = player.currentQuestion;
+            
+            if (question.a.includes(answer)) {
+                // 正解
+                const damage = Math.floor(Math.random() * 15) + 15;
+                const expGain = Math.floor(Math.random() * 10) + 10;
+                const goldGain = Math.floor(Math.random() * 10) + 5;
+                
+                player.exp += expGain;
+                player.gold += goldGain;
+                
+                if (question.type === 'english') {
+                    player.englishExp += 10;
+                } else {
+                    player.chineseExp += 10;
+                }
+                
+                showMessage(`
+                    ✅ <strong>正解！</strong><br><br>
+                    🗡️ <span class="damage">${damage}ダメージ</span>与えた！<br>
+                    ⭐ <span class="exp">経験値 +${expGain}</span><br>
+                    💰 <span class="gold-text">ゴールド +${goldGain}</span><br><br>
+                    ${player.currentEnemy.name}を倒した！
+                `);
+                
+                player.inBattle = false;
+                player.currentEnemy = null;
+            } else {
+                // 不正解
+                const damage = Math.floor(Math.random() * 10) + 5;
+                player.hp -= damage;
+                
+                showMessage(`
+                    ❌ <strong>不正解...</strong><br>
+                    正解は「<strong>${question.a[0]}</strong>」だった<br><br>
+                    💔 <span class="damage">${damage}ダメージ</span>受けた！<br>
+                    残りHP: ${player.hp}/${player.maxHp}
+                `);
+                
+                if (player.hp <= 0) {
+                    showMessage('<br>💀 <strong>あなたは倒れた...</strong><br>村に戻り、HPが回復しました。');
+                    player.hp = player.maxHp;
+                    player.currentLocation = '始まりの村';
+                    player.inBattle = false;
+                    player.gold = Math.floor(player.gold / 2);
+                }
+            }
+            
+            checkLevelUp();
+            updateStatus();
+        }
+
+        // 移動
+        function move() {
+            if (player.inBattle) return;
+            
+            const location = gameData.locations[player.currentLocation];
+            const destinations = location.connected;
+            
+            let html = '<strong>🚶 どこに移動する？</strong><br><br>';
+            
+            destinations.forEach(dest => {
+                const destData = gameData.locations[dest];
+                html += `
+                    <button onclick="moveTo('${dest}')" style="margin: 5px;">
+                        ${dest}<br>
+                        <small>🇬🇧 ${destData.name_en} | 🇨🇳 ${destData.name_cn}</small>
+                    </button>
+                `;
+            });
+            
+            showMessage(html);
+        }
+
+        function moveTo(destination) {
+            player.currentLocation = destination;
+            const loc = gameData.locations[destination];
+            
+            showMessage(`
+                <strong>🚶 ${destination}に到着！</strong><br><br>
+                🇬🇧 ${loc.name_en}<br>
+                🇨🇳 ${loc.name_cn}<br><br>
+                ${loc.description}<br><br>
+                <small>ここにいるNPC: ${loc.npcs.join(', ')}<br>
+                注意すべき敵: ${loc.enemies.join(', ')}</small>
+            `);
+            
+            updateStatus();
+        }
+
+        // ステータス表示
+        function showStatus() {
+            if (player.inBattle) return;
+            
+            showMessage(`
+                <strong>📊 ${player.name} のステータス</strong><br><br>
+                ❤️ HP: ${player.hp}/${player.maxHp}<br>
+                ⭐ Level: ${player.level}<br>
+                📈 経験値: ${player.exp}/${player.level * 50}<br>
+                💰 Gold: ${player.gold}<br>
+                📍 現在地: ${player.currentLocation}<br><br>
+                🇬🇧 英語経験値: ${player.englishExp}<br>
+                🇨🇳 中国語経験値: ${player.chineseExp}<br><br>
+                🎒 持ち物:<br>
+                ${player.inventory.length > 0 ? player.inventory.map(i => '- ' + i).join('<br>') : '- (なし)'}
+            `);
+        }
+
+        // 単語帳
+        function showVocab() {
+            if (player.inBattle) return;
+            
+            let html = '<strong>📖 単語帳</strong><br><br>';
+            
+            ['easy', 'medium'].forEach(level => {
+                html += `<strong>【${level === 'easy' ? '初級' : '中級'}】</strong><br>`;
+                gameData.vocabulary[level].slice(0, 5).forEach(word => {
+                    html += `
+                        <div style="margin: 10px 0; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px;">
+                            🇯🇵 ${word.jp} | 🇬🇧 ${word.en} | 🇨🇳 ${word.cn}
+                        </div>
+                    `;
+                });
+                html += '<br>';
+            });
+            
+            showMessage(html);
+        }
+
+        // レベルアップチェック
+        function checkLevelUp() {
+            const required = player.level * 50;
+            if (player.exp >= required) {
+                player.level++;
+                player.maxHp += 20;
+                player.hp = player.maxHp;
+                showMessage(`<br>🎉 <strong>LEVEL UP!</strong> Lv.${player.level}になった！<br>❤️ 最大HPが${player.maxHp}になった！`);
+            }
+        }
+    </script>
+</body>
+</html>
