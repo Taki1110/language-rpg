@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>株式会社エイジレス - 会社紹介</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            overflow: hidden;
+            background: #0f172a;
+        }
+        
+        .slide-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+        
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 80px;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            pointer-events: none;
+        }
+        
+        .slide.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        /* Slide 1 - Title */
+        .slide-1 {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+        }
+        
+        .slide-1::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at top, rgba(99, 102, 241, 0.15) 0%, transparent 50%);
+        }
+        
+        .slide-1 h1 {
+            font-size: 5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            letter-spacing: -0.02em;
+        }
+        
+        .slide-1 .subtitle {
+            font-size: 1.5rem;
+            color: #d4af37;
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .slide-1 .tagline {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .gold-line {
+            width: 200px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+            margin: 30px 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Slide 2 - Company Profile */
+        .slide-2 {
+            background: #f8fafc;
+            flex-direction: row;
+            padding: 0;
+        }
+        
+        .slide-2 .left-panel {
+            width: 40%;
+            height: 100%;
+            background: #0f172a;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px;
+        }
+        
+        .slide-2 .left-panel h2 {
+            font-size: 3rem;
+            color: #ffffff;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .slide-2 .left-panel .en-title {
+            font-size: 0.875rem;
+            color: #d4af37;
+            letter-spacing: 0.3em;
+        }
+        
+        .slide-2 .right-panel {
+            width: 60%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px 80px;
+        }
+        
+        .mission-box {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #d4af37;
+        }
+        
+        .mission-box h3 {
+            font-size: 1.125rem;
+            color: #0f172a;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .mission-box p {
+            font-size: 1rem;
+            color: #475569;
+            line-height: 1.7;
+        }
+        
+        .info-grid {
+            display: grid;
+            gap: 16px;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: baseline;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .info-item .label {
+            width: 120px;
+            font-size: 0.875rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+        
+        .info-item .value {
+            font-size: 1rem;
+            color: #0f172a;
+            font-weight: 600;
+        }
+        
+        /* Slide 3 - Vision */
+        .slide-3 {
+            background: linear-gradient(180deg, #f0f9ff 0%, #e0f2fe 100%);
+        }
+        
+        .slide-3 .header-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: #0f172a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .slide-3 .header-bar h2 {
+            color: #ffffff;
+            font-size: 1.75rem;
+            font-weight: 600;
+        }
+        
+        .vision-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 60px 80px;
+            max-width: 800px;
+            text-align: center;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+        }
+        
+        .vision-card .vision-text {
+            font-size: 1.5rem;
+            color: #475569;
+            line-height: 2;
+            margin-bottom: 20px;
+        }
+        
+        .vision-card .vision-text.highlight {
+            font-size: 2.25rem;
+            color: #0f172a;
+            font-weight: 700;
+            margin-top: 20px;
+        }
+        
+        .hashtags {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        
+        .hashtag {
+            background: #fef3c7;
+            color: #92400e;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        /* Slide 4 - Services */
+        .slide-4 {
+            background: #ffffff;
+        }
+        
+        .slide-4 .header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: #0f172a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .slide-4 .header h2 {
+            color: #ffffff;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 60px;
+            max-width: 1100px;
+        }
+        
+        .service-card {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .service-number {
+            width: 60px;
+            height: 60px;
+            background: #0f172a;
+            color: #d4af37;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 20px;
+        }
+        
+        .service-card h3 {
+            font-size: 1.375rem;
+            color: #0f172a;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        
+        .service-card p {
+            font-size: 0.9375rem;
+            color: #64748b;
+            line-height: 1.7;
+        }
+        
+        /* Slide 5 - Strengths */
+        .slide-5 {
+            background: #0f172a;
+        }
+        
+        .slide-5 h2 {
+            font-size: 2.5rem;
+            color: #ffffff;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .slide-5 .en-title {
+            font-size: 0.875rem;
+            color: #d4af37;
+            letter-spacing: 0.3em;
+            margin-bottom: 50px;
+        }
+        
+        .strengths-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            max-width: 900px;
+        }
+        
+        .strength-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 12px;
+            padding: 30px;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+        
+        .strength-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #d4af37;
+            line-height: 1;
+        }
+        
+        .strength-content h3 {
+            font-size: 1.125rem;
+            color: #ffffff;
+            margin-bottom: 8px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+        
+        .strength-content p {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.6;
+        }
+        
+        /* Slide 6 - Contact */
+        .slide-6 {
+            background: #f8fafc;
+            flex-direction: row;
+            padding: 0;
+        }
+        
+        .slide-6 .left-panel {
+            width: 45%;
+            height: 100%;
+            background: #0f172a;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px;
+        }
+        
+        .slide-6 .left-panel h2 {
+            font-size: 3rem;
+            color: #ffffff;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .slide-6 .left-panel .en-title {
+            font-size: 0.875rem;
+            color: #d4af37;
+            letter-spacing: 0.3em;
+        }
+        
+        .slide-6 .right-panel {
+            width: 55%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px 80px;
+        }
+        
+        .contact-item {
+            margin-bottom: 28px;
+        }
+        
+        .contact-item .label {
+            font-size: 0.875rem;
+            color: #64748b;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+        
+        .contact-item .value {
+            font-size: 1.125rem;
+            color: #0f172a;
+            font-weight: 600;
+        }
+        
+        .contact-item .value.highlight {
+            color: #d4af37;
+        }
+        
+        .closing-message {
+            margin-top: 40px;
+            font-size: 1rem;
+            color: #64748b;
+            font-style: italic;
+        }
+        
+        /* Navigation */
+        .nav-hint {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 100;
+            background: rgba(15, 23, 42, 0.9);
+            padding: 12px 24px;
+            border-radius: 30px;
+        }
+        
+        .nav-btn {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: rgba(212, 175, 55, 0.2);
+            border-color: #d4af37;
+        }
+        
+        .slide-counter {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.5);
+            background: rgba(15, 23, 42, 0.9);
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .slide {
+                padding: 40px;
+            }
+            
+            .slide-1 h1 {
+                font-size: 3rem;
+            }
+            
+            .slide-2 {
+                flex-direction: column;
+            }
+            
+            .slide-2 .left-panel,
+            .slide-2 .right-panel {
+                width: 100%;
+                height: auto;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .strengths-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .slide-6 {
+                flex-direction: column;
+            }
+            
+            .slide-6 .left-panel,
+            .slide-6 .right-panel {
+                width: 100%;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <!-- Slide 1: Title -->
+        <div class="slide slide-1 active" data-slide="1">
+            <div class="gold-line"></div>
+            <h1>株式会社エイジレス</h1>
+            <div class="subtitle">A G E L E S S &nbsp; I N C .</div>
+            <div class="gold-line"></div>
+            <div class="tagline">年齢を超えた価値創造</div>
+        </div>
+        
+        <!-- Slide 2: Company Profile -->
+        <div class="slide slide-2" data-slide="2">
+            <div class="left-panel">
+                <h2>会社概要</h2>
+                <div class="en-title">COMPANY PROFILE</div>
+            </div>
+            <div class="right-panel">
+                <div class="mission-box">
+                    <h3>ミッション</h3>
+                    <p>年齢にとらわれない価値の創造を使命とし、テクノロジーと人間性の融合により、すべての世代が活躍できる社会の実現を目指す。</p>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="label">設立</span>
+                        <span class="value">20XX年</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">従業員数</span>
+                        <span class="value">XX名</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">資本金</span>
+                        <span class="value">X,XXX万円</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">本社所在地</span>
+                        <span class="value">東京都XXX区XXX</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 3: Vision -->
+        <div class="slide slide-3" data-slide="3">
+            <div class="header-bar">
+                <h2>ビジョン</h2>
+            </div>
+            <div class="vision-card">
+                <div class="vision-text">年齢という境界を超え、</div>
+                <div class="vision-text">すべての人が可能性を</div>
+                <div class="vision-text">最大限に発揮できる</div>
+                <div class="vision-text highlight">世界の創造</div>
+            </div>
+            <div class="hashtags">
+                <span class="hashtag">#多様性</span>
+                <span class="hashtag">#イノベーション</span>
+                <span class="hashtag">#持続可能性</span>
+            </div>
+        </div>
+        
+        <!-- Slide 4: Services -->
+        <div class="slide slide-4" data-slide="4">
+            <div class="header">
+                <h2>事業内容</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-number">01</div>
+                    <h3>デジタル変革</h3>
+                    <p>AI・クラウド・データ分析など最新技術を活用し、企業のビジネスプロセスを根本から変革します。</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-number">02</div>
+                    <h3>人材開発</h3>
+                    <p>多世代が学び合う共生型の人材育成プログラムで、組織の持続的成長を支援します。</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-number">03</div>
+                    <h3>グローバル展開</h3>
+                    <p>言語と文化の壁を超えたグローバルビジネス支援で、世界市場での成功を目指します。</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 5: Strengths -->
+        <div class="slide slide-5" data-slide="5">
+            <h2>私たちの強み</h2>
+            <div class="en-title">OUR STRENGTHS</div>
+            <div class="strengths-grid">
+                <div class="strength-card">
+                    <div class="strength-number">01</div>
+                    <div class="strength-content">
+                        <h3>多様な世代の知見を<br>活かしたイノベーション</h3>
+                        <p>20年以上の実務経験を持つベテランと、最新技術に精通した若手が協働</p>
+                    </div>
+                </div>
+                <div class="strength-card">
+                    <div class="strength-number">02</div>
+                    <div class="strength-content">
+                        <h3>最新テクノロジーと<br>実務経験の融合</h3>
+                        <p>理論と実践のバランスを取れたソリューションを提供</p>
+                    </div>
+                </div>
+                <div class="strength-card">
+                    <div class="strength-number">03</div>
+                    <div class="strength-content">
+                        <h3>お客様に寄り添う<br>柔軟な対応力</h3>
+                        <p>大手にはない機動力で、お客様のニーズに迅速に対応</p>
+                    </div>
+                </div>
+                <div class="strength-card">
+                    <div class="strength-number">04</div>
+                    <div class="strength-content">
+                        <h3>持続可能な社会への<br>貢献</h3>
+                        <p>SDGsの達成に向けた取り組みを事業の核に据える</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 6: Contact -->
+        <div class="slide slide-6" data-slide="6">
+            <div class="left-panel">
+                <h2>お問い合わせ</h2>
+                <div class="en-title">CONTACT US</div>
+            </div>
+            <div class="right-panel">
+                <div class="contact-item">
+                    <div class="label">会社名</div>
+                    <div class="value highlight">株式会社エイジレス</div>
+                </div>
+                <div class="contact-item">
+                    <div class="label">所在地</div>
+                    <div class="value">〒XXX-XXXX 東京都XXX区XXX</div>
+                </div>
+                <div class="contact-item">
+                    <div class="label">TEL</div>
+                    <div class="value">03-XXXX-XXXX</div>
+                </div>
+                <div class="contact-item">
+                    <div class="label">Email</div>
+                    <div class="value">info@ageless.co.jp</div>
+                </div>
+                <div class="contact-item">
+                    <div class="label">Web</div>
+                    <div class="value highlight">www.ageless.co.jp</div>
+                </div>
+                <div class="closing-message">ご連絡お待ちしております</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Navigation -->
+    <div class="nav-hint">
+        <button class="nav-btn" onclick="prevSlide()">◀ 前へ</button>
+        <button class="nav-btn" onclick="nextSlide()">次へ ▶</button>
+    </div>
+    
+    <div class="slide-counter">
+        <span id="currentSlide">1</span> / <span id="totalSlides">6</span>
+    </div>
+    
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 6;
+        
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            
+            if (n > totalSlides) currentSlide = 1;
+            if (n < 1) currentSlide = totalSlides;
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            document.querySelector(`.slide-${currentSlide}`).classList.add('active');
+            
+            document.getElementById('currentSlide').textContent = currentSlide;
+        }
+        
+        function nextSlide() {
+            currentSlide++;
+            showSlide(currentSlide);
+        }
+        
+        function prevSlide() {
+            currentSlide--;
+            showSlide(currentSlide);
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+        
+        // Touch navigation
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+        
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) nextSlide();
+            if (touchEndX > touchStartX + 50) prevSlide();
+        }
+    </script>
+</body>
+</html>
