@@ -1,0 +1,20 @@
+{
+  "name": "language-rpg-dq",
+  "version": "1.0.0",
+  "description": "Dragon Quest Style RPG for Language Learning",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "rpg",
+    "game",
+    "language-learning",
+    "english",
+    "chinese",
+    "dragon-quest"
+  ],
+  "author": "",
+  "license": "MIT"
+}

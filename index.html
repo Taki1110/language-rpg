@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>語源の旅人 - Dragon Quest Style RPG</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="game-canvas"></canvas>
+        <div id="ui-layer">
+            <!-- メッセージウィンドウ -->
+            <div id="message-window" class="hidden">
+                <div id="message-text"></div>
+                <div id="message-arrow">▼</div>
+            </div>
+            
+            <!-- コマンドメニュー -->
+            <div id="command-menu" class="hidden">
+                <div class="menu-window">
+                    <div class="menu-item" data-cmd="fight">戦う</div>
+                    <div class="menu-item" data-cmd="skill">特技</div>
+                    <div class="menu-item" data-cmd="item">道具</div>
+                    <div class="menu-item" data-cmd="run">逃げる</div>
+                </div>
+            </div>
+            
+            <!-- サブメニュー -->
+            <div id="sub-menu" class="hidden">
+                <div class="menu-window"></div>
+            </div>
+            
+            <!-- ステータス表示 -->
+            <div id="status-panel" class="hidden">
+                <div class="status-window">
+                    <div class="status-row">
+                        <span class="label">HP</span>
+                        <span id="status-hp">100/100</span>
+                    </div>
+                    <div class="status-row">
+                        <span class="label">MP</span>
+                        <span id="status-mp">50/50</span>
+                    </div>
+                    <div class="status-row">
+                        <span class="label">Lv</span>
+                        <span id="status-lv">1</span>
+                    </div>
+                    <div class="status-row">
+                        <span class="label">英語Lv</span>
+                        <span id="status-en-lv">1</span>
+                    </div>
+                    <div class="status-row">
+                        <span class="label">中国語Lv</span>
+                        <span id="status-cn-lv">1</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 戦闘画面 -->
+            <div id="battle-screen" class="hidden">
+                <div id="battle-background"></div>
+                <div id="enemy-sprite"></div>
+                <div id="enemy-info">
+                    <div id="enemy-name"></div>
+                    <div id="enemy-hp-bar"><div id="enemy-hp-fill"></div></div>
+                </div>
+                <div id="battle-player">
+                    <div id="player-sprite"></div>
+                </div>
+                <div id="battle-command">
+                    <div class="battle-menu-item" data-cmd="attack">こうげき</div>
+                    <div class="battle-menu-item" data-cmd="skill">特技</div>
+                    <div class="battle-menu-item" data-cmd="item">どうぐ</div>
+                    <div class="battle-menu-item" data-cmd="escape">にげる</div>
+                </div>
+            </div>
+            
+            <!-- 単語帳 -->
+            <div id="vocabulary-book" class="hidden">
+                <div class="book-window">
+                    <h2>単語帳</h2>
+                    <div id="vocab-tabs">
+                        <button class="vocab-tab active" data-lang="en">英語</button>
+                        <button class="vocab-tab" data-lang="cn">中国語</button>
+                    </div>
+                    <div id="vocab-list"></div>
+                    <button id="close-vocab">とじる</button>
+                </div>
+            </div>
+            
+            <!-- タイトル画面 -->
+            <div id="title-screen">
+                <h1>語源の旅人</h1>
+                <p class="subtitle">Etymology Traveler</p>
+                <div class="title-menu">
+                    <div class="title-item selected" data-action="new">はじめから</div>
+                    <div class="title-item" data-action="continue">つづきから</div>
+                </div>
+                <p class="copyright">© 2024 Language RPG</p>
+            </div>
+            
+            <!-- 仮想コントローラー -->
+            <div id="virtual-controller" class="hidden">
+                <div id="d-pad">
+                    <div class="d-btn" data-dir="up">▲</div>
+                    <div class="d-btn" data-dir="left">◀</div>
+                    <div class="d-btn" data-dir="right">▶</div>
+                    <div class="d-btn" data-dir="down">▼</div>
+                </div>
+                <div id="action-buttons">
+                    <div id="btn-a" class="action-btn">A</div>
+                    <div id="btn-b" class="action-btn">B</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/audio.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/battle.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
